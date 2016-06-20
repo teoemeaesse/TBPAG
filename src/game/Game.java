@@ -1,17 +1,14 @@
 package game;
 
-import threads.TimeThread;
+import threads.MiningThread;
 import tools.Tools;
-import world.map.*;
-import world.map.entities.Drone;
-import world.map.entities.Ship;
-import world.map.entities.Asteroid;
-import world.map.entities.LargeAsteroid;
+import world.map.Map;
+import world.map.components.DroneHangar;
+import world.map.components.Hydroponics;
+import world.map.entities.*;
 
 import java.util.Random;
 import java.util.Scanner;
-
-import static world.map.Map.map;
 
 public class Game {
     private static Scanner in = new Scanner(System.in);
@@ -31,6 +28,10 @@ public class Game {
                 mines(input);
                 mined(input);
                 cold(input);
+                ac(input);
+                dc(input);
+                uc(input);
+                bc(input);
             }
             catch(NumberFormatException e){
                 Tools.out("\nWrong parameters\n\n");
@@ -41,47 +42,45 @@ public class Game {
     private static void init(){
         Ship.x = r.nextInt(20);
         Ship.y = r.nextInt(20);
-        for(int i = 0; i < 3; i++){
-            Ship.drones[i] = new Drone();
-            Ship.drones[i].x = Ship.x;
-            Ship.drones[i].y = Ship.y;
-        }
         for(int x = 0; x < 20; x++){
             for(int y = 0; y < 20; y++){
                 if(r.nextInt(26) == 0){
-                    map[x][y] = new Asteroid();
-                    map[x][y].icon = Asteroid.icon;
+                    Map.map[x][y] = new Asteroid();
+                    Map.map[x][y].icon = Asteroid.icon;
                 }
                 else if(r.nextInt(48) == 0){
-                    map[x][y] = new LargeAsteroid();
-                    map[x][y].icon = LargeAsteroid.icon;
+                    Map.map[x][y] = new LargeAsteroid();
+                    Map.map[x][y].icon = LargeAsteroid.icon;
                 }
                 else{
-                    map[x][y] = new Space();
-                    map[x][y].icon = Space.icon;
+                    Map.map[x][y] = new Space();
+                    Map.map[x][y].icon = Space.icon;
                 }
-                map[x][y].x = x;
-                map[x][y].y = y;
+                Map.map[x][y].x = x;
+                Map.map[x][y].y = y;
             }
         }
-        TimeThread.start();
+
+        Ship.init();
+        MiningThread.start();
     }
 
-    private static void shws(String input){
+    private static void shws(String input) throws Exception {
         if(input.length() > 4 && input.toUpperCase().substring(0, 5).equals("SHW S")){
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            Map.displayMap();
             Ship.displayShipStatus();
         }
     }
-    private static void shwd(String input){
+    private static void shwd(String input) throws Exception {
         if(input.length() > 4 && input.toUpperCase().substring(0, 5).equals("SHW D")){
             if(input.length() > 5){
                 int drone;
                 if (Integer.parseInt(input.substring(5, 7).trim()) <= Ship.drones.length && Integer.parseInt(input.substring(5, 7).trim()) > 0){
                     drone = Integer.parseInt(input.substring(5, 7).trim());
-                    if(Ship.drones[drone].extractionProgress == 0) Ship.drones[drone - 1].displayDroneStatus(drone - 1);
-                    else{
-                        Tools.out("\nDrone is mining...\n\n");
-                    }
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    Map.displayMap();
+                    Ship.drones[drone - 1].displayDroneStatus(drone - 1);
                 }else{
                     Tools.out("\nDrone does not exist\n\n");
                 }
@@ -90,33 +89,13 @@ public class Game {
             }
         }
     }
-    private static void shwm(String input){
+    private static void shwm(String input) throws Exception {
         if(input.length() > 4 && input.toUpperCase().substring(0, 5).equals("SHW M")) {
-            Tools.out("\n            1\n");
-            Tools.out("  01234567890123456789\n");
-            for(int y = 0; y < 20; y++){
-                for(int x = 0; x < 22; x++){
-                    if(x == 0 && y != 10){Tools.out(" ");}
-                    if(y == 10 && x == 0){Tools.out("1");}
-                    if(x == 1 && y < 10){Tools.out(y + "");}
-                    if(y >= 10 && x == 1){Tools.out((y - 10) + "");}
-                    if(x > 1){
-                        String icon = map[x - 2][y].icon;
-                        if(x - 2 == Ship.x && y == Ship.y) icon = "@";
-                        else{
-                            for(int i = 0; i < Ship.drones.length; i++){
-                                if(x - 2 == Ship.drones[i].x && y == Ship.drones[i].y) icon = "D";
-                            }
-                        }
-                        Tools.out(icon);
-                    }
-                }
-                Tools.out("\n");
-            }
-            Tools.out("\n\n");
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            Map.displayMap();
         }
     }
-    private static void navs(String input){
+    private static void navs(String input) throws Exception {
         if(input.length() > 4 && input.toUpperCase().substring(0, 5).equals("NAV S")){
             if(Ship.extractionProgress == 0){
                 if(input.length() > 5){
@@ -127,6 +106,7 @@ public class Game {
                                 if (input.length() > 10) {
                                     int yDestination = Integer.parseInt(input.substring(9, 11));
                                     if(yDestination >= 0 && yDestination < 20) {
+                                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
                                         Ship.navigateShip(xDestination, yDestination, Ship.calcHipotenuse(Ship.calcXDifference(Ship.x, xDestination), Ship.calcYDifference(Ship.y, yDestination)));
                                     } else {
                                         Tools.out("\nY coordinate invalid\n\n");
@@ -151,65 +131,70 @@ public class Game {
             }
         }
     }
-    private static void navd(String input){
-        if(input.length() > 4 && input.toUpperCase().substring(0, 5).equals("NAV D")){
-            if(Ship.extractionProgress == 0){
-                if(input.length() > 5){
-                    int drone;
-                    if(input.length() > 6){
-                        if (Integer.parseInt(input.substring(5, 7).trim()) <= Ship.drones.length && Integer.parseInt(input.substring(5, 7).trim()) > 0) {
-                            drone = Integer.parseInt(input.substring(5, 7).trim());
-                            if (input.length() > 9) {
-                                int xDestination = Integer.parseInt(input.substring(8, 10));
-                                if (xDestination >= 0 && xDestination < 20) {
-                                    if (input.length() > 10) {
-                                        if (input.length() > 12) {
-                                            int yDestination = Integer.parseInt(input.substring(11, 13));
-                                            if (yDestination >= 0 && yDestination < 20) {
-                                                Ship.drones[drone - 1].navigateDrone(xDestination, yDestination);
+    private static void navd(String input) throws Exception {
+        if (input.length() > 4 && input.toUpperCase().substring(0, 5).equals("NAV D")) {
+            if (input.length() > 5) {
+                int drone;
+                if (input.length() > 6) {
+                    if (Integer.parseInt(input.substring(5, 7).trim()) <= Ship.drones.length && Integer.parseInt(input.substring(5, 7).trim()) > 0) {
+                        drone = Integer.parseInt(input.substring(5, 7).trim());
+                        if (input.length() > 9) {
+                            int xDestination = Integer.parseInt(input.substring(8, 10));
+                            if (xDestination >= 0 && xDestination < 20) {
+                                if (input.length() > 10) {
+                                    if (input.length() > 12) {
+                                        int yDestination = Integer.parseInt(input.substring(11, 13));
+                                        if (yDestination >= 0 && yDestination < 20) {
+                                            if(Ship.drones[drone - 1].extractionProgress == 0){
+                                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                                Ship.drones[drone - 1].navigateDrone(xDestination, yDestination, Ship.calcHipotenuse(Ship.calcXDifference(Ship.drones[drone - 1].x, xDestination), Ship.calcYDifference(Ship.drones[drone - 1].y, yDestination)));
                                             } else {
-                                                Tools.out("\nY coordinate invalid\n\n");
+                                                Tools.out("\nDrone is mining...\n\n");
                                             }
                                         } else {
                                             Tools.out("\nY coordinate invalid\n\n");
                                         }
                                     } else {
-                                        Tools.out("\nY coordinate missing\n\n");
+                                        Tools.out("\nY coordinate invalid\n\n");
                                     }
                                 } else {
-                                    Tools.out("\nX coordinate invalid\n\n");
+                                    Tools.out("\nY coordinate missing\n\n");
                                 }
                             } else {
                                 Tools.out("\nX coordinate invalid\n\n");
                             }
-                        }else{
-                            Tools.out("\nDrone does not exist\n\n");
+                        } else {
+                            Tools.out("\nX coordinate invalid\n\n");
                         }
-                    }else{
-                        Tools.out("\nDrone ID missing\n\n");
+                    } else {
+                        Tools.out("\nDrone does not exist\n\n");
                     }
-                }else{
+                } else {
                     Tools.out("\nDrone ID missing\n\n");
                 }
-            }else {
-                Tools.out("\nDrone is mining...\n\n");
+            } else {
+                Tools.out("\nDrone ID missing\n\n");
             }
         }
     }
-    private static void mines(String input){
-        if(input.length() > 6 && input.toUpperCase().substring(0, 6).equals("MINE S")){
+    private static void mines(String input) throws Exception {
+        if(input.length() > 5 && input.toUpperCase().substring(0, 6).equals("MINE S")){
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            Map.displayMap();
             Tools.out("\nMining of" + Map.map[Ship.x][Ship.y].name + " commencing... It should be finished in " + Map.map[Ship.x][Ship.y].extractionTime + "s...\n\n");
-            TimeThread.shipMining = true;
+            MiningThread.shipMining = true;
         }
     }
-    private static void mined(String input){
+    private static void mined(String input) throws Exception {
         if(input.length() > 6 && input.toUpperCase().substring(0, 6).equals("MINE D")){
             if(input.length() > 7){
                 int drone = Integer.parseInt(input.substring(7).trim()) - 1;
                 if(drone >= 0 && drone < Ship.drones.length){
                     if(Ship.drones[drone].extractionProgress == 0) {
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                        Map.displayMap();
                         Tools.out("\nMining of" + Map.map[Ship.drones[drone].x][Ship.drones[drone].y].name + " commencing... It should be finished in " + Map.map[Ship.drones[drone].x][Ship.drones[drone].y].extractionTime + "s...\n\n");
-                        TimeThread.insertDrone(Ship.drones[drone]);
+                        MiningThread.insertDrone(drone);
                     }else{
                         Tools.out("\nDrone is mining...\n\n");
                     }
@@ -221,13 +206,16 @@ public class Game {
             }
         }
     }
-    private static void cold(String input){
+    private static void cold(String input) throws Exception {
         if(input.length() > 4 && input.toUpperCase().substring(0, 5).equals("COL D")){
             if(input.length() > 5){
                 int drone;
                 if (Integer.parseInt(input.substring(5, 7).trim()) <= Ship.drones.length && Integer.parseInt(input.substring(5, 7).trim()) > 0){
                     drone = Integer.parseInt(input.substring(5, 7).trim());
-                    if(Ship.drones[drone].extractionProgress == 0) Ship.drones[drone - 1].collectDrone(drone - 1);
+                    if(Ship.drones[drone - 1].extractionProgress == 0){
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                        Ship.drones[drone - 1].collectDrone(drone - 1, Ship.calcHipotenuse(Ship.calcXDifference(Ship.drones[drone].x, Ship.x), Ship.calcYDifference(Ship.drones[drone].y, Ship.y)));
+                    }
                     else{
                         Tools.out("\nDrone is mining...\n\n");
                     }
@@ -236,6 +224,112 @@ public class Game {
                 }
             }else{
                 Tools.out("\nDrone ID missing\n\n");
+            }
+        }
+    }
+    private static void ac(String input) throws Exception {
+        if(input.length() > 2 && input.toUpperCase().substring(0, 3).equals("A C")){
+            if(input.length() > 3){
+                int component;
+                if (Integer.parseInt(input.substring(3, 5).trim()) <= Ship.components.length && Integer.parseInt(input.substring(3, 5).trim()) > 0){
+                    component = Integer.parseInt(input.substring(3, 5).trim());
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    if(Ship.components[component - 1] != null){
+                        Ship.components[component - 1].activate();
+                    }else{
+                        Tools.out("\nComponent does not exist\n\n");
+                    }
+                }else{
+                    Tools.out("\nComponent does not exist\n\n");
+                }
+            }else{
+                Tools.out("\nComponent ID missing\n\n");
+            }
+        }
+    }
+    private static void dc(String input) throws Exception {
+        if(input.length() > 2 && input.toUpperCase().substring(0, 3).equals("D C")){
+            if(input.length() > 3){
+                int component;
+                if (Integer.parseInt(input.substring(3, 5).trim()) <= Ship.components.length && Integer.parseInt(input.substring(3, 5).trim()) > 0){
+                    component = Integer.parseInt(input.substring(3, 5).trim());
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    if(Ship.components[component - 1] != null){
+                        Ship.components[component - 1].deactivate();
+                    }else{
+                        Tools.out("\nComponent does not exist\n\n");
+                    }
+                }else{
+                    Tools.out("\nComponent does not exist\n\n");
+                }
+            }else{
+                Tools.out("\nComponent ID missing\n\n");
+            }
+        }
+    }
+    private static void uc(String input) throws Exception {
+        if(input.length() > 2 && input.toUpperCase().substring(0, 3).equals("U C")){
+            if(input.length() > 3){
+                int component;
+                if (Integer.parseInt(input.substring(3, 5).trim()) <= Ship.components.length && Integer.parseInt(input.substring(3, 5).trim()) > 0){
+                    component = Integer.parseInt(input.substring(3, 5).trim());
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    if(Ship.components[component - 1] != null){
+                        switch(Ship.components[component - 1].name){
+                            case "Hydroponics":
+                                ((Hydroponics) Ship.components[component - 1]).upgrade(component - 1);
+                                break;
+                            case "Drone Hangar":
+                                ((DroneHangar) Ship.components[component - 1]).upgrade();
+                                break;
+                        }
+                    }else{
+                        Tools.out("\nComponent does not exist\n\n");
+                    }
+                }else{
+                    Tools.out("\nComponent does not exist\n\n");
+                }
+            }else{
+                Tools.out("\nComponent ID missing\n\n");
+            }
+        }
+    }
+    private static void bc(String input) throws Exception {
+        if(input.length() > 2 && input.toUpperCase().substring(0, 3).equals("B C")){
+            if(input.length() > 3){
+                for(int i = 0; i < Ship.components.length; i++){
+                    if(Ship.components[i] == null){
+                        switch(input.toUpperCase().substring(4).replace(" ", "")){
+                            case "HYDROPONICS":
+                                if(Ship.scrap >= Hydroponics.buildCost){
+                                    Ship.components[i] = new Hydroponics();
+                                    i = Ship.components.length;
+                                }else{
+                                    Tools.out("\nNot enough scrap to build\n\n");
+                                    i = Ship.components.length;
+                                }
+                                break;
+
+                            case "DRONEHANGAR":
+                                if(Ship.scrap >= DroneHangar.buildCost){
+                                    Ship.components[i] = new DroneHangar();
+                                    i = Ship.components.length;
+                                }else{
+                                    Tools.out("\nNot enough scrap to build\n\n");
+                                    i = Ship.components.length;
+                                }
+                                break;
+                            default:
+                                Tools.out("\nComponent does not exist\n\n");
+                                i = Ship.components.length;
+                            }
+
+                    }else if(i == Ship.components.length - 1){
+                        Tools.out("\nNot enough component space\n\n");
+                    }
+                }
+            }else{
+                Tools.out("\nComponent name missing\n\n");
             }
         }
     }

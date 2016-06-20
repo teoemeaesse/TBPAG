@@ -1,6 +1,7 @@
 package world.map.entities;
 
 import tools.Tools;
+import world.map.Map;
 
 /**
  * Created by Tomás on 06/04/2016.
@@ -36,24 +37,36 @@ public class Drone {
         }
         Tools.out("|\n|-------------------------/\n\n");
     }
-    public void navigateDrone(int x, int y){
-        this.x = x;
-        this.y = y;
-        Tools.out("\nDrone arrived at destination\n\n");
+    public void navigateDrone(int x, int y, int dist){
+        if(Ship.fuel >= dist) {
+            this.x = x;
+            this.y = y;
+            Ship.fuel -= dist;
+            Map.displayMap();
+            Tools.out("\nDrone arrived at destination (" + dist + " fuel consumed)\n\n");
+        }else{
+            Tools.out("\nMother-ship does not have enough fuel to charge the drone enough for it to reach its destination\n\n");
+        }
     }
-    public void collectDrone(int index){
-        Ship.drones[index].x = Ship.x;
-        Ship.drones[index].y = Ship.y;
-        Ship.water += Ship.drones[index].water;
-        Ship.food += Ship.drones[index].food;
-        Ship.fuel += Ship.drones[index].fuel;
-        Ship.medicalEquipment += Ship.drones[index].medicalEquipment;
-        Ship.scrap += Ship.drones[index].scrap;
-        Ship.drones[index].water = 0;
-        Ship.drones[index].food = 0;
-        Ship.drones[index].fuel = 0;
-        Ship.drones[index].medicalEquipment = 0;
-        Ship.drones[index].scrap = 0;
-        Tools.out("\nDrone unloaded all goods on-board at " + Ship.x + " - " + Ship.y);
+    public void collectDrone(int index, int dist){
+        Map.displayMap();
+        if(Ship.fuel >= dist) {
+            Ship.drones[index].x = Ship.x;
+            Ship.drones[index].y = Ship.y;
+            Ship.water += Ship.drones[index].water;
+            Ship.food += Ship.drones[index].food;
+            Ship.fuel += Ship.drones[index].fuel;
+            Ship.fuel -= dist;
+            Ship.medicalEquipment += Ship.drones[index].medicalEquipment;
+            Ship.scrap += Ship.drones[index].scrap;
+            Ship.drones[index].water = 0;
+            Ship.drones[index].food = 0;
+            Ship.drones[index].fuel = 0;
+            Ship.drones[index].medicalEquipment = 0;
+            Ship.drones[index].scrap = 0;
+            Tools.out("\nDrone unloaded all goods on-board at " + Ship.x + " - " + Ship.y + "\n\n");
+        }else{
+            Tools.out("\nMother-ship does not have enough fuel to remotely charge the drone in order to return\n\n");
+        }
     }
 }
