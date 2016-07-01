@@ -1,6 +1,7 @@
 package game;
 
 import threads.MiningThread;
+import tools.IO;
 import tools.Tools;
 import world.map.Map;
 import world.map.components.DroneHangar;
@@ -40,6 +41,8 @@ public class Game {
     }
 
     private static void init(){
+        IO.loadComponents();
+
         Ship.x = r.nextInt(20);
         Ship.y = r.nextInt(20);
         for(int x = 0; x < 20; x++){

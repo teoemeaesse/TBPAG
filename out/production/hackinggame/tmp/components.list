@@ -1,0 +1,7 @@
+20
+<Hydroponics>
+    [DESCRIPTION]
+        {This transforms water into food via plant growing.\n}
+    [PRODUCE_TYPE]
+        {food}
+    #

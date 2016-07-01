@@ -7,9 +7,10 @@ import tools.Tools;
  */
 public class Component {
     public String name, description, produceType;
-    public static double buildCost;
-    public double baseUpgradeCost, consumption, produce, timeTaken, level;
-    public boolean active;
+    public double buildCost, baseUpgradeCost, consumption, produce, timeTaken, level;
+    public boolean active = false;
+
+    public static Component[] components;
 
     public void activate(){
         active = true;

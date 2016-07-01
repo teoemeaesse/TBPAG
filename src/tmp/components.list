@@ -1,0 +1,11 @@
+2
+<Hydroponics>
+    [DESCRIPTION] {This transforms water into food via plant growing.\n}
+    [PRODUCE_TYPE] {food}
+    [BUILD_COST] {20}
+    [BASE_UPGRADE_COST] {12.5}
+    [CONSUMPTION] {2}
+    [PRODUCE] {1}
+    [TIME_TAKEN] {1}
+    [LEVEL] {1}
+    #

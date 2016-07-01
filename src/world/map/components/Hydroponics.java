@@ -18,7 +18,6 @@ public class Hydroponics extends Component {
         produce = 1;
         timeTaken = 1;
         level = 1;
-        active = false;
     }
 
     public void hydroponics(){
