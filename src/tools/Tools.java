@@ -21,4 +21,11 @@ public class Tools {
         }
         return temp;
     }
+    public static boolean commandBlock(String command){
+        boolean temp = false;
+        if(input.length() > command.length - 1 && input.toUpperCase().substring(0, command.length).equals(command)){
+            if(input.length() > command.length) temp = true;
+        }
+        return temp;
+    }
 }
