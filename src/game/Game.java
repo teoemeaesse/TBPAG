@@ -67,6 +67,11 @@ public class Game {
         Ship.init();
         MiningThread.start();
     }
+    
+    
+    
+    
+    //TODO: SIMPLIFY COMMAND BLOCKS AS IN uc() AND bc()
 
     private static void shws(String input) throws Exception {
         if(input.length() > 4 && input.toUpperCase().substring(0, 5).equals("SHW S")){
@@ -270,70 +275,71 @@ public class Game {
             }
         }
     }
+    
+    
+    
+    
+    
     private static void uc(String input) throws Exception {
-        if(input.length() > 2 && input.toUpperCase().substring(0, 3).equals("U C")){
-            if(input.length() > 3){
-                int component;
-                if (Integer.parseInt(input.substring(3, 5).trim()) <= Ship.components.length && Integer.parseInt(input.substring(3, 5).trim()) > 0){
-                    component = Integer.parseInt(input.substring(3, 5).trim());
-                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-                    if(Ship.components[component - 1] != null){
-                        switch(Ship.components[component - 1].name){
-                            case "Hydroponics":
-                                ((Hydroponics) Ship.components[component - 1]).upgrade(component - 1);
-                                break;
-                            case "Drone Hangar":
-                                ((DroneHangar) Ship.components[component - 1]).upgrade();
-                                break;
-                        }
-                    }else{
-                        Tools.out("\nComponent does not exist\n\n");
+        if(Tools.commandBlock("U C")){
+            int component;
+            if (Integer.parseInt(input.substring(3, 5).trim()) <= Ship.components.length && Integer.parseInt(input.substring(3, 5).trim()) > 0){
+                component = Integer.parseInt(input.substring(3, 5).trim());
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                if(Ship.components[component - 1] != null){
+                    switch(Ship.components[component - 1].name){
+                        case "Hydroponics":
+                            ((Hydroponics) Ship.components[component - 1]).upgrade(component - 1);
+                            break;
+                        case "Drone Hangar":
+                            ((DroneHangar) Ship.components[component - 1]).upgrade();
+                            break;
                     }
                 }else{
                     Tools.out("\nComponent does not exist\n\n");
                 }
             }else{
-                Tools.out("\nComponent ID missing\n\n");
+                Tools.out("\nComponent does not exist\n\n");
             }
+        }else{
+            Tools.out("\nComponent ID missing\n\n");
         }
     }
     private static void bc(String input) throws Exception {
-        if(input.length() > 2 && input.toUpperCase().substring(0, 3).equals("B C")){
-            if(input.length() > 3){
-                for(int i = 0; i < Ship.components.length; i++){
-                    if(Ship.components[i] == null){
-                        switch(input.toUpperCase().substring(4).replace(" ", "")){
-                            case "HYDROPONICS":
-                                if(Ship.scrap >= Hydroponics.buildCost){
-                                    Ship.components[i] = new Hydroponics();
-                                    i = Ship.components.length;
-                                }else{
-                                    Tools.out("\nNot enough scrap to build\n\n");
-                                    i = Ship.components.length;
-                                }
-                                break;
-
-                            case "DRONEHANGAR":
-                                if(Ship.scrap >= DroneHangar.buildCost){
-                                    Ship.components[i] = new DroneHangar();
-                                    i = Ship.components.length;
-                                }else{
-                                    Tools.out("\nNot enough scrap to build\n\n");
-                                    i = Ship.components.length;
-                                }
-                                break;
-                            default:
-                                Tools.out("\nComponent does not exist\n\n");
+        if(Tools.commandBlock("B C")){
+            for(int i = 0; i < Ship.components.length; i++){
+                if(Ship.components[i] == null){
+                    switch(input.toUpperCase().substring(4).replace(" ", "")){
+                        case "HYDROPONICS":
+                            if(Ship.scrap >= Hydroponics.buildCost){
+                                Ship.components[i] = new Hydroponics();
+                                i = Ship.components.length;
+                            }else{
+                                Tools.out("\nNot enough scrap to build\n\n");
                                 i = Ship.components.length;
                             }
+                            break;
 
-                    }else if(i == Ship.components.length - 1){
-                        Tools.out("\nNot enough component space\n\n");
-                    }
+                        case "DRONEHANGAR":
+                            if(Ship.scrap >= DroneHangar.buildCost){
+                                Ship.components[i] = new DroneHangar();
+                                i = Ship.components.length;
+                            }else{
+                                Tools.out("\nNot enough scrap to build\n\n");
+                                i = Ship.components.length;
+                            }
+                            break;
+                        default:
+                            Tools.out("\nComponent does not exist\n\n");
+                            i = Ship.components.length;
+                        }
+
+                }else if(i == Ship.components.length - 1){
+                    Tools.out("\nNot enough component space\n\n");
                 }
-            }else{
-                Tools.out("\nComponent name missing\n\n");
             }
+        }else{
+            Tools.out("\nComponent name missing\n\n");
         }
     }
 }
