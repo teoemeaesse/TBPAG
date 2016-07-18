@@ -10,7 +10,7 @@ import java.util.Random;
 public class LargeAsteroid extends Tile {
     private static Random r = new Random();
     public static String icon = "o", name = " large asteroid";
-    public int water = r.nextInt(12), fuel = r.nextInt(16 - 4) + 4, scrap = r.nextInt(10 - 3) + 3, extractionTime = r.nextInt(200 - 20) + 20;
+    public int water = r.nextInt(12), fuel = r.nextInt(16 - 4) + 4, scrap = r.nextInt(10 - 3) + 3, extractionTime = r.nextInt(140 - 20) + 20;
 
     public LargeAsteroid(){
         super.name = name;

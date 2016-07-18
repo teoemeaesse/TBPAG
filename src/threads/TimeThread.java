@@ -4,7 +4,7 @@ import tools.Tools;
 import world.map.entities.Drone;
 import world.map.entities.Ship;
 import world.map.Map;
-import world.map.Space;
+import world.map.entities.Space;
 
 /**
  * Created by Tomás on 02/04/2016.

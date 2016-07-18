@@ -1,27 +1,23 @@
 package world.map.entities;
 
-import threads.HydroponicsThread;
 import tools.Tools;
 import world.map.Component;
 import world.map.Map;
-import world.map.components.DroneHangar;
-import world.map.components.Hydroponics;
 
 /**
  * Created by Tomás on 29/03/2016.
  */
 public class Ship {
     public static int x, y;
-    public static double water = 15, food = 5, fuel = 10, medicalEquipment = 1, scrap = 0, extractionProgress = 0;
-    public static Drone[] drones = new Drone[1];
-    public static Component components[] = new Component[5];
+    public static double waterCapacity = 30, foodCapacity = 30, fuelCapacity = 30, medicalEquipmentCapacity = 10, scrapCapacity = 20;
+    public static double water = 15, food = 5, fuel = 10, medicalEquipment = 1, scrap = 999, extractionProgress = 0;
+    public static int droneCapacity = 0;
+    public static Drone[] drones = new Drone[droneCapacity];
+    public static Component components[] = new Component[10];
 
     public static void init(){
-        Ship.drones[0] = new Drone();
-        Ship.drones[0].x = Ship.x;
-        Ship.drones[0].y = Ship.y;
-        components[0] = new DroneHangar();
-        HydroponicsThread.start();
+        /*Ship.drones[0] = new Drone();
+        components[0] = new DroneHangar();*/
     }
 
     public static void displayShipStatus(){
