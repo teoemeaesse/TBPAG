@@ -1,6 +1,7 @@
 package threads;
 
 import tools.Tools;
+import world.map.entities.Drone;
 import world.map.entities.Ship;
 import world.map.Map;
 import world.map.entities.Space;
@@ -49,7 +50,13 @@ public class MiningThread implements Runnable {
                     Ship.drones[i].medicalEquipment += Map.map[Ship.drones[i].x][Ship.drones[i].y].medicalEquipment;
                     Ship.drones[i].scrap += Map.map[Ship.drones[i].x][Ship.drones[i].y].scrap;
 
-                    Tools.out("\n - Successfully extracted:\n\t" + Map.map[Ship.drones[i].x][Ship.drones[i].y].water + " water;\n\t" + Map.map[Ship.drones[i].x][Ship.drones[i].y].food + " food;\n\t" + Map.map[Ship.drones[i].x][Ship.drones[i].y].fuel + " fuel;\n\t" + Map.map[Ship.drones[i].x][Ship.drones[i].y].medicalEquipment + " medical equipment;\n\t" + Map.map[Ship.drones[i].x][Ship.drones[i].y].scrap + " scrap;\n\n");
+                    if(Ship.drones[i].water > Drone.waterCapacity) Ship.drones[i].water = Drone.waterCapacity;
+                    if(Ship.drones[i].food > Drone.foodCapacity) Ship.drones[i].food = Drone.foodCapacity;
+                    if(Ship.drones[i].fuel > Drone.fuelCapacity) Ship.drones[i].fuel = Drone.fuelCapacity;
+                    if(Ship.drones[i].medicalEquipment > Drone.medicalEquipmentCapacity) Ship.drones[i].medicalEquipment = Drone.medicalEquipmentCapacity;
+                    if(Ship.drones[i].scrap > Drone.scrapCapacity) Ship.drones[i].scrap = Drone.scrapCapacity;
+
+                    Tools.out("\n - Successfully extracted:\n\t" + Map.map[Ship.drones[i].x][Ship.drones[i].y].water + " water;\n\t" + Map.map[Ship.drones[i].x][Ship.drones[i].y].food + " food;\n\t" + Map.map[Ship.drones[i].x][Ship.drones[i].y].fuel + " fuel;\n\t" + Map.map[Ship.drones[i].x][Ship.drones[i].y].medicalEquipment + " medical equipment;\n\t" + Map.map[Ship.drones[i].x][Ship.drones[i].y].scrap + " scrap. Some may or may not been left behind due to missing storage space.\n\n");
 
                     Map.map[Ship.drones[i].x][Ship.drones[i].y] = new Space();
                     Ship.drones[i].extractionProgress = 0;

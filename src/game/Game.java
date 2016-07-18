@@ -1,19 +1,22 @@
 package game;
 
+import data.main_computer.MainComputer;
+import threads.HydroponicsThread;
 import threads.MiningThread;
-import tools.IO;
 import tools.Tools;
+import data.Component;
 import world.map.Map;
-import world.map.components.DroneHangar;
-import world.map.components.Hydroponics;
+import data.components.DroneHangar;
+import data.components.production.Hydroponics;
+import data.components.JumpDrive;
+import data.components.production.ScrapProcessor;
+import data.components.storage.*;
 import world.map.entities.*;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
     private static Scanner in = new Scanner(System.in);
-    private static Random r = new Random();
 
     public static void main(String[] args) throws Exception {
         Tools.out("If you need help with commands, read the commands.pdf file.\n\n");
@@ -33,6 +36,7 @@ public class Game {
                 dc(input);
                 uc(input);
                 bc(input);
+                sc(input);
             }
             catch(NumberFormatException e){
                 Tools.out("\nWrong parameters\n\n");
@@ -41,37 +45,17 @@ public class Game {
     }
 
     private static void init(){
-        IO.loadComponents();
+        //IO.loadComponents();
 
-        Ship.x = r.nextInt(20);
-        Ship.y = r.nextInt(20);
-        for(int x = 0; x < 20; x++){
-            for(int y = 0; y < 20; y++){
-                if(r.nextInt(26) == 0){
-                    Map.map[x][y] = new Asteroid();
-                    Map.map[x][y].icon = Asteroid.icon;
-                }
-                else if(r.nextInt(48) == 0){
-                    Map.map[x][y] = new LargeAsteroid();
-                    Map.map[x][y].icon = LargeAsteroid.icon;
-                }
-                else{
-                    Map.map[x][y] = new Space();
-                    Map.map[x][y].icon = Space.icon;
-                }
-                Map.map[x][y].x = x;
-                Map.map[x][y].y = y;
-            }
-        }
+        Map.generateSector();
 
         Ship.init();
         MiningThread.start();
+        HydroponicsThread.start();
+
+        new MainComputer();
     }
-    
-    
-    
-    
-    //TODO: SIMPLIFY COMMAND BLOCKS AS IN uc() AND bc()
+
 
     private static void shws(String input) throws Exception {
         if(input.length() > 4 && input.toUpperCase().substring(0, 5).equals("SHW S")){
@@ -222,7 +206,7 @@ public class Game {
                     drone = Integer.parseInt(input.substring(5, 7).trim());
                     if(Ship.drones[drone - 1].extractionProgress == 0){
                         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-                        Ship.drones[drone - 1].collectDrone(drone - 1, Ship.calcHipotenuse(Ship.calcXDifference(Ship.drones[drone].x, Ship.x), Ship.calcYDifference(Ship.drones[drone].y, Ship.y)));
+                        Ship.drones[drone - 1].collectDrone(drone - 1, Ship.calcHipotenuse(Ship.calcXDifference(Ship.drones[drone - 1].x, Ship.x), Ship.calcYDifference(Ship.drones[drone - 1].y, Ship.y)));
                     }
                     else{
                         Tools.out("\nDrone is mining...\n\n");
@@ -275,71 +259,102 @@ public class Game {
             }
         }
     }
-    
-    
-    
-    
-    
     private static void uc(String input) throws Exception {
-        if(Tools.commandBlock("U C")){
-            int component;
-            if (Integer.parseInt(input.substring(3, 5).trim()) <= Ship.components.length && Integer.parseInt(input.substring(3, 5).trim()) > 0){
-                component = Integer.parseInt(input.substring(3, 5).trim());
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-                if(Ship.components[component - 1] != null){
-                    switch(Ship.components[component - 1].name){
-                        case "Hydroponics":
-                            ((Hydroponics) Ship.components[component - 1]).upgrade(component - 1);
-                            break;
-                        case "Drone Hangar":
-                            ((DroneHangar) Ship.components[component - 1]).upgrade();
-                            break;
+        if(input.length() > 2 && input.toUpperCase().substring(0, 3).equals("U C")) {
+            if (input.length() > 3) {
+                int component;
+                if (Integer.parseInt(input.substring(3, 5).trim()) <= Ship.components.length && Integer.parseInt(input.substring(3, 5).trim()) > 0) {
+                    component = Integer.parseInt(input.substring(3, 5).trim());
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    if (Ship.components[component - 1] != null) {
+                        switch (Ship.components[component - 1].name) {
+                            case "Hydroponics":
+                                ((Hydroponics) Ship.components[component - 1]).upgrade(component - 1);
+                                break;
+                            case "Drone Hangar":
+                                ((DroneHangar) Ship.components[component - 1]).upgrade(component - 1);
+                                break;
+                            case "Jump Drive":
+                                ((JumpDrive) Ship.components[component - 1]).upgrade(component - 1);
+                                break;
+                            case "Water Storage":
+                                ((WaterStorage) Ship.components[component - 1]).upgrade(component - 1);
+                                break;
+                            case "Food Storage":
+                                ((FoodStorage) Ship.components[component - 1]).upgrade(component - 1);
+                                break;
+                            case "Fuel Storage":
+                                ((FuelStorage) Ship.components[component - 1]).upgrade(component - 1);
+                                break;
+                            case "Medical Storage":
+                                ((MedicalStorage) Ship.components[component - 1]).upgrade(component - 1);
+                                break;
+                            case "Scrap Storage":
+                                ((ScrapStorage) Ship.components[component - 1]).upgrade(component - 1);
+                                break;
+                            case "Scrap Processor":
+                                ((ScrapProcessor) Ship.components[component - 1]).upgrade(component - 1);
+                                break;
+
+                        }
+                    } else {
+                        Tools.out("\nComponent does not exist\n\n");
+                    }
+                } else {
+                    Tools.out("\nComponent does not exist\n\n");
+                }
+            } else {
+                Tools.out("\nComponent ID missing\n\n");
+            }
+        }
+    }
+    private static void bc(String input) throws Exception {
+        if(input.length() > 2 && input.toUpperCase().substring(0, 3).equals("B C")) {
+            if (input.length() > 3) {
+                for (int i = 0; i < Ship.components.length; i++) {
+                    if (Ship.components[i] == null) {
+
+                        for(int a = 0; a < Component.components.length; a++){
+                            if(input.toUpperCase().substring(4).replace(" ", "").equals(Component.components[a].name.toUpperCase().replace(" ", ""))){
+                                if(Ship.scrap >= Component.components[a].buildCost){
+                                    Ship.scrap -= Component.components[a].buildCost;
+                                    Ship.components[i] = Component.components[a];
+                                    Tools.out("\nSuccessfully built " + Component.components[a].name + " component (" + (i + 1) + ")\n\n");
+                                }else{
+                                    Tools.out("\nNot enough scrap to build this component\n\n");
+                                }
+                                i = Ship.components.length;
+                            }
+                        }
+
+                    } else if (i == Ship.components.length - 1) {
+                        Tools.out("\nNot enough component space\n\n");
+                    }
+                }
+            } else {
+                Tools.out("\nComponent name missing\n\n");
+            }
+        }
+    }
+    private static void sc(String input) throws Exception {
+        if(input.length() > 2 && input.toUpperCase().substring(0, 3).equals("S C")){
+            if(input.length() > 3){
+                int component;
+                if (Integer.parseInt(input.substring(3, 5).trim()) <= Ship.components.length && Integer.parseInt(input.substring(3, 5).trim()) > 0){
+                    component = Integer.parseInt(input.substring(3, 5).trim());
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    if(Ship.components[component - 1] != null){
+                        Ship.components[component - 1].scrap();
+                        Ship.components[component - 1] = null;
+                    }else{
+                        Tools.out("\nComponent does not exist\n\n");
                     }
                 }else{
                     Tools.out("\nComponent does not exist\n\n");
                 }
             }else{
-                Tools.out("\nComponent does not exist\n\n");
+                Tools.out("\nComponent ID missing\n\n");
             }
-        }else{
-            Tools.out("\nComponent ID missing\n\n");
-        }
-    }
-    private static void bc(String input) throws Exception {
-        if(Tools.commandBlock("B C")){
-            for(int i = 0; i < Ship.components.length; i++){
-                if(Ship.components[i] == null){
-                    switch(input.toUpperCase().substring(4).replace(" ", "")){
-                        case "HYDROPONICS":
-                            if(Ship.scrap >= Hydroponics.buildCost){
-                                Ship.components[i] = new Hydroponics();
-                                i = Ship.components.length;
-                            }else{
-                                Tools.out("\nNot enough scrap to build\n\n");
-                                i = Ship.components.length;
-                            }
-                            break;
-
-                        case "DRONEHANGAR":
-                            if(Ship.scrap >= DroneHangar.buildCost){
-                                Ship.components[i] = new DroneHangar();
-                                i = Ship.components.length;
-                            }else{
-                                Tools.out("\nNot enough scrap to build\n\n");
-                                i = Ship.components.length;
-                            }
-                            break;
-                        default:
-                            Tools.out("\nComponent does not exist\n\n");
-                            i = Ship.components.length;
-                        }
-
-                }else if(i == Ship.components.length - 1){
-                    Tools.out("\nNot enough component space\n\n");
-                }
-            }
-        }else{
-            Tools.out("\nComponent name missing\n\n");
         }
     }
 }

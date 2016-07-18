@@ -1,6 +1,6 @@
 package threads;
 
-import world.map.components.Hydroponics;
+import data.components.production.Hydroponics;
 import world.map.entities.Ship;
 
 /**
@@ -18,19 +18,18 @@ public class HydroponicsThread implements Runnable {
         long lastTime = System.nanoTime();
         long timer = 0;
 
-
-        for(int i = 0; i < Ship.components.length; i++){
-            if(Ship.components[i] != null && Ship.components[i].name.equals("Hydroponics")){
-                fps = 1 / Ship.components[i].timeTaken;
-                timePerTick = 1000000000 / fps;
-            }
-        }
-
         while (running) {
             now = System.nanoTime();
             delta += (now - lastTime) / timePerTick;
             timer += now - lastTime;
             lastTime = now;
+
+            for(int i = 0; i < Ship.components.length; i++){
+                if(Ship.components[i] != null && Ship.components[i].name.equals("Hydroponics")){
+                    fps = 1.0 / Ship.components[i].timeTaken;
+                    timePerTick = 1000000000 / fps;
+                }
+            }
 
             if (delta >= 1) {
                 for(int i = 0; i < Ship.components.length; i++){

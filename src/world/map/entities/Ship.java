@@ -1,8 +1,12 @@
 package world.map.entities;
 
+import data.main_computer.Hardware;
 import tools.Tools;
-import world.map.Component;
+import data.Component;
 import world.map.Map;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Tomás on 29/03/2016.
@@ -14,6 +18,7 @@ public class Ship {
     public static int droneCapacity = 0;
     public static Drone[] drones = new Drone[droneCapacity];
     public static Component components[] = new Component[10];
+    public static List<Hardware> hardwareStorage = new ArrayList<>();
 
     public static void init(){
         /*Ship.drones[0] = new Drone();

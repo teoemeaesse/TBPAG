@@ -1,15 +1,15 @@
-package world.map;
+package data;
 
 
 import tools.Tools;
-import world.map.components.DroneHangar;
-import world.map.components.production.Hydroponics;
-import world.map.components.JumpDrive;
-import world.map.components.production.ScrapProcessor;
-import world.map.components.storage.FoodStorage;
-import world.map.components.storage.MedicalStorage;
-import world.map.components.storage.ScrapStorage;
-import world.map.components.storage.WaterStorage;
+import data.components.DroneHangar;
+import data.components.JumpDrive;
+import data.components.production.Hydroponics;
+import data.components.production.ScrapProcessor;
+import data.components.storage.FoodStorage;
+import data.components.storage.MedicalStorage;
+import data.components.storage.ScrapStorage;
+import data.components.storage.WaterStorage;
 import world.map.entities.Ship;
 
 /**

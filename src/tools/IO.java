@@ -1,21 +1,15 @@
 package tools;
 
-import world.map.Component;
-
-import java.io.*;
-import java.net.URL;
-import java.util.Scanner;
-
 /**
  * Created by Tomás on 01/04/2016.
  */
 public class IO {
-    private static URL location = IO.class.getProtectionDomain().getCodeSource().getLocation();
+    //private static URL location = IO.class.getProtectionDomain().getCodeSource().getLocation();
 
-    public static void loadComponents(){
+    /*public static void loadComponents(){
         try{
-            FileInputStream fis = new FileInputStream((location + "").substring(5) + "tmp/components.list");
-            BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+            InputStream is = IO.class.getResourceAsStream("components.list");
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String file = br.readLine();
 
             Component.components = new Component[Integer.parseInt(file)];
@@ -64,22 +58,22 @@ public class IO {
                                 Component.components[componentIndex].produceType = componentThingyDescription;
                                 break;
                             case "BUILD_COST":
-                                Component.components[componentIndex].buildCost = Integer.parseInt(componentThingyDescription);
+                                Component.components[componentIndex].buildCost = Double.parseDouble(componentThingyDescription);
                                 break;
                             case "BASE_UPGRADE_COST":
-                                Component.components[componentIndex].baseUpgradeCost = Integer.parseInt(componentThingyDescription);
+                                Component.components[componentIndex].baseUpgradeCost = Double.parseDouble(componentThingyDescription);
                                 break;
                             case "CONSUMPTION":
-                                Component.components[componentIndex].consumption = Integer.parseInt(componentThingyDescription);
+                                Component.components[componentIndex].consumption = Double.parseDouble(componentThingyDescription);
                                 break;
                             case "PRODUCE":
-                                Component.components[componentIndex].produce = Integer.parseInt(componentThingyDescription);
+                                Component.components[componentIndex].produce = Double.parseDouble(componentThingyDescription);
                                 break;
                             case "TIME_TAKEN":
-                                Component.components[componentIndex].timeTaken = Integer.parseInt(componentThingyDescription);
+                                Component.components[componentIndex].timeTaken = Double.parseDouble(componentThingyDescription);
                                 break;
                             case "LEVEL":
-                                Component.components[componentIndex].level = Integer.parseInt(componentThingyDescription);
+                                Component.components[componentIndex].level = Double.parseDouble(componentThingyDescription);
                                 break;
                         }
 
@@ -90,15 +84,12 @@ public class IO {
                     //COMPONENT... THINGIES
 
                     //FINISH COMPONENT
-                    if(file.substring(i, i + 1).equals("#")){
+                    if(file.substring(i + 1, i + 2).equals("#")){
                         componentIndex++;
                     }
                     //FINISH COMPONENT
                 }
             }
-            Tools.out(Component.components[0].name);
-            Tools.out(Component.components[0].description);
-            Tools.out(Component.components[0].produceType);
         }catch(IOException e){}
-    }
+    }*/
 }

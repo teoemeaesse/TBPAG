@@ -1,4 +1,4 @@
-package data.components.main_computer;
+package data.main_computer;
 
 /**
  * Created by Tomás on 07/18/2016.
