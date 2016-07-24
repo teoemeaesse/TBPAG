@@ -1,6 +1,10 @@
 package data.components.production;
 
+import data.DronePart;
+import data.Material;
+import data.drone_parts.DroneParts;
 import data.main_computer.hardware.CPU;
+import data.materials.Materials;
 import tools.Tools;
 import data.Component;
 import world.map.entities.Ship;
@@ -15,7 +19,9 @@ public class ScrapProcessor extends Component {
     private final int PRODUCTION_STAGE = 0, ASSEMBLING_STAGE = 1;
     private int currentStage = 0;
 
-    private int fe, sl, au, cu, pl;
+    private Material[] materials = new Material[]{Materials.FE.getMaterial(), Materials.SL.getMaterial(), Materials.AU.getMaterial(), Materials.CU.getMaterial(), Materials.PL.getMaterial()};
+
+    private DronePart[] dronePartList = new DronePart[]{DroneParts.SMALL_DRILL.getDronePart(), DroneParts.LARGE_DRILL.getDronePart(), DroneParts.WATER_STORAGE.getDronePart(), DroneParts.FOOD_STORAGE.getDronePart(), DroneParts.FUEL_STORAGE.getDronePart(), DroneParts.MEDICAL_STORAGE.getDronePart(), DroneParts.SCRAP_STORAGE.getDronePart()};
 
     private Scanner scanner = new Scanner(System.in);
 
@@ -38,11 +44,11 @@ public class ScrapProcessor extends Component {
     }
 
     @Override
-    public void activate() throws Exception{
+    public void activate() throws Exception {
         productionMenu();
     }
 
-    private void productionMenu() throws Exception{
+    private void productionMenu() throws Exception {
         boolean open = true;
 
         while(open){
@@ -50,7 +56,7 @@ public class ScrapProcessor extends Component {
 
             String input = scanner.nextLine();
 
-            switch(input.toUpperCase()){
+            switch(input){
                 case "1":
                     materialStorage();
                     break;
@@ -60,7 +66,7 @@ public class ScrapProcessor extends Component {
                 case "3":
                     produce();
                     break;
-                case "X":
+                case "x":
                     open = false;
                     Tools.out("\nThank you for using our service. Come back soon for more top-notch graphical menus.\n(press enter)\n\n");
                     scanner.nextLine();
@@ -71,44 +77,45 @@ public class ScrapProcessor extends Component {
     }
 
     private void materialStorage(){
-        Tools.out("\nMetal: " + fe + ";\nSilicon: " + sl + ";\nGold: " + au + ";\nCopper: " + cu + ";\nPlastic: " + pl + ". (press enter)\n\n");
+        Tools.out("\nMetal: " + materials[0].amount + ";\nSilicon: " + materials[1].amount + ";\nGold: " + materials[2].amount + ";\nCopper: " + materials[3].amount + ";\nPlastic: " + materials[4].amount + ". (press enter)\n\n");
         scanner.nextLine();
     }
-    private void separate(){
+    private void separate() throws NumberFormatException {
+        boolean open = true;
         Random r = new Random();
 
-        Tools.out("\nHow much scrap do you want to process?\n");
-        String input = scanner.nextLine();
+        while(open){
+            Tools.out("\nHow much scrap do you want to process? (you have " + Ship.scrap + "; x to return)\n");
 
-        try{
+            String input = scanner.nextLine();
+
             int scrap = Integer.parseInt(input);
 
             if(Ship.scrap >= scrap){
-
                 Ship.scrap -= scrap;
-                fe += r.nextInt(12) * scrap + r.nextInt(5);
-                sl += r.nextInt(6) * scrap + r.nextInt(5);
-                au += r.nextInt(4) * scrap + r.nextInt(5);
-                cu += r.nextInt(16) * scrap + r.nextInt(5);
-                pl += r.nextInt(8) * scrap + r.nextInt(5);
+
+                materials[0].amount += (r.nextInt(12 - 4) + 4) * scrap + r.nextInt(10 + 2) - 2;
+                materials[1].amount += (r.nextInt(6 - 2) + 2) * scrap + r.nextInt(10 + 1) - 1;
+                materials[2].amount += (r.nextInt(4 - 1) + 1) * scrap + r.nextInt(10);
+                materials[3].amount += (r.nextInt(16 - 5) + 5) * scrap + r.nextInt(10 + 2) - 2;
+                materials[4].amount += (r.nextInt(8 - 2) + 2) * scrap + r.nextInt(10 + 2) - 2;
 
                 Tools.out("\nMaterials added to storage. (press enter)\n\n");
+                open = false;
                 scanner.nextLine();
-
             }else{
                 Tools.out("\nNot enough scrap. Go away you lower-middle class citizen! Shoo! (press enter)\n\n");
                 scanner.nextLine();
             }
-        }catch(NumberFormatException e){
-            Tools.out("\nNumbers please. (press enter)\n\n");
-            scanner.nextLine();
+
+            if(input.equals("x")) open = false;
         }
     }
     private void produce() throws Exception {
         boolean open = true;
 
         while(open){
-            Tools.out("\nWelcome to the S.P.'s v.13 Menus4U's trademarked menu's produce hardware submenu.\n\nWhat hardware do you want to build?\n\n1. CPU\n2. SSD\n3. RAM\n4. Safety hardware\nx. Return\n\n");
+            Tools.out("\nWelcome to the S.P.'s v.13 Menus4U's trademarked menu's produce submenu.\n\nWhat hardware do you want to build?\n\n1. CPU\n2. SSD\n3. RAM\n4. Safety hardware\n5. Drone parts\nx. Return\n\n");
 
             String input = scanner.nextLine();
 
@@ -116,6 +123,8 @@ public class ScrapProcessor extends Component {
                 case "1":
                     produceCPU();
                     break;
+                case "5":
+                    dronePartsSubmenu();
                 case "X":
                     open = false;
                     Tools.out("\nReturning...\n\n");
@@ -138,57 +147,111 @@ public class ScrapProcessor extends Component {
 
             if(input.equals("x")) break;
 
-            try{
-                frequency = Double.parseDouble(input);
-                if(frequency > level * 3){
-                    Tools.out("\n\nWoa! Calm down! Too high frequency for this machine's level. Try upgrading it. (press enter)\n\n");
-                    frequency = 0;
+            frequency = Double.parseDouble(input);
+            if(frequency > level * 3){
+                Tools.out("\n\nWoa! Calm down! Too high frequency for this machine's level. Try upgrading it. (press enter)\n\n");
+                frequency = 0;
+                open = false;
+                scanner.nextLine();
+            }else{
+                Tools.out("\n\nAmount of cores (i.e. 2, 3, 6...; maximum is always 32): ");
+
+                input = scanner.nextLine();
+
+                cores = Integer.parseInt(input);
+
+                if(cores > 32){
+                    Tools.out("\n\nWhy don't you obey the rules? (press enter)\n\n");
+                    cores = 0;
                     open = false;
                     scanner.nextLine();
                 }else{
-                    Tools.out("\n\nAmount of cores (i.e. 2, 3, 6...; maximum is always 32): ");
+                    Tools.out("\nYou're about to spend " + Math.floor(frequency * cores * 30) + " iron, " + Math.floor(frequency * cores * 25) + " silicon, " + Math.floor(cores * 10) + " gold, " + Math.floor(cores * 35) + " copper and " + Math.floor(frequency * cores * 5) + " plastic.\nAre you sure you want to build this CPU? (y/anything else)\n\n");
 
                     input = scanner.nextLine();
 
-                    cores = Integer.parseInt(input);
+                    if(input.toUpperCase().equals("Y")){
+                         if(enoughMaterials(Math.floor(frequency * cores * 30), Math.floor(frequency * cores * 25), cores * 10, cores * 35, Math.floor(frequency * cores * 5))){
+                            materials[0].amount -= Math.floor(frequency * cores * 30);
+                            materials[1].amount -= Math.floor(frequency * cores * 25);//fe, sl, au, cu, pl
+                            materials[2].amount -= cores * 10;
+                            materials[3].amount -= cores * 35;
+                            materials[4].amount -= Math.floor(frequency * cores * 5);
 
-                    if(cores > 32){
-                        Tools.out("\n\nWhy don't you obey the rules? (press enter)\n\n");
-                        cores = 0;
-                        open = false;
-                        scanner.nextLine();
-                    }else{
-                        Tools.out("\nYou're about to spend " + Math.floor(frequency * cores * 30) + " iron, " + Math.floor(frequency * cores * 25) + " silicon, " + cores * 10 + ".0 gold, " + cores * 35 + ".0 copper and " + Math.floor(frequency * cores * 5) + " plastic.\nAre you sure you want to build this CPU? (y/anything else)\n\n");
+                            Ship.hardwareStorage.add(new CPU(frequency, cores));
 
-                        input = scanner.nextLine();
-
-                        if(input.toUpperCase().equals("Y")){
-                            if(fe >= Math.floor(frequency * cores * 30) && sl >= Math.floor(frequency * cores * 25) && au >= cores * 10 && cu > cores * 35 && pl >= Math.floor(frequency * cores * 5)) {
-                                fe -= Math.floor(frequency * cores * 30);
-                                sl -= Math.floor(frequency * cores * 25);
-                                au -= cores * 10;
-                                cu -= cores * 35;
-                                pl -= Math.floor(frequency * cores * 5);
-
-                                Ship.hardwareStorage.add(new CPU(frequency, cores));
-
-                                Tools.out("\nCPU added to ship storage. (press enter)\n\n");
-                                scanner.nextLine();
-                            }else{
-                                Tools.out("\nNot enough materials. (press enter)\n\n");
-                                scanner.nextLine();
-                            }
-                            open = false;
+                            Tools.out("\nCPU added to ship storage. (press enter)\n\n");
+                            scanner.nextLine();
                         }else{
-                            break;
+                            Tools.out("\nNot enough materials. (press enter)\n\n");
+                            scanner.nextLine();
                         }
+                        open = false;
+                    }else{
+                        break;
                     }
                 }
-
-            }catch (NumberFormatException e){
-                Tools.out("\nError processing request. (press enter)\n\n");
-                scanner.nextLine();
             }
+        }
+    }
+
+    private void dronePartsSubmenu() throws NumberFormatException {
+        boolean open = true;
+
+        while(open) {
+            Tools.out("\nWelcome to the S.P.'s v.13 Menus4U's trademarked menu's produce submenu's drone parts submenu.\n\nWhat drone part do you want to build?\n\n");
+
+            for(int i = 0; i < dronePartList.length; i++){
+                Tools.out((i + 1) + ". " + dronePartList[i].name + "\n");
+            }
+
+            Tools.out("x. Return\n\n");
+
+            String input = scanner.nextLine();
+
+            for(int i = 0; i < dronePartList.length; i++){
+                if(input.equals(i + 1 + "")){
+                    Tools.out("\nYou will need:\n\n");
+
+                    for(int a = 0; a < dronePartList[i].materialsToBuild.length; a++){
+                        Tools.out(dronePartList[i].materialsToBuild[a].name + ": " + Math.floor(dronePartList[i].materialsToBuild[a].amount) + "\n");
+                    }
+
+                    Tools.out("\nDo you want to build this? (y/anything else)\n\n");
+
+                    input = scanner.nextLine();
+
+                    if(input.toUpperCase().equals("Y")){
+                        if(enoughMaterials(dronePartList[i].materialsToBuild[0].amount, dronePartList[i].materialsToBuild[1].amount, dronePartList[i].materialsToBuild[2].amount, dronePartList[i].materialsToBuild[3].amount, dronePartList[i].materialsToBuild[4].amount)){
+                            materials[0].amount -= dronePartList[i].materialsToBuild[0].amount;
+                            materials[1].amount -= dronePartList[i].materialsToBuild[1].amount;
+                            materials[2].amount -= dronePartList[i].materialsToBuild[2].amount;
+                            materials[3].amount -= dronePartList[i].materialsToBuild[3].amount;
+                            materials[4].amount -= dronePartList[i].materialsToBuild[4].amount;
+
+                            Ship.dronePartsStorage.add(dronePartList[i]);
+                            Tools.out("\n" + dronePartList[i].name + " added to ship storage for further use. (press enter)\n\n");
+                            scanner.nextLine();
+                        }else{
+                            Tools.out("\nNot enough materials. (press enter)\n\n");
+                            scanner.nextLine();
+                        }
+                    }else{
+                        break;
+                    }
+                }
+            }
+
+            if(input.equals("x")) open = false;
+        }
+    }
+
+
+    private boolean enoughMaterials(double fe, double sl, double au, double cu, double pl){
+        if(materials[0].amount >= fe && materials[1].amount >= sl && materials[2].amount >= au && materials[3].amount > cu && materials[4].amount >= pl) {
+            return true;
+        }else{
+            return false;
         }
     }
 }

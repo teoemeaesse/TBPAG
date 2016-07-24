@@ -9,7 +9,7 @@ import world.map.entities.Space;
 /**
  * Created by Tomás on 02/04/2016.
  */
-public class TimeThread implements Runnable {
+public class DroneThread implements Runnable {
     private static Thread thread;
     private static boolean running = false;
     public static boolean shipMining = false;
@@ -89,7 +89,7 @@ public class TimeThread implements Runnable {
     public static synchronized void start() {
         if (running) return;
         running = true;
-        thread = new Thread(new TimeThread());
+        thread = new Thread(new DroneThread());
         thread.start();
     }
 

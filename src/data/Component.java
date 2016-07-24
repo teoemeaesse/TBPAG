@@ -1,6 +1,7 @@
 package data;
 
 
+import data.components.drone.DroneModifier;
 import tools.Tools;
 import data.components.DroneHangar;
 import data.components.JumpDrive;
@@ -22,7 +23,7 @@ public class Component {
 
     public static final Component[] components = new Component[]{new Hydroponics(), new DroneHangar(), new JumpDrive(),
                                                                  new WaterStorage(), new FoodStorage(), new MedicalStorage(), new ScrapStorage(), new WaterStorage(),
-                                                                 new ScrapProcessor()};
+                                                                 new ScrapProcessor(), new DroneModifier()};
 
     public void activate() throws Exception {
         active = true;

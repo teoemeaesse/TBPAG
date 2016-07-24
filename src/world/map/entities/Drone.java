@@ -1,15 +1,22 @@
 package world.map.entities;
 
+import data.DronePart;
 import tools.Tools;
 import world.map.Map;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Tomás on 06/04/2016.
  */
 public class Drone {
+    //public static final int INACTIVE = 0, SCRAP_MINER = 1, GATHERER = 2, ASTEROID_MINER = 3;
     public int x, y;
     public static final int waterCapacity = 20, foodCapacity = 20, fuelCapacity = 20, medicalEquipmentCapacity = 10, scrapCapacity = 30;
     public double water, food, fuel, medicalEquipment, scrap, extractionProgress;
+    //public int type = INACTIVE;
+    public List<DronePart> parts = new ArrayList<>();
 
     public Drone(){
         x = Ship.x;

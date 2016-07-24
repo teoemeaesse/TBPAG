@@ -1,5 +1,6 @@
 package world.map.entities;
 
+import data.DronePart;
 import data.main_computer.Hardware;
 import tools.Tools;
 import data.Component;
@@ -15,14 +16,15 @@ public class Ship {
     public static int x, y;
     public static double waterCapacity = 30, foodCapacity = 30, fuelCapacity = 30, medicalEquipmentCapacity = 10, scrapCapacity = 20;
     public static double water = 15, food = 5, fuel = 10, medicalEquipment = 1, scrap = 999, extractionProgress = 0;
-    public static int droneCapacity = 0;
+    public static int droneCapacity = 1;
     public static Drone[] drones = new Drone[droneCapacity];
     public static Component components[] = new Component[10];
     public static List<Hardware> hardwareStorage = new ArrayList<>();
+    public static List<DronePart> dronePartsStorage = new ArrayList<>();
 
     public static void init(){
-        /*Ship.drones[0] = new Drone();
-        components[0] = new DroneHangar();*/
+        Ship.drones[0] = new Drone();
+        //components[0] = new DroneHangar();
     }
 
     public static void displayShipStatus(){
@@ -89,7 +91,6 @@ public class Ship {
             Tools.out("\nNot enough fuel...\n\n");
         }
     }
-
 
     public static int calcXDifference(int x1, int x2){
         int diff = x1 - x2;
