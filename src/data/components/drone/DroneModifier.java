@@ -1,6 +1,7 @@
 package data.components.drone;
 
 import data.Component;
+import game.GameConstants;
 import tools.Tools;
 import world.map.entities.Ship;
 
@@ -13,8 +14,7 @@ public class DroneModifier extends Component {
     private Scanner scanner = new Scanner(System.in);
 
     public DroneModifier(){
-        name = "Drone Modifier";
-        description = "This turns inactive drones into active drones.\n";
+        name = GameConstants.COMPONENT_DRONEMODIFIER;
         buildCost = 40;
         baseUpgradeCost = 25;
         timeTaken = 180;
@@ -44,25 +44,26 @@ public class DroneModifier extends Component {
 
             String input = scanner.nextLine();
 
-            if(input.equals("x")) open = false;
+            if(input.toUpperCase().equals("X")) open = false;
+            else if(!input.equals("")){
+                int id = Integer.parseInt(input);
 
-            int id = Integer.parseInt(input);
+                if(id <= Ship.droneCapacity){
+                    Tools.out("\n\nDo you wish to...\n\n1. Install a part\n2. Remove a part\n\n");
+                    input = scanner.nextLine();
 
-            if(id <= Ship.droneCapacity){
-                Tools.out("\n\nDo you wish to...\n\n1. Install a part\n2. Remove a part\n\n");
-                input = scanner.nextLine();
-
-                switch(input){
-                    case "1":
-                        installPart(id);
-                        break;
-                    case "2":
-                        removePart();
-                        break;
+                    switch(input){
+                        case "1":
+                            installPart(id);
+                            break;
+                        case "2":
+                            removePart();
+                            break;
+                    }
+                }else{
+                    Tools.out("\nDrone does not exist. (press enter)\n\n");
+                    scanner.nextLine();
                 }
-            }else{
-                Tools.out("\nDrone does not exist. (press enter)\n\n");
-                scanner.nextLine();
             }
         }
     }
@@ -81,19 +82,21 @@ public class DroneModifier extends Component {
 
             String input = scanner.nextLine();
 
-            if(input.equals("x")) open = false;
+            if(input.toUpperCase().equals("X")) open = false;
+            else{
+                int id = Integer.parseInt(input) - 1;
 
-            int id = Integer.parseInt(input);
+                if(id <= Ship.dronePartsStorage.size()){
+                    Ship.drones.get(drone - 1).parts.add(Ship.dronePartsStorage.get(id));
 
-            if(id <= Ship.dronePartsStorage.size()){
-                Ship.drones[drone - 1].parts.add(Ship.dronePartsStorage.get(id - 1));
-                Ship.dronePartsStorage.remove(id - 1);
+                    Tools.out("\n" + Ship.dronePartsStorage.get(id).name + " added to drone. (press enter)\n\n");
 
-                Tools.out("\n" + Ship.dronePartsStorage.get(id - 1).name + " added to drone. (press enter)\n\n");
-                scanner.nextLine();
-            }else{
-                Tools.out("\nSelect a part you have. (press enter)\n\n");
-                scanner.nextLine();
+                    Ship.dronePartsStorage.remove(id);
+                    scanner.nextLine();
+                }else{
+                    Tools.out("\nSelect a part you have. (press enter)\n\n");
+                    scanner.nextLine();
+                }
             }
         }
     }

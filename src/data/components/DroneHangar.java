@@ -1,5 +1,6 @@
 package data.components;
 
+import game.GameConstants;
 import tools.Tools;
 import data.Component;
 import world.map.entities.Ship;
@@ -9,8 +10,7 @@ import world.map.entities.Ship;
  */
 public class DroneHangar extends Component {
     public DroneHangar(){
-        name = "Drone Hangar";
-        description = "This holds all your drones. Upgrading will increase drone capacity.";
+        name = GameConstants.COMPONENT_DRONEHANGAR;
         buildCost = 40;
         baseUpgradeCost = 25;
         level = 1;

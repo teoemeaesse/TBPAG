@@ -13,7 +13,7 @@ public class DroneThread implements Runnable {
     private static Thread thread;
     private static boolean running = false;
     public static boolean shipMining = false;
-    public static Drone[] dronesToCheck = new Drone[Ship.drones.length];
+    public static Drone[] dronesToCheck = new Drone[Ship.drones.size()];
 
     public static void insertDrone(Drone drone){
         for(int i = 0; i < dronesToCheck.length; i++){
@@ -51,7 +51,7 @@ public class DroneThread implements Runnable {
                     Tools.out("\n - Successfully extracted:\n\t" + Map.map[dronesToCheck[i].x][dronesToCheck[i].y].water + " water;\n\t" + Map.map[dronesToCheck[i].x][dronesToCheck[i].y].food + " food;\n\t" + Map.map[dronesToCheck[i].x][dronesToCheck[i].y].fuel + " fuel;\n\t" + Map.map[dronesToCheck[i].x][dronesToCheck[i].y].medicalEquipment + " medical equipment;\n\t" + Map.map[dronesToCheck[i].x][dronesToCheck[i].y].scrap + " scrap;\n\n");
                     Map.map[dronesToCheck[i].x][dronesToCheck[i].y] = new Space();
                     dronesToCheck[i].extractionProgress = 0;
-                    Ship.drones[i] = dronesToCheck[i];
+                    Ship.drones.set(i, dronesToCheck[i]);
                     dronesToCheck[i] = null;
                 }
             }

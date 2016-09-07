@@ -1,5 +1,6 @@
 package data.components;
 
+import game.GameConstants;
 import tools.Tools;
 import data.Component;
 import world.map.Map;
@@ -10,8 +11,7 @@ import world.map.entities.Ship;
  */
 public class JumpDrive extends Component {
     public JumpDrive(){
-        name = "Jump Drive";
-        description = "Used for jumping between sectors.\n";
+        name = GameConstants.COMPONENT_JUMPDRIVE;
         buildCost = 40;
         baseUpgradeCost = 25;
         consumption = 10;

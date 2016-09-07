@@ -5,6 +5,7 @@ import data.Material;
 import data.drone_parts.DroneParts;
 import data.main_computer.hardware.CPU;
 import data.materials.Materials;
+import game.GameConstants;
 import tools.Tools;
 import data.Component;
 import world.map.entities.Ship;
@@ -26,8 +27,7 @@ public class ScrapProcessor extends Component {
     private Scanner scanner = new Scanner(System.in);
 
     public ScrapProcessor(){
-        name = "Scrap Processor";
-        description = "This processes scrap into materials that can be used to build various hardware.\n";
+        name = GameConstants.COMPONENT_SCRAPPROCESSOR;
         buildCost = 40;
         baseUpgradeCost = 25;
         level = 1;
@@ -81,34 +81,36 @@ public class ScrapProcessor extends Component {
         scanner.nextLine();
     }
     private void separate() throws NumberFormatException {
-        boolean open = true;
         Random r = new Random();
+
+        boolean open = true;
 
         while(open){
             Tools.out("\nHow much scrap do you want to process? (you have " + Ship.scrap + "; x to return)\n");
 
             String input = scanner.nextLine();
 
-            int scrap = Integer.parseInt(input);
+            if(input.toUpperCase().equals("X")) open = false;
+            else{
+                int scrap = Integer.parseInt(input);
 
-            if(Ship.scrap >= scrap){
-                Ship.scrap -= scrap;
+                if(Ship.scrap >= scrap){
+                    Ship.scrap -= scrap;
 
-                materials[0].amount += (r.nextInt(12 - 4) + 4) * scrap + r.nextInt(10 + 2) - 2;
-                materials[1].amount += (r.nextInt(6 - 2) + 2) * scrap + r.nextInt(10 + 1) - 1;
-                materials[2].amount += (r.nextInt(4 - 1) + 1) * scrap + r.nextInt(10);
-                materials[3].amount += (r.nextInt(16 - 5) + 5) * scrap + r.nextInt(10 + 2) - 2;
-                materials[4].amount += (r.nextInt(8 - 2) + 2) * scrap + r.nextInt(10 + 2) - 2;
+                    materials[0].amount += (r.nextInt(12 - 4) + 4) * scrap;
+                    materials[1].amount += (r.nextInt(6 - 2) + 2) * scrap;
+                    materials[2].amount += (r.nextInt(4 - 1) + 1) * scrap;
+                    materials[3].amount += (r.nextInt(16 - 5) + 5) * scrap;
+                    materials[4].amount += (r.nextInt(8 - 2) + 2) * scrap;
 
-                Tools.out("\nMaterials added to storage. (press enter)\n\n");
-                open = false;
-                scanner.nextLine();
-            }else{
-                Tools.out("\nNot enough scrap. Go away you lower-middle class citizen! Shoo! (press enter)\n\n");
-                scanner.nextLine();
+                    Tools.out("\nMaterials added to storage. (press enter)\n\n");
+                    open = false;
+                    scanner.nextLine();
+                }else{
+                    Tools.out("\nNot enough scrap. Go away you lower-middle class citizen! Shoo! (press enter)\n\n");
+                    scanner.nextLine();
+                }
             }
-
-            if(input.equals("x")) open = false;
         }
     }
     private void produce() throws Exception {
@@ -145,7 +147,7 @@ public class ScrapProcessor extends Component {
 
             String input = scanner.nextLine();
 
-            if(input.equals("x")) break;
+            if(input.toUpperCase().equals("X")) break;
 
             frequency = Double.parseDouble(input);
             if(frequency > level * 3){
@@ -209,40 +211,38 @@ public class ScrapProcessor extends Component {
 
             String input = scanner.nextLine();
 
-            for(int i = 0; i < dronePartList.length; i++){
-                if(input.equals(i + 1 + "")){
-                    Tools.out("\nYou will need:\n\n");
+            if(input.toUpperCase().equals("X")) open = false;
+            else{
+                for(int i = 0; i < dronePartList.length; i++){
+                    if(input.equals(i + 1 + "")){
+                        Tools.out("\nYou will need:\n\n");
 
-                    for(int a = 0; a < dronePartList[i].materialsToBuild.length; a++){
-                        Tools.out(dronePartList[i].materialsToBuild[a].name + ": " + Math.floor(dronePartList[i].materialsToBuild[a].amount) + "\n");
-                    }
-
-                    Tools.out("\nDo you want to build this? (y/anything else)\n\n");
-
-                    input = scanner.nextLine();
-
-                    if(input.toUpperCase().equals("Y")){
-                        if(enoughMaterials(dronePartList[i].materialsToBuild[0].amount, dronePartList[i].materialsToBuild[1].amount, dronePartList[i].materialsToBuild[2].amount, dronePartList[i].materialsToBuild[3].amount, dronePartList[i].materialsToBuild[4].amount)){
-                            materials[0].amount -= dronePartList[i].materialsToBuild[0].amount;
-                            materials[1].amount -= dronePartList[i].materialsToBuild[1].amount;
-                            materials[2].amount -= dronePartList[i].materialsToBuild[2].amount;
-                            materials[3].amount -= dronePartList[i].materialsToBuild[3].amount;
-                            materials[4].amount -= dronePartList[i].materialsToBuild[4].amount;
-
-                            Ship.dronePartsStorage.add(dronePartList[i]);
-                            Tools.out("\n" + dronePartList[i].name + " added to ship storage for further use. (press enter)\n\n");
-                            scanner.nextLine();
-                        }else{
-                            Tools.out("\nNot enough materials. (press enter)\n\n");
-                            scanner.nextLine();
+                        for(int a = 0; a < dronePartList[i].materialsToBuild.length; a++){
+                            Tools.out(dronePartList[i].materialsToBuild[a].name + ": " + Math.floor(dronePartList[i].materialsToBuild[a].amount) + "\n");
                         }
-                    }else{
-                        break;
+
+                        Tools.out("\nDo you want to build this? (y/anything else)\n\n");
+
+                        input = scanner.nextLine();
+
+                        if(input.toUpperCase().equals("Y")){
+                            if(enoughMaterials(dronePartList[i].materialsToBuild[0].amount, dronePartList[i].materialsToBuild[1].amount, dronePartList[i].materialsToBuild[2].amount, dronePartList[i].materialsToBuild[3].amount, dronePartList[i].materialsToBuild[4].amount)){
+
+                                for(int j = 0; j < materials.length; j++) materials[j].amount -= dronePartList[i].materialsToBuild[j].amount;
+
+                                Ship.dronePartsStorage.add(dronePartList[i]);
+                                Tools.out("\n" + dronePartList[i].name + " added to ship storage for further use. (press enter)\n\n");
+                                scanner.nextLine();
+                            }else{
+                                Tools.out("\nNot enough materials. (press enter)\n\n");
+                                scanner.nextLine();
+                            }
+                        }else{
+                            break;
+                        }
                     }
                 }
             }
-
-            if(input.equals("x")) open = false;
         }
     }
 

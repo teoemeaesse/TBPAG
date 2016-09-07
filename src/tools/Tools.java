@@ -1,6 +1,6 @@
 package tools;
 
-import world.map.entities.Drone;
+import game.GameConstants;
 
 /**
  * Created by Tomás on 29/03/2016.
@@ -9,7 +9,7 @@ public class Tools {
     public static void out(String arg){
         System.out.print(arg);
     }
-    public static Drone[] increaseArraySize(Drone[] array){
+    /*public static Drone[] increaseArraySize(Drone[] array){
         Drone[] temp = new Drone[array.length + 1];
         for(int i = 0; i < array.length; i++){
             temp[i] = array[i];
@@ -22,5 +22,25 @@ public class Tools {
             temp[i] = array[i];
         }
         return temp;
+    }*/
+
+    public static void drawCommandsHelp(){
+        out("\nList of all commands:\n\n");
+
+        for(int i = 0; i < GameConstants.commands.length; i++){
+            out(GameConstants.commands[i] + " - " + GameConstants.commandDescriptions[i] + "\n");
+        }
+
+        out("\n\n");
+    }
+
+    public static void drawComponentsHelp(){
+        out("\nList of all components:\n\n");
+
+        for(int i = 0; i < GameConstants.components.length; i++){
+            out(GameConstants.components[i] + " - " + GameConstants.componentDescriptions[i] + "\n");
+        }
+
+        out("\n\n");
     }
 }

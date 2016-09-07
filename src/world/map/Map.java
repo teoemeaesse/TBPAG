@@ -28,8 +28,8 @@ public class Map {
                     String icon = map[x - 2][y].icon;
                     if(x - 2 == Ship.x && y == Ship.y) icon = "@";
                     else{
-                        for(int i = 0; i < Ship.drones.length; i++){
-                            if(x - 2 == Ship.drones[i].x && y == Ship.drones[i].y) icon = "D";
+                        for(int i = 0; i < Ship.drones.size(); i++){
+                            if(x - 2 == Ship.drones.get(i).x && y == Ship.drones.get(i).y) icon = "D";
                         }
                     }
                     Tools.out(icon);

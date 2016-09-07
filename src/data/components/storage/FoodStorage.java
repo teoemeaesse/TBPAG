@@ -1,5 +1,6 @@
 package data.components.storage;
 
+import game.GameConstants;
 import tools.Tools;
 import data.Component;
 import world.map.entities.Ship;
@@ -9,8 +10,7 @@ import world.map.entities.Ship;
  */
 public class FoodStorage extends Component {
     public FoodStorage(){
-        name = "Food Storage";
-        description = "This stores food.\n";
+        name = GameConstants.COMPONENT_FOODSTORAGE;
         buildCost = 16;
         baseUpgradeCost = 10;
         level = 1;

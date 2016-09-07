@@ -1,6 +1,7 @@
 package world.map.entities;
 
 import data.DronePart;
+import data.drone_parts.DroneParts;
 import data.main_computer.Hardware;
 import tools.Tools;
 import data.Component;
@@ -17,13 +18,16 @@ public class Ship {
     public static double waterCapacity = 30, foodCapacity = 30, fuelCapacity = 30, medicalEquipmentCapacity = 10, scrapCapacity = 20;
     public static double water = 15, food = 5, fuel = 10, medicalEquipment = 1, scrap = 999, extractionProgress = 0;
     public static int droneCapacity = 1;
-    public static Drone[] drones = new Drone[droneCapacity];
+    public static List<Drone> drones = new ArrayList<>(droneCapacity);
     public static Component components[] = new Component[10];
     public static List<Hardware> hardwareStorage = new ArrayList<>();
     public static List<DronePart> dronePartsStorage = new ArrayList<>();
 
     public static void init(){
-        Ship.drones[0] = new Drone();
+        Ship.drones.add(new Drone());
+        Ship.dronePartsStorage.add(DroneParts.SMALL_DRILL.getDronePart());
+        Ship.dronePartsStorage.add(DroneParts.LARGE_DRILL.getDronePart());
+        Ship.dronePartsStorage.add(DroneParts.FOOD_STORAGE.getDronePart());
         //components[0] = new DroneHangar();
     }
 
@@ -66,13 +70,13 @@ public class Ship {
     }
     public static void navigateShip(int x, int y, int dist){
         if(fuel - dist >= 0) {
-            String[] dronesMoved = new String[drones.length];
-            for(int i = 0; i < drones.length; i++){
+            String[] dronesMoved = new String[drones.size()];
+            for(int i = 0; i < drones.size(); i++){
                 dronesMoved[i] = "";
-                if(drones[i].x == Ship.x && drones[i].y == Ship.y) {
+                if(drones.get(i).x == Ship.x && drones.get(i).y == Ship.y) {
                     dronesMoved[i] += i + 1;
-                    drones[i].x = x;
-                   drones[i].y = y;
+                    drones.get(i).x = x;
+                    drones.get(i).y = y;
                 }
             }
             Ship.x = x;

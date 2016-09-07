@@ -1,5 +1,6 @@
 package data.components.storage;
 
+import game.GameConstants;
 import tools.Tools;
 import data.Component;
 import world.map.entities.Ship;
@@ -9,8 +10,7 @@ import world.map.entities.Ship;
  */
 public class FuelStorage extends Component {
     public FuelStorage(){
-        name = "Fuel Storage";
-        description = "This stores fuel.\n";
+        name = GameConstants.COMPONENT_FUELSTORAGE;
         buildCost = 16;
         baseUpgradeCost = 10;
         level = 1;

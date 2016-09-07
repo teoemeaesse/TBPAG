@@ -24,28 +24,28 @@ public class Drone {
     }
 
     public void displayDroneStatus(int index){
-        Tools.out("/-------------------------|\n" + "|Coordinates: " + Ship.drones[index].x + " - " + Ship.drones[index].y);
-        for(int i = 0; i < 12 - (Ship.drones[index].x + " - " + Ship.drones[index].y).length(); i++){
+        Tools.out("/-------------------------|\n" + "|Coordinates: " + Ship.drones.get(index).x + " - " + Ship.drones.get(index).y);
+        for(int i = 0; i < 12 - (Ship.drones.get(index).x + " - " + Ship.drones.get(index).y).length(); i++){
             Tools.out(" ");
         }
-        Tools.out("|\n|                         |\n|Water: " + Ship.drones[index].water);
-        for(int i = 0; i < 18 - (Ship.drones[index].water + "").length(); i++){
+        Tools.out("|\n|                         |\n|Water: " + Ship.drones.get(index).water);
+        for(int i = 0; i < 18 - (Ship.drones.get(index).water + "").length(); i++){
             Tools.out(" ");
         }
-        Tools.out("|\n|Food: " + Ship.drones[index].food);
-        for(int i = 0; i < 19 - (Ship.drones[index].food + "").length(); i++){
+        Tools.out("|\n|Food: " + Ship.drones.get(index).food);
+        for(int i = 0; i < 19 - (Ship.drones.get(index).food + "").length(); i++){
             Tools.out(" ");
         }
-        Tools.out("|\n|Fuel: " + Ship.drones[index].fuel);
-        for(int i = 0; i < 19 - (Ship.drones[index].fuel + "").length(); i++){
+        Tools.out("|\n|Fuel: " + Ship.drones.get(index).fuel);
+        for(int i = 0; i < 19 - (Ship.drones.get(index).fuel + "").length(); i++){
             Tools.out(" ");
         }
-        Tools.out("|\n|Medical equipment: " + Ship.drones[index].medicalEquipment);
-        for(int i = 0; i < 6 - (Ship.drones[index].medicalEquipment + "").length(); i++){
+        Tools.out("|\n|Medical equipment: " + Ship.drones.get(index).medicalEquipment);
+        for(int i = 0; i < 6 - (Ship.drones.get(index).medicalEquipment + "").length(); i++){
             Tools.out(" ");
         }
-        Tools.out("|\n|Scrap: " + Ship.drones[index].scrap);
-        for(int i = 0; i < 18 - (Ship.drones[index].scrap + "").length(); i++){
+        Tools.out("|\n|Scrap: " + Ship.drones.get(index).scrap);
+        for(int i = 0; i < 18 - (Ship.drones.get(index).scrap + "").length(); i++){
             Tools.out(" ");
         }
         Tools.out("|\n|-------------------------/\n\n");
@@ -72,51 +72,51 @@ public class Drone {
         }
     }
     private void collect(int index){
-        Ship.drones[index].x = Ship.x;
-        Ship.drones[index].y = Ship.y;
-        Ship.water += Ship.drones[index].water;
-        Ship.food += Ship.drones[index].food;
-        Ship.fuel += Ship.drones[index].fuel;
-        Ship.medicalEquipment += Ship.drones[index].medicalEquipment;
-        Ship.scrap += Ship.drones[index].scrap;
+        Ship.drones.get(index).x = Ship.x;
+        Ship.drones.get(index).y = Ship.y;
+        Ship.water += Ship.drones.get(index).water;
+        Ship.food += Ship.drones.get(index).food;
+        Ship.fuel += Ship.drones.get(index).fuel;
+        Ship.medicalEquipment += Ship.drones.get(index).medicalEquipment;
+        Ship.scrap += Ship.drones.get(index).scrap;
 
         correctStorageFull(index);
     }
 
     private void correctStorageFull(int index){
         if(Ship.water > Ship.waterCapacity){
-            Ship.drones[index].water = Ship.water - Ship.waterCapacity;
+            Ship.drones.get(index).water = Ship.water - Ship.waterCapacity;
             Ship.water = Ship.waterCapacity;
         }else{
-            Ship.drones[index].water = 0;
+            Ship.drones.get(index).water = 0;
         }
 
         if(Ship.food > Ship.foodCapacity){
-            Ship.drones[index].food = Ship.food - Ship.foodCapacity;
+            Ship.drones.get(index).food = Ship.food - Ship.foodCapacity;
             Ship.food = Ship.foodCapacity;
         }else{
-            Ship.drones[index].food = 0;
+            Ship.drones.get(index).food = 0;
         }
 
         if(Ship.fuel > Ship.fuelCapacity){
-            Ship.drones[index].fuel = Ship.fuel - Ship.fuelCapacity;
+            Ship.drones.get(index).fuel = Ship.fuel - Ship.fuelCapacity;
             Ship.fuel = Ship.fuelCapacity;
         }else{
-            Ship.drones[index].fuel = 0;
+            Ship.drones.get(index).fuel = 0;
         }
 
         if(Ship.medicalEquipment > Ship.medicalEquipmentCapacity){
-            Ship.drones[index].medicalEquipment = Ship.medicalEquipment - Ship.medicalEquipmentCapacity;
+            Ship.drones.get(index).medicalEquipment = Ship.medicalEquipment - Ship.medicalEquipmentCapacity;
             Ship.medicalEquipment = Ship.medicalEquipmentCapacity;
         }else{
-            Ship.drones[index].medicalEquipment = 0;
+            Ship.drones.get(index).medicalEquipment = 0;
         }
 
         if(Ship.scrap > Ship.scrapCapacity){
-            Ship.drones[index].scrap = Ship.scrap - Ship.scrapCapacity;
+            Ship.drones.get(index).scrap = Ship.scrap - Ship.scrapCapacity;
             Ship.scrap = Ship.scrapCapacity;
         }else{
-            Ship.drones[index].scrap = 0;
+            Ship.drones.get(index).scrap = 0;
         }
     }
 }
