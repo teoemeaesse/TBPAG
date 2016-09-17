@@ -4,6 +4,7 @@ import data.DronePart;
 import tools.Tools;
 import world.map.Map;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,8 +51,9 @@ public class Drone {
         }
         Tools.out("|\n|-------------------------/\n\n");
     }
-    public void navigateDrone(int x, int y, int dist){
+    public void navigateDrone(int x, int y, int dist) throws Exception{
         if(Ship.fuel >= dist) {
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
             this.x = x;
             this.y = y;
             Ship.fuel -= dist;

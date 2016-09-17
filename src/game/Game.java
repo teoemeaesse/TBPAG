@@ -1,5 +1,6 @@
 package game;
 
+import data.components.drone.DroneModifier;
 import data.main_computer.MainComputer;
 import threads.HydroponicsThread;
 import threads.MiningThread;
@@ -20,7 +21,9 @@ public class Game {
 
     public static void main(String[] args) throws Exception {
         Tools.out("If you need help, type in '" + GameConstants.COMMAND_HELPCOMMANDS.toLowerCase() + "'.\n\n");
+
         init();
+        
         while(true){
             String input = in.nextLine();
             try{
@@ -122,7 +125,7 @@ public class Game {
                                     int yDestination = Integer.parseInt(input.substring(initialLength + 5, initialLength + 7));
                                     if(yDestination >= 0 && yDestination < 20) {
                                         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-                                        Ship.navigateShip(xDestination, yDestination, Ship.calcHipotenuse(Ship.calcXDifference(Ship.x, xDestination), Ship.calcYDifference(Ship.y, yDestination)));
+                                        Ship.navigateShip(xDestination, yDestination, Ship.calcHypotenuse(Ship.calcXDifference(Ship.x, xDestination), Ship.calcYDifference(Ship.y, yDestination)));
                                     } else {
                                         Tools.out("\nY coordinate invalid\n\n");
                                     }
@@ -163,8 +166,7 @@ public class Game {
                                         int yDestination = Integer.parseInt(input.substring(initialLength + 7, initialLength + 9));
                                         if (yDestination >= 0 && yDestination < 20) {
                                             if(Ship.drones.get(drone - 1).extractionProgress == 0){
-                                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-                                                Ship.drones.get(drone - 1).navigateDrone(xDestination, yDestination, Ship.calcHipotenuse(Ship.calcXDifference(Ship.drones.get(drone - 1).x, xDestination), Ship.calcYDifference(Ship.drones.get(drone - 1).y, yDestination)));
+                                                Ship.drones.get(drone - 1).navigateDrone(xDestination, yDestination, Ship.calcHypotenuse(Ship.calcXDifference(Ship.drones.get(drone - 1).x, xDestination), Ship.calcYDifference(Ship.drones.get(drone - 1).y, yDestination)));
                                             } else {
                                                 Tools.out("\nDrone is mining...\n\n");
                                             }
@@ -237,7 +239,7 @@ public class Game {
                     drone = Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim());
                     if(Ship.drones.get(drone - 1).extractionProgress == 0){
                         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-                        Ship.drones.get(drone - 1).collectDrone(drone - 1, Ship.calcHipotenuse(Ship.calcXDifference(Ship.drones.get(drone - 1).x, Ship.x), Ship.calcYDifference(Ship.drones.get(drone - 1).y, Ship.y)));
+                        Ship.drones.get(drone - 1).collectDrone(drone - 1, Ship.calcHypotenuse(Ship.calcXDifference(Ship.drones.get(drone - 1).x, Ship.x), Ship.calcYDifference(Ship.drones.get(drone - 1).y, Ship.y)));
                     }
                     else{
                         Tools.out("\nDrone is mining...\n\n");
@@ -332,7 +334,9 @@ public class Game {
                             case "Scrap Processor":
                                 ((ScrapProcessor) Ship.components[component - 1]).upgrade(component - 1);
                                 break;
-
+                            case "Drone Modifier":
+                                ((DroneModifier) Ship.components[component - 1]).upgrade(component - 1);
+                                break;
                         }
                     } else {
                         Tools.out("\nComponent does not exist\n\n");
@@ -396,5 +400,8 @@ public class Game {
                 Tools.out("\nComponent ID missing\n\n");
             }
         }
+    }
+    private static void mountc(String input) throws Exception {
+
     }
 }

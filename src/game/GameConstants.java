@@ -20,6 +20,7 @@ public class GameConstants {
             COMMAND_UC = "UP C",
             COMMAND_BC = "BUILD C",
             COMMAND_SC = "SCRAP C",
+            COMMAND_MOUNTH = "MOUNT H",
             COMMAND_HELPCOMMANDS = "HELP CMD",
             COMMAND_HELPCOMPONENTS = "HELP CMP";
     public static final String[] commands = {
@@ -36,6 +37,7 @@ public class GameConstants {
             COMMAND_UC,
             COMMAND_BC,
             COMMAND_SC,
+            COMMAND_MOUNTH,
             COMMAND_HELPCOMMANDS,
             COMMAND_HELPCOMPONENTS
     };
@@ -53,6 +55,7 @@ public class GameConstants {
             "Upgrades selected component. Usage: 'up c [component ID]'.",
             "Builds designated component. Usage: 'build c [component name]'.",
             "Scrap selected component. Usage: 'scrap c [component ID]'.",
+            "Mount hardware from the ship storage on the main computer. Usage: 'mount h [hardware cargo tag]'.",
             "Commands help.",
             "Components help."
     };
@@ -67,7 +70,8 @@ public class GameConstants {
             COMPONENT_HYDROPONICS = "Hydroponics",
             COMPONENT_SCRAPPROCESSOR = "Scrap Processor",
             COMPONENT_DRONEHANGAR = "Drone Hangar",
-            COMPONENT_JUMPDRIVE = "Jump Drive";
+            COMPONENT_JUMPDRIVE = "Jump Drive",
+            COMPONENT_MAINCOMPUTER = "Main Computer";
     public static final String[] components = {
             COMPONENT_FOODSTORAGE,
             COMPONENT_FUELSTORAGE,
@@ -78,7 +82,8 @@ public class GameConstants {
             COMPONENT_HYDROPONICS,
             COMPONENT_SCRAPPROCESSOR,
             COMPONENT_DRONEHANGAR,
-            COMPONENT_JUMPDRIVE
+            COMPONENT_JUMPDRIVE,
+            COMPONENT_MAINCOMPUTER
     };
     public static final String[] componentDescriptions = {
             "This stores food.",
@@ -90,6 +95,7 @@ public class GameConstants {
             "This transforms water into food via plant growing.",
             "This processes scrap into materials that can be used to build various hardware.",
             "This holds all your drones. Upgrading will increase drone capacity.",
-            "Used for jumping between sectors."
+            "Used for jumping between sectors.",
+            "Used for locating useful sectors. Without one, the jump drive will jump to a random sector."
     };
 }

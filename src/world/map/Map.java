@@ -46,6 +46,12 @@ public class Map {
 
         for(int x = 0; x < 20; x++){
             for(int y = 0; y < 20; y++){
+                Map.map[x][y] = new Space();
+            }
+        }
+
+        for(int x = 0; x < 20; x++){
+            for(int y = 0; y < 20; y++){
                 if(r.nextInt(20) == 0){
                     Map.map[x][y] = new Asteroid();
                     Map.map[x][y].icon = Asteroid.icon;

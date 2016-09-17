@@ -36,7 +36,7 @@ public class DroneModifier extends Component {
         modificationMenu();
     }
 
-    private void modificationMenu() throws NumberFormatException {
+    private void modificationMenu() {
         boolean open = true;
 
         while(open){
@@ -44,11 +44,15 @@ public class DroneModifier extends Component {
 
             String input = scanner.nextLine();
 
-            if(input.toUpperCase().equals("X")) open = false;
+            if(input.toUpperCase().equals("X")){
+                Tools.out("\n\nThank you for using our service. Come back soon for more beautiful UIs. (press enter)");
+                scanner.nextLine();
+                open = false;
+            }
             else if(!input.equals("")){
                 int id = Integer.parseInt(input);
 
-                if(id <= Ship.droneCapacity){
+                if(id <= Ship.droneCapacity && id >= 0){
                     Tools.out("\n\nDo you wish to...\n\n1. Install a part\n2. Remove a part\n\n");
                     input = scanner.nextLine();
 
@@ -57,7 +61,7 @@ public class DroneModifier extends Component {
                             installPart(id);
                             break;
                         case "2":
-                            removePart();
+                            removePart(id);
                             break;
                     }
                 }else{
@@ -68,7 +72,7 @@ public class DroneModifier extends Component {
         }
     }
 
-    private void installPart(int drone) throws NumberFormatException {
+    private void installPart(int drone) {
         boolean open = true;
 
         while(open){
@@ -101,7 +105,36 @@ public class DroneModifier extends Component {
         }
     }
 
-    private void removePart(){
+    private void removePart(int drone){
+        boolean open = true;
 
+        while(open){
+            Tools.out("\nWhich of the following parts do you want to remove from this drone?\n\n");
+
+            for(int i = 0; i < Ship.drones.get(drone - 1).parts.size(); i++){
+                Tools.out((i + 1) + ". " + Ship.drones.get(drone - 1).parts.get(i).name + "\n");
+            }
+
+            Tools.out("x. Return\n\n");
+
+            String input = scanner.nextLine();
+
+            if(input.toUpperCase().equals("X")) open = false;
+            else{
+                int id = Integer.parseInt(input) - 1;
+
+                if(id <= Ship.dronePartsStorage.size()){
+                    Ship.dronePartsStorage.add(Ship.drones.get(drone - 1).parts.get(id));
+
+                    Tools.out("\n" + Ship.drones.get(drone - 1).parts.get(id).name + " removed from drone. (press enter)\n\n");
+
+                    Ship.drones.get(drone - 1).parts.remove(id);
+                    scanner.nextLine();
+                }else{
+                    Tools.out("\nSelect a part you have. (press enter)\n\n");
+                    scanner.nextLine();
+                }
+            }
+        }
     }
 }

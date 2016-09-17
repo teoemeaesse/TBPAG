@@ -8,7 +8,6 @@ import data.main_computer.Hardware;
 public class CPU extends Hardware {
     public double frequency;
     public int cores;
-    public boolean assembled = false;
 
     public CPU(double frequency, int cores){
         this.frequency = frequency;

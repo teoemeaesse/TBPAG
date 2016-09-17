@@ -32,25 +32,25 @@ public class Ship {
     }
 
     public static void displayShipStatus(){
-        Tools.out("/-------------------------|\n" + "|Coordinates: " + x + " - " + y);
-        for(int i = 0; i < 12 - (x + " - " + y).length(); i++){Tools.out(" ");}
+        Tools.out("/--------------------------------------|\n" + "| Coordinates: " + x + " - " + y);
+        for(int i = 0; i < 24 - (x + " - " + y).length(); i++){Tools.out(" ");}
 
-        Tools.out("|\n|                         |\n|Water: " + water);
-        for(int i = 0; i < 18 - (water + "").length(); i++){Tools.out(" ");}
+        Tools.out("|\n|                                      |\n| Water: " + water + " / " + waterCapacity);
+        for(int i = 0; i < 24 - (water + waterCapacity + "").length(); i++){Tools.out(" ");}
 
-        Tools.out("|\n|Food: " + food);
-        for(int i = 0; i < 19 - (food + "").length(); i++){Tools.out(" ");}
+        Tools.out("|\n| Food: " + food + " / " + foodCapacity);
+        for(int i = 0; i < 25 - (food + foodCapacity + "").length(); i++){Tools.out(" ");}
 
-        Tools.out("|\n|Fuel: " + fuel);
-        for(int i = 0; i < 19 - (fuel + "").length(); i++){Tools.out(" ");}
+        Tools.out("|\n| Fuel: " + fuel + " / " + fuelCapacity);
+        for(int i = 0; i < 24 - (fuel + fuelCapacity + "").length(); i++){Tools.out(" ");}
 
-        Tools.out("|\n|Medical equipment: " + medicalEquipment);
-        for(int i = 0; i < 6 - (medicalEquipment + "").length(); i++){Tools.out(" ");}
+        Tools.out("|\n| Medical equipment: " + medicalEquipment + " / " + medicalEquipmentCapacity);
+        for(int i = 0; i < 12 - (medicalEquipment + medicalEquipmentCapacity + "").length(); i++){Tools.out(" ");}
 
-        Tools.out("|\n|Scrap: " + scrap);
-        for(int i = 0; i < 18 - (scrap + "").length(); i++){Tools.out(" ");}
+        Tools.out("|\n| Scrap: " + scrap + " / " + scrapCapacity);
+        for(int i = 0; i < 24 - (scrap + scrapCapacity + "").length(); i++){Tools.out(" ");}
 
-        Tools.out("|\n|-------------------------/\n\n");
+        Tools.out("|\n|--------------------------------------/\n\n");
 
         Tools.out("/-------------------------|");
         for(int c = 0; c < components.length; c++){
@@ -106,7 +106,7 @@ public class Ship {
         diff = Math.abs(diff);
         return diff;
     }
-    public static int calcHipotenuse(int x, int y){
+    public static int calcHypotenuse(int x, int y){
         double xs = Math.pow(x, 2), ys = Math.pow(y, 2);
         double sum = xs + ys;
         return (int) Math.sqrt(sum);
