@@ -23,7 +23,7 @@ public class Game {
         Tools.out("If you need help, type in '" + GameConstants.COMMAND_HELPCOMMANDS.toLowerCase() + "'.\n\n");
 
         init();
-        
+
         while(true){
             String input = in.nextLine();
             try{
@@ -42,6 +42,8 @@ public class Game {
                 uc(input);
                 bc(input);
                 sc(input);
+                examh(input);
+                mounth(input);
             }
             catch(Exception e){}
         }
@@ -352,10 +354,10 @@ public class Game {
     private static void bc(String input) throws Exception {
         int initialLength = GameConstants.COMMAND_BC.length() - 1;
 
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_BC)) {
-            if (input.length() > initialLength + 1) {
-                for (int i = 0; i < Ship.components.length; i++) {
-                    if (Ship.components[i] == null) {
+        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_BC)){
+            if(input.length() > initialLength + 1){
+                for(int i = 0; i < Ship.components.length; i++){
+                    if(Ship.components[i] == null){
                         for(int a = 0; a < Component.components.length; a++){
                             if(input.toUpperCase().substring(initialLength + 2).replace(" ", "").equals(Component.components[a].name.toUpperCase().replace(" ", ""))){
                                 if(Ship.scrap >= Component.components[a].buildCost){
@@ -401,7 +403,29 @@ public class Game {
             }
         }
     }
-    private static void mountc(String input) throws Exception {
+    private static void examh(String input) throws Exception {
+        int initialLength = GameConstants.COMMAND_EXAMH.length() - 1;
 
+        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_EXAMH)){
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            Ship.displayHardwareStorage();
+
+            Tools.out("Select one for a detailed description.\n\n");
+
+            input = in.nextLine();
+
+            if(input != null && !input.equals("")) Ship.hardwareStorage.get(Integer.parseInt(input) - 1).describe();
+
+            Tools.out("\n\nPress enter to continue.\n\n");
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        }
+    }
+    private static void mounth(String input) throws Exception {
+        int initialLength = GameConstants.COMMAND_MOUNTH.length() - 1;
+
+        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_MOUNTH)){
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            Ship.displayHardwareStorage();
+        }
     }
 }

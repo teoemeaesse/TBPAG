@@ -22,7 +22,7 @@ public class ScrapProcessor extends Component {
 
     private Material[] materials = new Material[]{Materials.FE.getMaterial(), Materials.SL.getMaterial(), Materials.AU.getMaterial(), Materials.CU.getMaterial(), Materials.PL.getMaterial()};
 
-    private DronePart[] dronePartList = new DronePart[]{DroneParts.SMALL_DRILL.getDronePart(), DroneParts.LARGE_DRILL.getDronePart(), DroneParts.WATER_STORAGE.getDronePart(), DroneParts.FOOD_STORAGE.getDronePart(), DroneParts.FUEL_STORAGE.getDronePart(), DroneParts.MEDICAL_STORAGE.getDronePart(), DroneParts.SCRAP_STORAGE.getDronePart()};
+    private DronePart[] dronePartList = new DronePart[]{DroneParts.SMALL_DRILL.getDronePart(), DroneParts.LARGE_DRILL.getDronePart()};
 
     private Scanner scanner = new Scanner(System.in);
 
@@ -107,7 +107,7 @@ public class ScrapProcessor extends Component {
                     open = false;
                     scanner.nextLine();
                 }else{
-                    Tools.out("\nNot enough scrap. Go away you lower-middle class citizen! Shoo! (press enter)\n\n");
+                    Tools.out("\nNot enough scrap. Go away you poor bastard! Shoo! (press enter)\n\n");
                     scanner.nextLine();
                 }
             }
@@ -117,7 +117,7 @@ public class ScrapProcessor extends Component {
         boolean open = true;
 
         while(open){
-            Tools.out("\nWelcome to the S.P.'s v.13 Menus4U's trademarked menu's produce submenu.\n\nWhat hardware do you want to build?\n\n1. CPU\n2. SSD\n3. RAM\n4. Safety hardware\n5. Drone parts\nx. Return\n\n");
+            Tools.out("\nWelcome to the S.P.'s v.13 Menus4U's trademarked menu's produce sub-menu.\n\nWhat hardware do you want to build?\n\n1. CPU\n2. SSD\n3. RAM\n4. Safety hardware\n5. Drone parts\nx. Return\n\n");
 
             String input = scanner.nextLine();
 

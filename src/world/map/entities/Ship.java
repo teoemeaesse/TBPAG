@@ -18,8 +18,8 @@ public class Ship {
     public static double waterCapacity = 30, foodCapacity = 30, fuelCapacity = 30, medicalEquipmentCapacity = 10, scrapCapacity = 20;
     public static double water = 15, food = 5, fuel = 10, medicalEquipment = 1, scrap = 999, extractionProgress = 0;
     public static int droneCapacity = 1;
-    public static List<Drone> drones = new ArrayList<>(droneCapacity);
     public static Component components[] = new Component[10];
+    public static List<Drone> drones = new ArrayList<>(droneCapacity);
     public static List<Hardware> hardwareStorage = new ArrayList<>();
     public static List<DronePart> dronePartsStorage = new ArrayList<>();
 
@@ -27,7 +27,6 @@ public class Ship {
         Ship.drones.add(new Drone());
         Ship.dronePartsStorage.add(DroneParts.SMALL_DRILL.getDronePart());
         Ship.dronePartsStorage.add(DroneParts.LARGE_DRILL.getDronePart());
-        Ship.dronePartsStorage.add(DroneParts.FOOD_STORAGE.getDronePart());
         //components[0] = new DroneHangar();
     }
 
@@ -94,6 +93,14 @@ public class Ship {
             Map.displayMap();
             Tools.out("\nNot enough fuel...\n\n");
         }
+    }
+
+    public static void displayHardwareStorage(){
+        Tools.out("\n\n");
+        for(int i = 0; i < hardwareStorage.size(); i++){
+            Tools.out((i + 1) + ". " + hardwareStorage.get(i).name + " [" + hardwareStorage.get(i).tag + "]\n");
+        }
+        Tools.out("\n\n");
     }
 
     public static int calcXDifference(int x1, int x2){

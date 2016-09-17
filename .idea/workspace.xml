@@ -7,27 +7,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9faed2a7-fd19-4997-830c-3f6209b9e60d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TODO.TODO" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/data/Cargo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/hackinggame_jar/hackinggame.jar" afterPath="$PROJECT_DIR$/out/artifacts/hackinggame_jar/hackinggame.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/hackinggame/data/components/drone/DroneModifier.class" afterPath="$PROJECT_DIR$/out/production/hackinggame/data/components/drone/DroneModifier.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/hackinggame/data/main_computer/Hardware.class" afterPath="$PROJECT_DIR$/out/production/hackinggame/data/main_computer/Hardware.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/hackinggame/data/main_computer/MainComputer.class" afterPath="$PROJECT_DIR$/out/production/hackinggame/data/main_computer/MainComputer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/hackinggame/data/main_computer/hardware/CPU.class" afterPath="$PROJECT_DIR$/out/production/hackinggame/data/main_computer/hardware/CPU.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/hackinggame/game/Game.class" afterPath="$PROJECT_DIR$/out/production/hackinggame/game/Game.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/hackinggame/game/GameConstants.class" afterPath="$PROJECT_DIR$/out/production/hackinggame/game/GameConstants.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/hackinggame/tools/Tools.class" afterPath="$PROJECT_DIR$/out/production/hackinggame/tools/Tools.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/hackinggame/world/map/Map.class" afterPath="$PROJECT_DIR$/out/production/hackinggame/world/map/Map.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game.jar" afterPath="$PROJECT_DIR$/game.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/hackinggame/data/components/production/ScrapProcessor.class" afterPath="$PROJECT_DIR$/out/production/hackinggame/data/components/production/ScrapProcessor.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/hackinggame/data/drone_parts/DroneParts.class" afterPath="$PROJECT_DIR$/out/production/hackinggame/data/drone_parts/DroneParts.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/hackinggame/world/map/entities/Drone.class" afterPath="$PROJECT_DIR$/out/production/hackinggame/world/map/entities/Drone.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/hackinggame/world/map/entities/Ship.class" afterPath="$PROJECT_DIR$/out/production/hackinggame/world/map/entities/Ship.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/components/drone/DroneModifier.java" afterPath="$PROJECT_DIR$/src/data/components/drone/DroneModifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/Cargo.java" afterPath="$PROJECT_DIR$/src/data/Cargo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/components/production/ScrapProcessor.java" afterPath="$PROJECT_DIR$/src/data/components/production/ScrapProcessor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/drone_parts/DroneParts.java" afterPath="$PROJECT_DIR$/src/data/drone_parts/DroneParts.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/main_computer/Hardware.java" afterPath="$PROJECT_DIR$/src/data/main_computer/Hardware.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/main_computer/MainComputer.java" afterPath="$PROJECT_DIR$/src/data/main_computer/MainComputer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/main_computer/hardware/CPU.java" afterPath="$PROJECT_DIR$/src/data/main_computer/hardware/CPU.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/Game.java" afterPath="$PROJECT_DIR$/src/game/Game.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/GameConstants.java" afterPath="$PROJECT_DIR$/src/game/GameConstants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/world/map/Map.java" afterPath="$PROJECT_DIR$/src/world/map/Map.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/world/map/entities/Drone.java" afterPath="$PROJECT_DIR$/src/world/map/entities/Drone.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/world/map/entities/Ship.java" afterPath="$PROJECT_DIR$/src/world/map/entities/Ship.java" />
     </list>
@@ -53,10 +45,11 @@
       <file leaf-file-name="Game.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/game/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+            <state relative-caret-position="151">
+              <caret line="114" column="5" selection-start-line="114" selection-start-column="5" selection-end-line="114" selection-end-column="5" />
               <folding>
                 <element signature="method#init#0;class#Game#0" expanded="false" />
+                <element signature="method#commandsHelp#0;class#Game#0" expanded="false" />
                 <element signature="method#componentsHelp#0;class#Game#0" expanded="false" />
                 <element signature="method#shws#0;class#Game#0" expanded="false" />
                 <element signature="method#shwd#0;class#Game#0" expanded="false" />
@@ -71,7 +64,18 @@
                 <element signature="method#uc#0;class#Game#0" expanded="false" />
                 <element signature="method#bc#0;class#Game#0" expanded="false" />
                 <element signature="method#sc#0;class#Game#0" expanded="false" />
+                <element signature="method#examh#0;class#Game#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScrapProcessor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/data/components/production/ScrapProcessor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="182" column="0" selection-start-line="182" selection-start-column="0" selection-end-line="182" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -79,43 +83,15 @@
       <file leaf-file-name="Ship.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/world/map/entities/Ship.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="638">
-              <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+            <state relative-caret-position="372">
+              <caret line="100" column="105" selection-start-line="100" selection-start-column="105" selection-end-line="100" selection-end-column="105" />
               <folding>
+                <element signature="method#displayShipStatus#0;class#Ship#0" expanded="false" />
                 <element signature="method#navigateShip#0;class#Ship#0" expanded="false" />
                 <element signature="method#calcXDifference#0;class#Ship#0" expanded="false" />
                 <element signature="method#calcYDifference#0;class#Ship#0" expanded="false" />
+                <element signature="method#calcHypotenuse#0;class#Ship#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Drone.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/world/map/entities/Drone.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="53" column="70" selection-start-line="53" selection-start-column="70" selection-end-line="53" selection-end-column="70" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameConstants.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/game/GameConstants.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="76" selection-start-line="6" selection-start-column="76" selection-end-line="6" selection-end-column="76" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DroneModifier.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/components/drone/DroneModifier.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="48" column="35" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="35" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -165,14 +141,12 @@
         <option value="$PROJECT_DIR$/src/data/Material.java" />
         <option value="$PROJECT_DIR$/src/data/materials/Materials.java" />
         <option value="$PROJECT_DIR$/src/data/DronePart.java" />
-        <option value="$PROJECT_DIR$/src/data/drone_parts/DroneParts.java" />
         <option value="$PROJECT_DIR$/src/data/components/drone/DroneModificator.java" />
         <option value="$PROJECT_DIR$/src/data/Component.java" />
         <option value="$PROJECT_DIR$/src/world/map/entities/LargeAsteroid.java" />
         <option value="$PROJECT_DIR$/src/world/map/entities/Asteroid.java" />
         <option value="$PROJECT_DIR$/src/threads/MiningThread.java" />
         <option value="$PROJECT_DIR$/src/threads/DroneThread.java" />
-        <option value="$PROJECT_DIR$/src/data/components/production/ScrapProcessor.java" />
         <option value="$PROJECT_DIR$/src/data/components/production/Hydroponics.java" />
         <option value="$PROJECT_DIR$/src/data/components/storage/FoodStorage.java" />
         <option value="$PROJECT_DIR$/src/data/components/storage/FuelStorage.java" />
@@ -183,17 +157,19 @@
         <option value="$PROJECT_DIR$/src/data/components/storage/WaterStorage.java" />
         <option value="$PROJECT_DIR$/src/tools/Tools.java" />
         <option value="$PROJECT_DIR$/src/data/main_computer/MainComputer.java" />
-        <option value="$PROJECT_DIR$/src/data/Cargo.java" />
-        <option value="$PROJECT_DIR$/src/data/main_computer/Hardware.java" />
-        <option value="$PROJECT_DIR$/src/data/main_computer/hardware/CPU.java" />
-        <option value="$PROJECT_DIR$/src/game/GameConstants.java" />
         <option value="$PROJECT_DIR$/src/world/map/Map.java" />
         <option value="$PROJECT_DIR$/src/data/components/drone/DroneModifier.java" />
         <option value="$PROJECT_DIR$/TODO.TODO" />
-        <option value="$PROJECT_DIR$/src/world/map/entities/Ship.java" />
-        <option value="$PROJECT_DIR$/src/world/map/entities/Drone.java" />
         <option value="$PROJECT_DIR$/src/run/TBPAG.java" />
+        <option value="$PROJECT_DIR$/src/data/drone_parts/DroneParts.java" />
+        <option value="$PROJECT_DIR$/src/world/map/entities/Drone.java" />
+        <option value="$PROJECT_DIR$/src/data/components/production/ScrapProcessor.java" />
+        <option value="$PROJECT_DIR$/src/game/GameConstants.java" />
+        <option value="$PROJECT_DIR$/src/data/Cargo.java" />
+        <option value="$PROJECT_DIR$/src/world/map/entities/Ship.java" />
+        <option value="$PROJECT_DIR$/src/data/main_computer/Hardware.java" />
         <option value="$PROJECT_DIR$/src/game/Game.java" />
+        <option value="$PROJECT_DIR$/src/data/main_computer/hardware/CPU.java" />
       </list>
     </option>
   </component>
@@ -399,7 +375,81 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="main_computer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TBPAG" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TBPAG" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main_computer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hardware" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TBPAG" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TBPAG" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TBPAG" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TBPAG" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="production" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -444,6 +494,9 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Tomás\Desktop\TBPAG" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Rui\Desktop\tomas_projetos\src\tools" />
       <recent name="C:\Users\Rui\Desktop\hackinggame" />
@@ -666,8 +719,8 @@
     </list>
     <recent_temporary>
       <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Application.TBPAG" />
-        <item index="1" class="java.lang.String" itemvalue="Application.Game" />
+        <item index="0" class="java.lang.String" itemvalue="Application.Game" />
+        <item index="1" class="java.lang.String" itemvalue="Application.TBPAG" />
       </list>
     </recent_temporary>
   </component>
@@ -697,7 +750,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -707,7 +760,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30430108" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30430108" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40752864" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.128125" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -739,7 +792,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="119" />
+      <option name="time" value="125" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -809,13 +862,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/DronePart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="42" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/data/Component.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -837,13 +883,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/threads/MiningThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="61" column="38" selection-start-line="61" selection-start-column="38" selection-end-line="61" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/threads/DroneThread.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -855,13 +894,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="12" column="50" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/components/production/ScrapProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="29" column="53" selection-start-line="29" selection-start-column="53" selection-end-line="29" selection-end-column="53" />
         </state>
       </provider>
     </entry>
@@ -890,13 +922,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="12" column="50" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/drone_parts/DroneParts.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="15" column="203" selection-start-line="15" selection-start-column="203" selection-end-line="15" selection-end-column="203" />
         </state>
       </provider>
     </entry>
@@ -933,27 +958,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/Cargo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/main_computer/Hardware.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/main_computer/hardware/CPU.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -1000,38 +1004,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/world/map/entities/Ship.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
-          <folding>
-            <element signature="method#navigateShip#0;class#Ship#0" expanded="false" />
-            <element signature="method#calcXDifference#0;class#Ship#0" expanded="false" />
-            <element signature="method#calcYDifference#0;class#Ship#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/world/map/entities/Drone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="53" column="70" selection-start-line="53" selection-start-column="70" selection-end-line="53" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_102/src.zip!/java/lang/ProcessBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-13081">
           <caret line="214" column="11" selection-start-line="214" selection-start-column="11" selection-end-line="214" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/GameConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="76" selection-start-line="6" selection-start-column="76" selection-end-line="6" selection-end-column="76" />
           <folding />
         </state>
       </provider>
@@ -1044,12 +1020,103 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/DronePart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="42" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/threads/MiningThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="61" column="38" selection-start-line="61" selection-start-column="38" selection-end-line="61" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/drone_parts/DroneParts.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" column="200" selection-start-line="10" selection-start-column="200" selection-end-line="10" selection-end-column="200" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/world/map/entities/Drone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="28" column="29" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/GameConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="508">
+          <caret line="60" column="50" selection-start-line="60" selection-start-column="50" selection-end-line="60" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/Cargo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/world/map/entities/Ship.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="100" column="105" selection-start-line="100" selection-start-column="105" selection-end-line="100" selection-end-column="105" />
+          <folding>
+            <element signature="method#displayShipStatus#0;class#Ship#0" expanded="false" />
+            <element signature="method#navigateShip#0;class#Ship#0" expanded="false" />
+            <element signature="method#calcXDifference#0;class#Ship#0" expanded="false" />
+            <element signature="method#calcYDifference#0;class#Ship#0" expanded="false" />
+            <element signature="method#calcHypotenuse#0;class#Ship#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/main_computer/Hardware.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="27" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/components/production/ScrapProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="182" column="0" selection-start-line="182" selection-start-column="0" selection-end-line="182" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/main_computer/hardware/CPU.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="52" selection-start-line="15" selection-start-column="52" selection-end-line="15" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#490#491#0" expanded="true" />
+            <element signature="e#590#591#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/game/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+        <state relative-caret-position="151">
+          <caret line="114" column="5" selection-start-line="114" selection-start-column="5" selection-end-line="114" selection-end-column="5" />
           <folding>
             <element signature="method#init#0;class#Game#0" expanded="false" />
+            <element signature="method#commandsHelp#0;class#Game#0" expanded="false" />
             <element signature="method#componentsHelp#0;class#Game#0" expanded="false" />
             <element signature="method#shws#0;class#Game#0" expanded="false" />
             <element signature="method#shwd#0;class#Game#0" expanded="false" />
@@ -1064,6 +1131,7 @@
             <element signature="method#uc#0;class#Game#0" expanded="false" />
             <element signature="method#bc#0;class#Game#0" expanded="false" />
             <element signature="method#sc#0;class#Game#0" expanded="false" />
+            <element signature="method#examh#0;class#Game#0" expanded="false" />
           </folding>
         </state>
       </provider>

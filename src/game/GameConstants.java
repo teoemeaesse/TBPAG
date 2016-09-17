@@ -21,6 +21,7 @@ public class GameConstants {
             COMMAND_BC = "BUILD C",
             COMMAND_SC = "SCRAP C",
             COMMAND_MOUNTH = "MOUNT H",
+            COMMAND_EXAMH = "EXAM H",
             COMMAND_HELPCOMMANDS = "HELP CMD",
             COMMAND_HELPCOMPONENTS = "HELP CMP";
     public static final String[] commands = {
@@ -38,6 +39,7 @@ public class GameConstants {
             COMMAND_BC,
             COMMAND_SC,
             COMMAND_MOUNTH,
+            COMMAND_EXAMH,
             COMMAND_HELPCOMMANDS,
             COMMAND_HELPCOMPONENTS
     };
@@ -56,6 +58,7 @@ public class GameConstants {
             "Builds designated component. Usage: 'build c [component name]'.",
             "Scrap selected component. Usage: 'scrap c [component ID]'.",
             "Mount hardware from the ship storage on the main computer. Usage: 'mount h [hardware cargo tag]'.",
+            "Examines the ship's hardware storage.",
             "Commands help.",
             "Components help."
     };

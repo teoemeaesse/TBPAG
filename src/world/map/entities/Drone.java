@@ -14,7 +14,7 @@ import java.util.List;
 public class Drone {
     //public static final int INACTIVE = 0, SCRAP_MINER = 1, GATHERER = 2, ASTEROID_MINER = 3;
     public int x, y;
-    public static final int waterCapacity = 20, foodCapacity = 20, fuelCapacity = 20, medicalEquipmentCapacity = 10, scrapCapacity = 30;
+    public static final double waterCapacity = 20, foodCapacity = 20, fuelCapacity = 20, medicalEquipmentCapacity = 10, scrapCapacity = 30;
     public double water, food, fuel, medicalEquipment, scrap, extractionProgress;
     //public int type = INACTIVE;
     public List<DronePart> parts = new ArrayList<>();
@@ -25,31 +25,25 @@ public class Drone {
     }
 
     public void displayDroneStatus(int index){
-        Tools.out("/-------------------------|\n" + "|Coordinates: " + Ship.drones.get(index).x + " - " + Ship.drones.get(index).y);
-        for(int i = 0; i < 12 - (Ship.drones.get(index).x + " - " + Ship.drones.get(index).y).length(); i++){
-            Tools.out(" ");
-        }
-        Tools.out("|\n|                         |\n|Water: " + Ship.drones.get(index).water);
-        for(int i = 0; i < 18 - (Ship.drones.get(index).water + "").length(); i++){
-            Tools.out(" ");
-        }
-        Tools.out("|\n|Food: " + Ship.drones.get(index).food);
-        for(int i = 0; i < 19 - (Ship.drones.get(index).food + "").length(); i++){
-            Tools.out(" ");
-        }
-        Tools.out("|\n|Fuel: " + Ship.drones.get(index).fuel);
-        for(int i = 0; i < 19 - (Ship.drones.get(index).fuel + "").length(); i++){
-            Tools.out(" ");
-        }
-        Tools.out("|\n|Medical equipment: " + Ship.drones.get(index).medicalEquipment);
-        for(int i = 0; i < 6 - (Ship.drones.get(index).medicalEquipment + "").length(); i++){
-            Tools.out(" ");
-        }
-        Tools.out("|\n|Scrap: " + Ship.drones.get(index).scrap);
-        for(int i = 0; i < 18 - (Ship.drones.get(index).scrap + "").length(); i++){
-            Tools.out(" ");
-        }
-        Tools.out("|\n|-------------------------/\n\n");
+        Tools.out("/--------------------------------------|\n" + "| Coordinates: " + Ship.drones.get(index).x + " - " + Ship.drones.get(index).y);
+        for(int i = 0; i < 24 - (Ship.drones.get(index).x + " - " + Ship.drones.get(index).y).length(); i++){Tools.out(" ");}
+
+        Tools.out("|\n|                                      |\n| Water: " + Ship.drones.get(index).water + " / " + waterCapacity);
+        for(int i = 0; i < 24 - (Ship.drones.get(index).water + waterCapacity + "").length(); i++){Tools.out(" ");}
+
+        Tools.out("|\n| Food: " + Ship.drones.get(index).food + " / " + foodCapacity);
+        for(int i = 0; i < 25 - (Ship.drones.get(index).food + foodCapacity + "").length(); i++){Tools.out(" ");}
+
+        Tools.out("|\n| Fuel: " + Ship.drones.get(index).fuel + " / " + fuelCapacity);
+        for(int i = 0; i < 25 - (Ship.drones.get(index).fuel + fuelCapacity + "").length(); i++){Tools.out(" ");}
+
+        Tools.out("|\n| Medical equipment: " + Ship.drones.get(index).medicalEquipment + " / " + medicalEquipmentCapacity);
+        for(int i = 0; i < 12 - (Ship.drones.get(index).medicalEquipment + medicalEquipmentCapacity + "").length(); i++){Tools.out(" ");}
+
+        Tools.out("|\n| Scrap: " + Ship.drones.get(index).scrap + " / " + scrapCapacity);
+        for(int i = 0; i < 24 - (Ship.drones.get(index).scrap + scrapCapacity + "").length(); i++){Tools.out(" ");}
+
+        Tools.out("|\n|--------------------------------------/\n\n");
     }
     public void navigateDrone(int x, int y, int dist) throws Exception{
         if(Ship.fuel >= dist) {
