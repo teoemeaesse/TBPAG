@@ -23,7 +23,6 @@ public class Tools {
         }
         return temp;
     }*/
-
     public static void drawCommandsHelp(){
         out("\nList of all commands:\n\n");
 
@@ -33,7 +32,6 @@ public class Tools {
 
         out("\n\n");
     }
-
     public static void drawComponentsHelp(){
         out("\nList of all components:\n\n");
 
@@ -42,5 +40,8 @@ public class Tools {
         }
 
         out("\n\n");
+    }
+    public static boolean intToBool(int i){
+        return (i == 0) ? false : true;
     }
 }

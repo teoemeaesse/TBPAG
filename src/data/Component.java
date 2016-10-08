@@ -17,13 +17,14 @@ import world.map.entities.Ship;
  * Created by Tomás on 12/04/2016.
  */
 public class Component {
-    public String name, description;
-    public double buildCost, baseUpgradeCost, consumption = 0, produce = 0, timeTaken = 0, level;
+    public String name;
+    public double buildCost = 0, baseUpgradeCost = 0, consumption = 0, produce = 0, timeTaken = 0, level;
     public boolean active = false;
 
     public static final Component[] components = new Component[]{new Hydroponics(), new DroneHangar(), new JumpDrive(),
-                                                                 new WaterStorage(), new FoodStorage(), new MedicalStorage(), new ScrapStorage(), new WaterStorage(),
-                                                                 new ScrapProcessor(), new DroneModifier()};
+                                                                 new WaterStorage(), new FoodStorage(), new MedicalStorage(),
+                                                                 new ScrapStorage(), new WaterStorage(), new ScrapProcessor(),
+                                                                 new DroneModifier()};
 
     public void activate() throws Exception {
         active = true;

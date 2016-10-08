@@ -3,6 +3,8 @@ package world.map.entities;
 import data.DronePart;
 import data.drone_parts.DroneParts;
 import data.main_computer.Hardware;
+import data.main_computer.MainComputer;
+import data.main_computer.hardware.CPU;
 import tools.Tools;
 import data.Component;
 import world.map.Map;
@@ -16,7 +18,7 @@ import java.util.List;
 public class Ship {
     public static int x, y;
     public static double waterCapacity = 30, foodCapacity = 30, fuelCapacity = 30, medicalEquipmentCapacity = 10, scrapCapacity = 20;
-    public static double water = 15, food = 5, fuel = 10, medicalEquipment = 1, scrap = 999, extractionProgress = 0;
+    public static double water = 15, food = 5, fuel = 1000, medicalEquipment = 1, scrap = 999, extractionProgress = 0;
     public static int droneCapacity = 1;
     public static Component components[] = new Component[10];
     public static List<Drone> drones = new ArrayList<>(droneCapacity);
@@ -27,7 +29,8 @@ public class Ship {
         Ship.drones.add(new Drone());
         Ship.dronePartsStorage.add(DroneParts.SMALL_DRILL.getDronePart());
         Ship.dronePartsStorage.add(DroneParts.LARGE_DRILL.getDronePart());
-        //components[0] = new DroneHangar();
+        Ship.hardwareStorage.add(new CPU(2, 8));
+        components[0] = new MainComputer();
     }
 
     public static void displayShipStatus(){

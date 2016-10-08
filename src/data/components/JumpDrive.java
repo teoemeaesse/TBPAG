@@ -1,6 +1,7 @@
 package data.components;
 
 import game.GameConstants;
+import threads.JumpThread;
 import tools.Tools;
 import data.Component;
 import world.map.Map;
@@ -10,20 +11,23 @@ import world.map.entities.Ship;
  * Created by Tomás on 07/17/2016.
  */
 public class JumpDrive extends Component {
+    public static boolean jumping = false;
+
     public JumpDrive(){
         name = GameConstants.COMPONENT_JUMPDRIVE;
         buildCost = 40;
         baseUpgradeCost = 25;
         consumption = 10;
+        timeTaken = 12;
         level = 1;
     }
 
     public void jumpDrive(){
         if(Ship.fuel - 5 >= consumption){
-            Map.generateSector();
-            Tools.out("\nSuccessfully jumped to another sector. Check map to scan it.\n\n");
+            Tools.out("\nBeginning light-speed jump... Keep your eyes peeled for malfunctions.\n\n");
+            JumpThread.start();
         }else{
-            Tools.out("\nNot enough fuel to safely make the jump to another sector.\n\n");
+            Tools.out("\nNot enough fuel to safely make the jump to another sector. You need " + consumption + " fuel.\n\n");
         }
     }
 

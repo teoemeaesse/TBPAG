@@ -9,7 +9,7 @@ public class Space extends Tile {
     public static String icon = " ", name = " deep space";
 
     public Space(){
-        super.icon = icon;
         super.name = name;
+        super.icon = icon;
     }
 }

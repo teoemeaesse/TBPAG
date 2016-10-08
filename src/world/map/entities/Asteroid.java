@@ -15,6 +15,7 @@ public class Asteroid extends Tile {
 
     public Asteroid(){
         super.name = name;
+        super.icon = icon;
         super.water = water;
         super.fuel = fuel;
         super.scrap = scrap;

@@ -4,8 +4,10 @@ package game;
  * Created by Tomás on 05-Sep-16.
  */
 public class GameConstants {
-    public static final String MAP_LARGE_ASTEROID = "o", MAP_ASTEROID = ".";
-    public static final String NAME_LARGE_ASTEROID = " large asteroid", NAME_ASTEROID = " asteroid";
+    public static final String MAP_LARGE_ASTEROID = "o", MAP_ASTEROID = ".", MAP_AMTP = "$";
+    public static final String NAME_LARGE_ASTEROID = " large asteroid", NAME_ASTEROID = " asteroid", NAME_ATP = " automated trading post", NAME_MTP = " manned trading post";
+    public static final int BASE_VALUE_CPU = 12, BASE_VALUE_RAM = 9, BASE_VALUE_SSD = 1;
+    public static final int MISSED_DOCK_DAMAGE_MIN = 5, MISSED_DOCK_DAMAGE_MAX = 20;
     public static final String
             COMMAND_SHWS = "SHOW S",
             COMMAND_SHWD = "SHOW D",
@@ -20,8 +22,8 @@ public class GameConstants {
             COMMAND_UC = "UP C",
             COMMAND_BC = "BUILD C",
             COMMAND_SC = "SCRAP C",
-            COMMAND_MOUNTH = "MOUNT H",
             COMMAND_EXAMH = "EXAM H",
+            COMMAND_INTR = "INTR",
             COMMAND_HELPCOMMANDS = "HELP CMD",
             COMMAND_HELPCOMPONENTS = "HELP CMP";
     public static final String[] commands = {
@@ -38,8 +40,8 @@ public class GameConstants {
             COMMAND_UC,
             COMMAND_BC,
             COMMAND_SC,
-            COMMAND_MOUNTH,
             COMMAND_EXAMH,
+            COMMAND_INTR,
             COMMAND_HELPCOMMANDS,
             COMMAND_HELPCOMPONENTS
     };
@@ -57,8 +59,8 @@ public class GameConstants {
             "Upgrades selected component. Usage: 'up c [component ID]'.",
             "Builds designated component. Usage: 'build c [component name]'.",
             "Scrap selected component. Usage: 'scrap c [component ID]'.",
-            "Mount hardware from the ship storage on the main computer. Usage: 'mount h [hardware cargo tag]'.",
             "Examines the ship's hardware storage.",
+            "Interact with a map object.",
             "Commands help.",
             "Components help."
     };
@@ -99,6 +101,6 @@ public class GameConstants {
             "This processes scrap into materials that can be used to build various hardware.",
             "This holds all your drones. Upgrading will increase drone capacity.",
             "Used for jumping between sectors.",
-            "Used for locating useful sectors. Without one, the jump drive will jump to a random sector."
+            "Used for... eh, just don't deconstruct it ok?"
     };
 }

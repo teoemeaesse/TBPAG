@@ -7,6 +7,7 @@ import data.Cargo;
  */
 public class Hardware extends Cargo {
     public String name;
+    public double value;
 
     public void describe(){};
 }

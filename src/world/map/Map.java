@@ -1,10 +1,7 @@
 package world.map;
 
 import tools.Tools;
-import world.map.entities.Asteroid;
-import world.map.entities.LargeAsteroid;
-import world.map.entities.Ship;
-import world.map.entities.Space;
+import world.map.entities.*;
 
 import java.util.Random;
 
@@ -40,10 +37,7 @@ public class Map {
         Tools.out("\n\n");
     }
 
-    public static void generateSector(){
-        Ship.x = r.nextInt(20);
-        Ship.y = r.nextInt(20);
-
+    public static void generateSector(boolean firstTime, boolean hasATP, boolean hasMTP){
         for(int x = 0; x < 20; x++){
             for(int y = 0; y < 20; y++){
                 Map.map[x][y] = new Space();
@@ -54,16 +48,37 @@ public class Map {
             for(int y = 0; y < 20; y++){
                 if(r.nextInt(20) == 0){
                     Map.map[x][y] = new Asteroid();
-                    Map.map[x][y].icon = Asteroid.icon;
                 }
                 else if(r.nextInt(50) == 0){
                     Map.map[x][y] = new LargeAsteroid();
-                    Map.map[x][y].icon = LargeAsteroid.icon;
                 }
                 else{
                     Map.map[x][y] = new Space();
-                    Map.map[x][y].icon = Space.icon;
                 }
+                Map.map[x][y].x = x;
+                Map.map[x][y].y = y;
+            }
+        }
+
+
+        if(firstTime){
+            Ship.x = r.nextInt(20);
+            Ship.y = r.nextInt(20);
+        }
+
+        if(hasATP) Map.map[r.nextInt(20)][r.nextInt(20)] = new AutomatedTradingPost();
+    }
+
+    public static void generateTravelGFX(){
+        for(int x = 0; x < 20; x++){
+            for(int y = 0; y < 20; y++){
+                Map.map[x][y] = new Space();
+            }
+        }
+
+        for(int x = 0; x < 20; x++){
+            for(int y = 0; y < 20; y++){
+                if(r.nextInt(3) == 0) Map.map[x][y] = new TravelGFX();
                 Map.map[x][y].x = x;
                 Map.map[x][y].y = y;
             }

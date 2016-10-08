@@ -4,6 +4,8 @@ import data.DronePart;
 import data.Material;
 import data.drone_parts.DroneParts;
 import data.main_computer.hardware.CPU;
+import data.main_computer.hardware.RAM;
+import data.main_computer.hardware.SSD;
 import data.materials.Materials;
 import game.GameConstants;
 import tools.Tools;
@@ -17,9 +19,6 @@ import java.util.Scanner;
  * Created by Tomás on 07/18/2016.
  */
 public class ScrapProcessor extends Component {
-    private final int PRODUCTION_STAGE = 0, ASSEMBLING_STAGE = 1;
-    private int currentStage = 0;
-
     private Material[] materials = new Material[]{Materials.FE.getMaterial(), Materials.SL.getMaterial(), Materials.AU.getMaterial(), Materials.CU.getMaterial(), Materials.PL.getMaterial()};
 
     private DronePart[] dronePartList = new DronePart[]{DroneParts.SMALL_DRILL.getDronePart(), DroneParts.LARGE_DRILL.getDronePart()};
@@ -45,10 +44,10 @@ public class ScrapProcessor extends Component {
 
     @Override
     public void activate() throws Exception {
-        productionMenu();
+        menu();
     }
 
-    private void productionMenu() throws Exception {
+    private void menu() throws Exception {
         boolean open = true;
 
         while(open){
@@ -117,7 +116,7 @@ public class ScrapProcessor extends Component {
         boolean open = true;
 
         while(open){
-            Tools.out("\nWelcome to the S.P.'s v.13 Menus4U's trademarked menu's produce sub-menu.\n\nWhat hardware do you want to build?\n\n1. CPU\n2. SSD\n3. RAM\n4. Safety hardware\n5. Drone parts\nx. Return\n\n");
+            Tools.out("\nWelcome to the S.P.'s v.13 Menus4U's trademarked menu's produce sub-menu.\n\nWhat hardware do you want to build?\n\n1. CPU\n2. SSD\n3. RAM\n4. Drone parts\nx. Return\n\n");
 
             String input = scanner.nextLine();
 
@@ -125,8 +124,15 @@ public class ScrapProcessor extends Component {
                 case "1":
                     produceCPU();
                     break;
-                case "5":
+                case "2":
+                    produceSSD();
+                    break;
+                case "3":
+                    produceRAM();
+                    break;
+                case "4":
                     dronePartsSubmenu();
+                    break;
                 case "X":
                     open = false;
                     Tools.out("\nReturning...\n\n");
@@ -192,6 +198,102 @@ public class ScrapProcessor extends Component {
                     }else{
                         break;
                     }
+                }
+            }
+        }
+    }
+    private void produceSSD() throws NumberFormatException {
+        boolean open = true;
+        int memory;
+
+        Tools.out("\nWelcome to the S.P.'s v.13 Menus4U's trademarked menu's produce hardware submenu's SSD submenu. Enter x to return.\n\n");
+
+
+        while(open){
+            Tools.out("\nMemory size (i.e. 3.0, 14.2, 1.2...; current maximum is " + Double.parseDouble(String.valueOf(level * 1024)) + "): ");
+
+            String input = scanner.nextLine();
+
+            if(input.toUpperCase().equals("X")) break;
+
+            memory = Integer.parseInt(input);
+            if(memory > level * 1024){
+                Tools.out("\n\nWoa! Calm down! Too big memory size for this machine's level. Try upgrading it. (press enter)\n\n");
+                memory = 0;
+                open = false;
+                scanner.nextLine();
+            }else{
+                Tools.out("\nYou're about to spend " + memory * 2 + " iron, " + memory * 3 + " silicon, " + memory + " gold, " + memory * 9 + " copper and " + memory * 3 + " plastic.\nAre you sure you want to build this SSD drive? (y/anything else)\n\n");
+
+                input = scanner.nextLine();
+
+                if(input.toUpperCase().equals("Y")){
+                    if(enoughMaterials(memory * 2, memory * 3, memory, memory * 9, memory * 3)){
+                        materials[0].amount -= memory * 2;//fe, sl, au, cu, pl
+                        materials[1].amount -= memory * 3;
+                        materials[2].amount -= memory;
+                        materials[3].amount -= memory * 9;
+                        materials[4].amount -= memory * 3;
+
+                        Ship.hardwareStorage.add(new SSD(memory));
+
+                        Tools.out("\nSSD added to ship storage. (press enter)\n\n");
+                        scanner.nextLine();
+                    }else{
+                        Tools.out("\nNot enough materials. (press enter)\n\n");
+                        scanner.nextLine();
+                    }
+                    open = false;
+                }else{
+                    break;
+                }
+            }
+        }
+    }
+    private void produceRAM() throws NumberFormatException {
+        boolean open = true;
+        int memory;
+
+        Tools.out("\nWelcome to the S.P.'s v.13 Menus4U's trademarked menu's produce hardware submenu's RAM submenu. Enter x to return.\n\n");
+
+
+        while(open){
+            Tools.out("\nMemory size (i.e. 3.0, 14.2, 1.2...; current maximum is " + Double.parseDouble(String.valueOf(level * 4)) + "): ");
+
+            String input = scanner.nextLine();
+
+            if(input.toUpperCase().equals("X")) break;
+
+            memory = Integer.parseInt(input);
+            if(memory > level * 4){
+                Tools.out("\n\nWoa! Calm down! Too big memory size for this machine's level. Try upgrading it. (press enter)\n\n");
+                memory = 0;
+                open = false;
+                scanner.nextLine();
+            }else{
+                Tools.out("\nYou're about to spend " + memory * 20 + " iron, " + memory * 45 + " silicon, " + memory * 15 + " gold, " + memory * 75 + " copper and " + memory * 20 + " plastic.\nAre you sure you want to build this RAM card? (y/anything else)\n\n");
+
+                input = scanner.nextLine();
+
+                if(input.toUpperCase().equals("Y")){
+                    if(enoughMaterials(memory * 20, memory * 45, memory * 15, memory * 75, memory * 20)){
+                        materials[0].amount -= memory * 20;//fe, sl, au, cu, pl
+                        materials[1].amount -= memory * 45;
+                        materials[2].amount -= memory * 15;
+                        materials[3].amount -= memory * 75;
+                        materials[4].amount -= memory * 20;
+
+                        Ship.hardwareStorage.add(new RAM(memory));
+
+                        Tools.out("\nRAM added to ship storage. (press enter)\n\n");
+                        scanner.nextLine();
+                    }else{
+                        Tools.out("\nNot enough materials. (press enter)\n\n");
+                        scanner.nextLine();
+                    }
+                    open = false;
+                }else{
+                    break;
                 }
             }
         }
