@@ -20,9 +20,9 @@ public class Hydroponics extends Component {
     }
 
     public void hydroponics(){
-        if(Ship.water >= 5 + 2){
-            Ship.water -= consumption * (level / 2 + 0.5);
-            Ship.food += produce * (level / 2 + 0.5);
+        if(Ship.resources[0] >= 5 + 2){
+            Ship.resources[0] -= consumption * (level / 2 + 0.5);
+            Ship.resources[1] += produce * (level / 2 + 0.5);
             Tools.out("\nYour hydroponics ship component just produced " + produce * (level / 2 + 0.5) + " food, having consumed " + consumption * (level / 2 + 0.5) + " water.\n\n");
         }else{
             Tools.out("\nNot enough water in your mother-ship to safely continue plant growing.\n\n");
@@ -30,8 +30,8 @@ public class Hydroponics extends Component {
     }
 
     public void upgrade(int index){
-        if(Ship.scrap >= baseUpgradeCost * (level + 0.5)){
-            Ship.scrap -= baseUpgradeCost * (level + 0.5);
+        if(Ship.resources[4] >= baseUpgradeCost * (level + 0.5)){
+            Ship.resources[4] -= baseUpgradeCost * (level + 0.5);
             Ship.components[index].level++;
             consumption += 0.1;
             produce += 0.3;

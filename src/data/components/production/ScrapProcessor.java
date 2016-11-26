@@ -33,8 +33,8 @@ public class ScrapProcessor extends Component {
     }
 
     public void upgrade(int index){
-        if(Ship.scrap >= baseUpgradeCost * (level + 0.5)){
-            Ship.scrap -= baseUpgradeCost * (level + 0.5);
+        if(Ship.resources[4] >= baseUpgradeCost * (level + 0.5)){
+            Ship.resources[4] -= baseUpgradeCost * (level + 0.5);
             Ship.components[index].level++;
             Tools.out("\nScrap Processor component successfully upgraded, having spent " + baseUpgradeCost * (level + 0.5) + " scrap.\n\n");
         }else{
@@ -85,7 +85,7 @@ public class ScrapProcessor extends Component {
         boolean open = true;
 
         while(open){
-            Tools.out("\nHow much scrap do you want to process? (you have " + Ship.scrap + "; x to return)\n");
+            Tools.out("\nHow much scrap do you want to process? (you have " + Ship.resources[4] + "; x to return)\n");
 
             String input = scanner.nextLine();
 
@@ -93,8 +93,8 @@ public class ScrapProcessor extends Component {
             else{
                 int scrap = Integer.parseInt(input);
 
-                if(Ship.scrap >= scrap){
-                    Ship.scrap -= scrap;
+                if(Ship.resources[4] >= scrap){
+                    Ship.resources[4] -= scrap;
 
                     materials[0].amount += (r.nextInt(12 - 4) + 4) * scrap;
                     materials[1].amount += (r.nextInt(6 - 2) + 2) * scrap;

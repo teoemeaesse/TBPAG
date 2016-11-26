@@ -36,6 +36,6 @@ public class Component {
     }
     public void scrap(){
         Tools.out("\n" + name + " has been scrapped for " + buildCost * 0.75 + " scrap.\n\n");
-        Ship.scrap += buildCost * 0.75;
+        Ship.resources[4] += buildCost * 0.75;
     }
 }

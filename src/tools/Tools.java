@@ -41,7 +41,10 @@ public class Tools {
 
         out("\n\n");
     }
+    public static void cls(){
+        try{new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();}catch(Exception e){}
+    }
     public static boolean intToBool(int i){
-        return (i == 0) ? false : true;
+        return i != 0;
     }
 }

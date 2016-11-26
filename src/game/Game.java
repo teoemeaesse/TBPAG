@@ -17,13 +17,14 @@ import java.util.Scanner;
 
 public class Game {
     private static Scanner in = new Scanner(System.in);
+    public static boolean alive = true;
 
     public static void main(String[] args) throws Exception {
         Tools.out("If you need help, type in '" + GameConstants.COMMAND_HELPCOMMANDS.toLowerCase() + "'.\n\n");
 
         init();
 
-        while(true){
+        while(alive){
             String input = in.nextLine();
             try{
                 commandsHelp(input);
@@ -62,7 +63,7 @@ public class Game {
         int initialLength = GameConstants.COMMAND_HELPCOMMANDS.length() - 1;
 
         if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_HELPCOMMANDS)){
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            Tools.cls();
             Tools.drawCommandsHelp();
         }
     }
@@ -70,7 +71,7 @@ public class Game {
         int initialLength = GameConstants.COMMAND_HELPCOMPONENTS.length() - 1;
 
         if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_HELPCOMPONENTS)){
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            Tools.cls();
             Tools.drawComponentsHelp();
         }
     }
@@ -78,7 +79,7 @@ public class Game {
         int initialLength = GameConstants.COMMAND_SHWS.length() - 1;
 
         if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_SHWS)){
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            Tools.cls();
             Map.displayMap();
             Ship.displayShipStatus();
         }
@@ -91,7 +92,7 @@ public class Game {
                 int drone;
                 if (Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) <= Ship.drones.size() && Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) > 0){
                     drone = Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim());
-                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    Tools.cls();
                     Map.displayMap();
                     Ship.drones.get(drone - 1).displayDroneStatus(drone - 1);
                 }else{
@@ -106,7 +107,7 @@ public class Game {
         int initialLength = GameConstants.COMMAND_SHWM.length() - 1;
 
         if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_SHWM)) {
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            Tools.cls();
             Map.displayMap();
         }
     }
@@ -123,7 +124,7 @@ public class Game {
                                 if (input.length() > initialLength + 6) {
                                     int yDestination = Integer.parseInt(input.substring(initialLength + 5, initialLength + 7));
                                     if(yDestination >= 0 && yDestination < 20) {
-                                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                        Tools.cls();
                                         Ship.navigateShip(xDestination, yDestination, Ship.calcHypotenuse(Ship.calcXDifference(Ship.x, xDestination), Ship.calcYDifference(Ship.y, yDestination)));
                                     } else {
                                         Tools.out("\nY coordinate invalid\n\n");
@@ -199,7 +200,7 @@ public class Game {
         int initialLength = GameConstants.COMMAND_MINES.length() - 1;
 
         if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_MINES)){
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            Tools.cls();
             Map.displayMap();
             Tools.out("\nMining of" + Map.map[Ship.x][Ship.y].name + " commencing... It should be finished in " + Map.map[Ship.x][Ship.y].extractionTime + "s...\n\n");
             MiningThread.shipMining = true;
@@ -213,7 +214,7 @@ public class Game {
                 int drone = Integer.parseInt(input.substring(initialLength + 2).trim()) - 1;
                 if(drone >= 0 && drone < Ship.drones.size()){
                     if(Ship.drones.get(drone).extractionProgress == 0) {
-                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                        Tools.cls();
                         Map.displayMap();
                         Tools.out("\nMining of" + Map.map[Ship.drones.get(drone).x][Ship.drones.get(drone).y].name + " commencing... It should be finished in " + Map.map[Ship.drones.get(drone).x][Ship.drones.get(drone).y].extractionTime + "s...\n\n");
                         MiningThread.insertDrone(drone);
@@ -237,7 +238,7 @@ public class Game {
                 if (Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) <= Ship.drones.size() && Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) > 0){
                     drone = Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim());
                     if(Ship.drones.get(drone - 1).extractionProgress == 0){
-                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                        Tools.cls();
                         Ship.drones.get(drone - 1).collectDrone(drone - 1, Ship.calcHypotenuse(Ship.calcXDifference(Ship.drones.get(drone - 1).x, Ship.x), Ship.calcYDifference(Ship.drones.get(drone - 1).y, Ship.y)));
                     }
                     else{
@@ -259,7 +260,7 @@ public class Game {
                 int component;
                 if (Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) <= Ship.components.length && Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) > 0){
                     component = Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim());
-                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    Tools.cls();
                     if(Ship.components[component - 1] != null){
                         Ship.components[component - 1].activate();
                     }else{
@@ -281,7 +282,7 @@ public class Game {
                 int component;
                 if (Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) <= Ship.components.length && Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) > 0){
                     component = Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim());
-                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    Tools.cls();
                     if(Ship.components[component - 1] != null){
                         Ship.components[component - 1].deactivate();
                     }else{
@@ -303,7 +304,7 @@ public class Game {
                 int component;
                 if (Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) <= Ship.components.length && Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) > 0) {
                     component = Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim());
-                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    Tools.cls();
                     if (Ship.components[component - 1] != null) {
                         switch (Ship.components[component - 1].name) {
                             case "Hydroponics":
@@ -357,8 +358,8 @@ public class Game {
                     if(Ship.components[i] == null){
                         for(int a = 0; a < Component.components.length; a++){
                             if(input.toUpperCase().substring(initialLength + 2).replace(" ", "").equals(Component.components[a].name.toUpperCase().replace(" ", ""))){
-                                if(Ship.scrap >= Component.components[a].buildCost){
-                                    Ship.scrap -= Component.components[a].buildCost;
+                                if(Ship.resources[4] >= Component.components[a].buildCost){
+                                    Ship.resources[4] -= Component.components[a].buildCost;
                                     Ship.components[i] = Component.components[a];
                                     Tools.out("\nSuccessfully built " + Component.components[a].name + " component (" + (i + 1) + ")\n\n");
                                 }else{
@@ -385,7 +386,7 @@ public class Game {
                 int component;
                 if (Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) <= Ship.components.length && Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) > 0){
                     component = Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim());
-                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    Tools.cls();
                     if(Ship.components[component - 1] != null){
                         Ship.components[component - 1].scrap();
                         Ship.components[component - 1] = null;
@@ -404,7 +405,7 @@ public class Game {
         int initialLength = GameConstants.COMMAND_EXAMH.length() - 1;
 
         if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_EXAMH)){
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            Tools.cls();
 
             boolean open = true;
 
@@ -417,20 +418,16 @@ public class Game {
 
                 if(input != null && !input.equals("")) Ship.hardwareStorage.get(Integer.parseInt(input) - 1).describe();
                 else open = false;
-
-                Tools.out("\n\nPress enter to continue.\n\n");
-
-                in.nextLine();
             }
 
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            Tools.cls();
         }
     }
     private static void intr(String input) throws Exception{
         int initialLength = GameConstants.COMMAND_INTR.length() - 1;
 
         if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_INTR)){
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            Tools.cls();
 
             Map.map[Ship.x][Ship.y].interact();
         }

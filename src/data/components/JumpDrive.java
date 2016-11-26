@@ -23,7 +23,7 @@ public class JumpDrive extends Component {
     }
 
     public void jumpDrive(){
-        if(Ship.fuel - 5 >= consumption){
+        if(Ship.resources[2] - 5 >= consumption){
             Tools.out("\nBeginning light-speed jump... Keep your eyes peeled for malfunctions.\n\n");
             JumpThread.start();
         }else{
@@ -32,8 +32,8 @@ public class JumpDrive extends Component {
     }
 
     public void upgrade(int index){
-        if(Ship.scrap >= baseUpgradeCost * (level + 0.5)){
-            Ship.scrap -= baseUpgradeCost * (level + 0.5);
+        if(Ship.resources[4] >= baseUpgradeCost * (level + 0.5)){
+            Ship.resources[4] -= baseUpgradeCost * (level + 0.5);
             Ship.components[index].level++;
             consumption *= 0.95;
             Tools.out("\nJump Drive component successfully upgraded, having spent " + baseUpgradeCost * (level + 0.5) + " scrap.\n\n");

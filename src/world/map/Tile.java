@@ -5,6 +5,7 @@ package world.map;
  */
 public class Tile {
     public int x, y, extractionTime = 1, water = 0, food = 0, fuel = 0, medicalEquipment = 0, scrap = 0;
+    public boolean allowedIn = true;
     public String icon, name;
 
     public void interact(){}

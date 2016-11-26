@@ -22,8 +22,8 @@ public class DroneModifier extends Component {
     }
 
     public void upgrade(int index){
-        if(Ship.scrap >= baseUpgradeCost * (level + 0.5)){
-            Ship.scrap -= baseUpgradeCost * (level + 0.5);
+        if(Ship.resources[4] >= baseUpgradeCost * (level + 0.5)){
+            Ship.resources[4] -= baseUpgradeCost * (level + 0.5);
             Ship.components[index].level++;
             Tools.out("\nDrone Modifier component successfully upgraded, having spent " + baseUpgradeCost * (level + 0.5) + " scrap.\n\n");
         }else{

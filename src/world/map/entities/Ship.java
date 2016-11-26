@@ -17,8 +17,10 @@ import java.util.List;
  */
 public class Ship {
     public static int x, y;
-    public static double waterCapacity = 30, foodCapacity = 30, fuelCapacity = 30, medicalEquipmentCapacity = 10, scrapCapacity = 20;
-    public static double water = 15, food = 5, fuel = 1000, medicalEquipment = 1, scrap = 999, extractionProgress = 0;
+    public static int hullPoints = 100, money = 9999999;
+    public static double[] resourceCapacities = {30, 30, 30, 5, 20};
+    public static double extractionProgress = 0;
+    public static double[] resources = {15, 5, 999, 1, 999};//water, food, fuel, medequip, scrap
     public static int droneCapacity = 1;
     public static Component components[] = new Component[10];
     public static List<Drone> drones = new ArrayList<>(droneCapacity);
@@ -37,20 +39,23 @@ public class Ship {
         Tools.out("/--------------------------------------|\n" + "| Coordinates: " + x + " - " + y);
         for(int i = 0; i < 24 - (x + " - " + y).length(); i++){Tools.out(" ");}
 
-        Tools.out("|\n|                                      |\n| Water: " + water + " / " + waterCapacity);
-        for(int i = 0; i < 24 - (water + waterCapacity + "").length(); i++){Tools.out(" ");}
+        Tools.out("|\n|                                      |\n| Water: " + resources[0] + " / " + resourceCapacities[0]);
+        for(int i = 0; i < 24 - (resources[0] + resourceCapacities[0] + "").length(); i++){Tools.out(" ");}
 
-        Tools.out("|\n| Food: " + food + " / " + foodCapacity);
-        for(int i = 0; i < 25 - (food + foodCapacity + "").length(); i++){Tools.out(" ");}
+        Tools.out("|\n| Food: " + resources[1] + " / " + resourceCapacities[1]);
+        for(int i = 0; i < 25 - (resources[1] + resourceCapacities[1] + "").length(); i++){Tools.out(" ");}
 
-        Tools.out("|\n| Fuel: " + fuel + " / " + fuelCapacity);
-        for(int i = 0; i < 24 - (fuel + fuelCapacity + "").length(); i++){Tools.out(" ");}
+        Tools.out("|\n| Fuel: " + resources[2] + " / " + resourceCapacities[2]);
+        for(int i = 0; i < 25 - (resources[2] + resourceCapacities[2] + "").length(); i++){Tools.out(" ");}
 
-        Tools.out("|\n| Medical equipment: " + medicalEquipment + " / " + medicalEquipmentCapacity);
-        for(int i = 0; i < 12 - (medicalEquipment + medicalEquipmentCapacity + "").length(); i++){Tools.out(" ");}
+        Tools.out("|\n| Medical equipment: " + resources[3] + " / " + resourceCapacities[3]);
+        for(int i = 0; i < 12 - (resources[3] + resourceCapacities[3] + "").length(); i++){Tools.out(" ");}
 
-        Tools.out("|\n| Scrap: " + scrap + " / " + scrapCapacity);
-        for(int i = 0; i < 24 - (scrap + scrapCapacity + "").length(); i++){Tools.out(" ");}
+        Tools.out("|\n| Scrap: " + resources[4] + " / " + resourceCapacities[4]);
+        for(int i = 0; i < 24 - (resources[4] + resourceCapacities[4] + "").length(); i++){Tools.out(" ");}
+
+        Tools.out("|\n| Money: " + money);
+        for(int i = 0; i < 30 - String.valueOf(money).length(); i++){Tools.out(" ");}
 
         Tools.out("|\n|--------------------------------------/\n\n");
 
@@ -71,7 +76,7 @@ public class Ship {
         Tools.out("\n|-------------------------/\n\n");
     }
     public static void navigateShip(int x, int y, int dist){
-        if(fuel - dist >= 0) {
+        if(resources[2] - dist >= 0) {
             String[] dronesMoved = new String[drones.size()];
             for(int i = 0; i < drones.size(); i++){
                 dronesMoved[i] = "";
@@ -83,7 +88,7 @@ public class Ship {
             }
             Ship.x = x;
             Ship.y = y;
-            fuel -= dist;
+            resources[2] -= dist;
             String dronesPrinted = "";
             for (int i = 0; i < dronesMoved.length; i++) {
                 if (!dronesMoved[i].equals("")) {

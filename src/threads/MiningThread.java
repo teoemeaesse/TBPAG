@@ -27,11 +27,11 @@ public class MiningThread implements Runnable {
         if(shipMining){
             Ship.extractionProgress++;
             if(Ship.extractionProgress == Map.map[Ship.x][Ship.y].extractionTime){
-                Ship.water += Map.map[Ship.x][Ship.y].water;
-                Ship.food += Map.map[Ship.x][Ship.y].food;
-                Ship.fuel += Map.map[Ship.x][Ship.y].fuel;
-                Ship.medicalEquipment += Map.map[Ship.x][Ship.y].medicalEquipment;
-                Ship.scrap += Map.map[Ship.x][Ship.y].scrap;
+                Ship.resources[0] += Map.map[Ship.x][Ship.y].water;
+                Ship.resources[1] += Map.map[Ship.x][Ship.y].food;
+                Ship.resources[2] += Map.map[Ship.x][Ship.y].fuel;
+                Ship.resources[3] += Map.map[Ship.x][Ship.y].medicalEquipment;
+                Ship.resources[4] += Map.map[Ship.x][Ship.y].scrap;
 
                 Tools.out("\n - Successfully extracted:\n\t" + Map.map[Ship.x][Ship.y].water + " water;\n\t" + Map.map[Ship.x][Ship.y].food + " food;\n\t" + Map.map[Ship.x][Ship.y].fuel + " fuel;\n\t" + Map.map[Ship.x][Ship.y].medicalEquipment + " medical equipment;\n\t" + Map.map[Ship.x][Ship.y].scrap + " scrap;\n\n");
 

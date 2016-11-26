@@ -8,6 +8,9 @@ public class GameConstants {
     public static final String NAME_LARGE_ASTEROID = " large asteroid", NAME_ASTEROID = " asteroid", NAME_ATP = " automated trading post", NAME_MTP = " manned trading post";
     public static final int BASE_VALUE_CPU = 12, BASE_VALUE_RAM = 9, BASE_VALUE_SSD = 1;
     public static final int MISSED_DOCK_DAMAGE_MIN = 5, MISSED_DOCK_DAMAGE_MAX = 20;
+    public static final int[] BASE_VALUE_RESOURCES = {3, 4, 1, 10, 2};
+    public static final String[] NAMES_RESOURCES = {"Water", "Food", "Fuel", "Medical Equipment", "Scrap"};
+    public static final int WATER_ID = 0, FOOD_ID = 1, FUEL_ID = 2, MEDICAL_EQUIPMENT_ID = 3, SCRAP_ID = 4;
     public static final String
             COMMAND_SHWS = "SHOW S",
             COMMAND_SHWD = "SHOW D",

@@ -46,11 +46,11 @@ public class Drone {
         Tools.out("|\n|--------------------------------------/\n\n");
     }
     public void navigateDrone(int x, int y, int dist) throws Exception{
-        if(Ship.fuel >= dist) {
+        if(Ship.resources[2] >= dist) {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
             this.x = x;
             this.y = y;
-            Ship.fuel -= dist;
+            Ship.resources[2] -= dist;
             Map.displayMap();
             Tools.out("\nDrone arrived at destination (" + dist + " fuel consumed)\n\n");
         }else{
@@ -59,8 +59,8 @@ public class Drone {
     }
     public void collectDrone(int index, int dist){
         Map.displayMap();
-        if(Ship.fuel >= dist){
-            Ship.fuel -= dist;
+        if(Ship.resources[2] >= dist){
+            Ship.resources[2] -= dist;
             collect(index);
             Tools.out("\nDrone unloaded all goods on-board at " + Ship.x + " - " + Ship.y + "\n\n");
         }else{
@@ -70,47 +70,47 @@ public class Drone {
     private void collect(int index){
         Ship.drones.get(index).x = Ship.x;
         Ship.drones.get(index).y = Ship.y;
-        Ship.water += Ship.drones.get(index).water;
-        Ship.food += Ship.drones.get(index).food;
-        Ship.fuel += Ship.drones.get(index).fuel;
-        Ship.medicalEquipment += Ship.drones.get(index).medicalEquipment;
-        Ship.scrap += Ship.drones.get(index).scrap;
+        Ship.resources[0] += Ship.drones.get(index).water;
+        Ship.resources[1] += Ship.drones.get(index).food;
+        Ship.resources[2] += Ship.drones.get(index).fuel;
+        Ship.resources[3] += Ship.drones.get(index).medicalEquipment;
+        Ship.resources[4] += Ship.drones.get(index).scrap;
 
         correctStorageFull(index);
     }
 
     private void correctStorageFull(int index){
-        if(Ship.water > Ship.waterCapacity){
-            Ship.drones.get(index).water = Ship.water - Ship.waterCapacity;
-            Ship.water = Ship.waterCapacity;
+        if(Ship.resources[0] > Ship.resourceCapacities[0]){
+            Ship.drones.get(index).water = Ship.resources[0] - Ship.resourceCapacities[0];
+            Ship.resources[0] = Ship.resourceCapacities[0];
         }else{
             Ship.drones.get(index).water = 0;
         }
 
-        if(Ship.food > Ship.foodCapacity){
-            Ship.drones.get(index).food = Ship.food - Ship.foodCapacity;
-            Ship.food = Ship.foodCapacity;
+        if(Ship.resources[1] > Ship.resourceCapacities[1]){
+            Ship.drones.get(index).food = Ship.resources[1] - Ship.resourceCapacities[1];
+            Ship.resources[1] = Ship.resourceCapacities[1];
         }else{
             Ship.drones.get(index).food = 0;
         }
 
-        if(Ship.fuel > Ship.fuelCapacity){
-            Ship.drones.get(index).fuel = Ship.fuel - Ship.fuelCapacity;
-            Ship.fuel = Ship.fuelCapacity;
+        if(Ship.resources[2] > Ship.resourceCapacities[2]){
+            Ship.drones.get(index).fuel = Ship.resources[2] - Ship.resourceCapacities[2];
+            Ship.resources[2] = Ship.resourceCapacities[2];
         }else{
             Ship.drones.get(index).fuel = 0;
         }
 
-        if(Ship.medicalEquipment > Ship.medicalEquipmentCapacity){
-            Ship.drones.get(index).medicalEquipment = Ship.medicalEquipment - Ship.medicalEquipmentCapacity;
-            Ship.medicalEquipment = Ship.medicalEquipmentCapacity;
+        if(Ship.resources[3] > Ship.resourceCapacities[3]){
+            Ship.drones.get(index).medicalEquipment = Ship.resources[3] - Ship.resourceCapacities[3];
+            Ship.resources[3] = Ship.resourceCapacities[3];
         }else{
             Ship.drones.get(index).medicalEquipment = 0;
         }
 
-        if(Ship.scrap > Ship.scrapCapacity){
-            Ship.drones.get(index).scrap = Ship.scrap - Ship.scrapCapacity;
-            Ship.scrap = Ship.scrapCapacity;
+        if(Ship.resources[4] > Ship.resourceCapacities[4]){
+            Ship.drones.get(index).scrap = Ship.resources[4] - Ship.resourceCapacities[4];
+            Ship.resources[4] = Ship.resourceCapacities[4];
         }else{
             Ship.drones.get(index).scrap = 0;
         }
