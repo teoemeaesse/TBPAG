@@ -1,7 +1,8 @@
 package data.components;
 
 import game.GameConstants;
-import threads.JumpThread;
+import thread.GameThread;
+import thread.threads.JumpThread;
 import tools.Tools;
 import data.Component;
 import world.map.Map;
@@ -25,7 +26,8 @@ public class JumpDrive extends Component {
     public void jumpDrive(){
         if(Ship.resources[2] - 5 >= consumption){
             Tools.out("\nBeginning light-speed jump... Keep your eyes peeled for malfunctions.\n\n");
-            JumpThread.start();
+            Map.generateTravelGFX();
+            jumping = true;
         }else{
             Tools.out("\nNot enough fuel to safely make the jump to another sector. You need " + consumption + " fuel.\n\n");
         }

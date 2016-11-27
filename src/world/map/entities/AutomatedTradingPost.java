@@ -42,14 +42,13 @@ public class AutomatedTradingPost extends Tile {
                         open = mainMenu();
                     }catch(Exception e){Tools.out("\n\n\nError processing request\n\n\n");}
                 }
-
             }
         }
     }
 
 
     private boolean mainMenu() throws Exception {
-        boolean open1 = true, open2 = true;
+        boolean open = true;
         Tools.cls();
         Tools.out("\n\n1. Purchase goods\n2. Sell goods\nx. Leave\n\n");
 
@@ -58,37 +57,44 @@ public class AutomatedTradingPost extends Tile {
         if(input.toUpperCase().equals("X")){
             Tools.out("\n\nGoodbye, human (press enter).\n\n");
             scanner.nextLine();
-            open1 = false;
-        }else if(Integer.parseInt(input) == 1){
-            while(open2){
-                listResources(true);
-                input = scanner.nextLine();
-                int resourceID = Integer.parseInt(input) - 1;
-                Tools.out("\nHow much?\n(space: " + (Ship.resourceCapacities[resourceID] - Ship.resources[resourceID]) + "; money: " + Ship.money + "$)\n\n");
-                input = scanner.nextLine();
-                if(Commerce.purchase(Integer.parseInt(input), resources[resourceID], resourceID, tax)) {
-                    open2 = false;
-                    resources[resourceID] -= Integer.parseInt(input);
-                    Tools.out("\nSuccessfully processed order. Thank you for using our service.\n\n");
-                }else Tools.out("\nError purchasing. Check if you have enough space/money.\n\n");
-            }
-        }else if(Integer.parseInt(input) == 2){
-            while(open2){
-                listResources(false);
-                input = scanner.nextLine();
-                int resourceID = Integer.parseInt(input) - 1;
-                Tools.out("\nHow much?\n\n");
-                input = scanner.nextLine();
-                if(Commerce.sell(Integer.parseInt(input), resourceID, tax)) {
-                    open2 = false;
-                    resources[resourceID] += Integer.parseInt(input);
-                    Tools.out("\nSuccessfully processed transaction. Thank you for using our service.\n\n");
-                }else Tools.out("\nError selling.\n\n");
-            }
+            open = false;
         }
+        else if(Integer.parseInt(input) == 1) purchaseSubMenu();
+        else if(Integer.parseInt(input) == 2) sellSubMenu();
 
 
-        return open1;
+        return open;
+    }
+
+    private void purchaseSubMenu(){
+        boolean open = true;
+        while(open){
+            listResources(true);
+            String input = scanner.nextLine();
+            int resourceID = Integer.parseInt(input) - 1;
+            Tools.out("\nHow much?\n(space: " + (Ship.resourceCapacities[resourceID] - Ship.resources[resourceID]) + "; money: " + Ship.money + "$)\n\n");
+            input = scanner.nextLine();
+            if(Commerce.purchase(Integer.parseInt(input), resources[resourceID], resourceID, tax)) {
+                open = false;
+                resources[resourceID] -= Integer.parseInt(input);
+                Tools.out("\nSuccessfully processed order. Thank you for using our service.\n\n");
+            }else Tools.out("\nError purchasing. Check if you have enough space/money.\n\n");
+        }
+    }
+    private void sellSubMenu(){
+        boolean open = true;
+        while(open){
+            listResources(false);
+            String input = scanner.nextLine();
+            int resourceID = Integer.parseInt(input) - 1;
+            Tools.out("\nHow much?\n\n");
+            input = scanner.nextLine();
+            if(Commerce.sell(Integer.parseInt(input), resourceID, tax)) {
+                open = false;
+                resources[resourceID] += Integer.parseInt(input);
+                Tools.out("\nSuccessfully processed transaction. Thank you for using our service.\n\n");
+            }else Tools.out("\nError selling.\n\n");
+        }
     }
 
     private void listResources(boolean purchasing){
@@ -97,8 +103,6 @@ public class AutomatedTradingPost extends Tile {
         else for(int i = 0; i < resources.length; i++) Tools.out((i + 1) + ". " + GameConstants.NAMES_RESOURCES[i] + " (" + Math.floor(GameConstants.BASE_VALUE_RESOURCES[i] * tax) + "$/each; " + Ship.resources[i] + " on-board)" + "\n");
         Tools.out("\n");
     }
-
-
     private void generateResources(){
         for(int i = 0; i < resources.length; i++){
             resources[i] = r.nextInt(30 - 2) + 2;

@@ -14,8 +14,9 @@ import java.util.List;
 public class Drone {
     //public static final int INACTIVE = 0, SCRAP_MINER = 1, GATHERER = 2, ASTEROID_MINER = 3;
     public int x, y;
-    public static final double waterCapacity = 20, foodCapacity = 20, fuelCapacity = 20, medicalEquipmentCapacity = 10, scrapCapacity = 30;
-    public double water, food, fuel, medicalEquipment, scrap, extractionProgress;
+    public static double[] resourceCapacities = {20, 20, 20, 4, 30};
+    public double[] resources = new double[5];
+    public double extractionProgress = 0;
     //public int type = INACTIVE;
     public List<DronePart> parts = new ArrayList<>();
 
@@ -28,20 +29,20 @@ public class Drone {
         Tools.out("/--------------------------------------|\n" + "| Coordinates: " + Ship.drones.get(index).x + " - " + Ship.drones.get(index).y);
         for(int i = 0; i < 24 - (Ship.drones.get(index).x + " - " + Ship.drones.get(index).y).length(); i++){Tools.out(" ");}
 
-        Tools.out("|\n|                                      |\n| Water: " + Ship.drones.get(index).water + " / " + waterCapacity);
-        for(int i = 0; i < 24 - (Ship.drones.get(index).water + waterCapacity + "").length(); i++){Tools.out(" ");}
+        Tools.out("|\n|                                      |\n| Water: " + Ship.drones.get(index).resources[0] + " / " + resourceCapacities[0]);
+        for(int i = 0; i < 24 - (Ship.drones.get(index).resources[0] + resourceCapacities[0] + "").length(); i++){Tools.out(" ");}
 
-        Tools.out("|\n| Food: " + Ship.drones.get(index).food + " / " + foodCapacity);
-        for(int i = 0; i < 25 - (Ship.drones.get(index).food + foodCapacity + "").length(); i++){Tools.out(" ");}
+        Tools.out("|\n| Food: " + Ship.drones.get(index).resources[1] + " / " + resourceCapacities[1]);
+        for(int i = 0; i < 25 - (Ship.drones.get(index).resources[1] + resourceCapacities[1] + "").length(); i++){Tools.out(" ");}
 
-        Tools.out("|\n| Fuel: " + Ship.drones.get(index).fuel + " / " + fuelCapacity);
-        for(int i = 0; i < 25 - (Ship.drones.get(index).fuel + fuelCapacity + "").length(); i++){Tools.out(" ");}
+        Tools.out("|\n| Fuel: " + Ship.drones.get(index).resources[2] + " / " + resourceCapacities[2]);
+        for(int i = 0; i < 25 - (Ship.drones.get(index).resources[2] + resourceCapacities[2] + "").length(); i++){Tools.out(" ");}
 
-        Tools.out("|\n| Medical equipment: " + Ship.drones.get(index).medicalEquipment + " / " + medicalEquipmentCapacity);
-        for(int i = 0; i < 12 - (Ship.drones.get(index).medicalEquipment + medicalEquipmentCapacity + "").length(); i++){Tools.out(" ");}
+        Tools.out("|\n| Medical equipment: " + Ship.drones.get(index).resources[3] + " / " + resourceCapacities[3]);
+        for(int i = 0; i < 12 - (Ship.drones.get(index).resources[3] + resourceCapacities[3] + "").length(); i++){Tools.out(" ");}
 
-        Tools.out("|\n| Scrap: " + Ship.drones.get(index).scrap + " / " + scrapCapacity);
-        for(int i = 0; i < 24 - (Ship.drones.get(index).scrap + scrapCapacity + "").length(); i++){Tools.out(" ");}
+        Tools.out("|\n| Scrap: " + Ship.drones.get(index).resources[4] + " / " + resourceCapacities[4]);
+        for(int i = 0; i < 24 - (Ship.drones.get(index).resources[4] + resourceCapacities[4] + "").length(); i++){Tools.out(" ");}
 
         Tools.out("|\n|--------------------------------------/\n\n");
     }
@@ -70,49 +71,19 @@ public class Drone {
     private void collect(int index){
         Ship.drones.get(index).x = Ship.x;
         Ship.drones.get(index).y = Ship.y;
-        Ship.resources[0] += Ship.drones.get(index).water;
-        Ship.resources[1] += Ship.drones.get(index).food;
-        Ship.resources[2] += Ship.drones.get(index).fuel;
-        Ship.resources[3] += Ship.drones.get(index).medicalEquipment;
-        Ship.resources[4] += Ship.drones.get(index).scrap;
+        for(int i = 0; i < Ship.resources.length; i++) Ship.resources[i] += Ship.drones.get(index).resources[i];
 
         correctStorageFull(index);
     }
 
     private void correctStorageFull(int index){
-        if(Ship.resources[0] > Ship.resourceCapacities[0]){
-            Ship.drones.get(index).water = Ship.resources[0] - Ship.resourceCapacities[0];
-            Ship.resources[0] = Ship.resourceCapacities[0];
-        }else{
-            Ship.drones.get(index).water = 0;
-        }
-
-        if(Ship.resources[1] > Ship.resourceCapacities[1]){
-            Ship.drones.get(index).food = Ship.resources[1] - Ship.resourceCapacities[1];
-            Ship.resources[1] = Ship.resourceCapacities[1];
-        }else{
-            Ship.drones.get(index).food = 0;
-        }
-
-        if(Ship.resources[2] > Ship.resourceCapacities[2]){
-            Ship.drones.get(index).fuel = Ship.resources[2] - Ship.resourceCapacities[2];
-            Ship.resources[2] = Ship.resourceCapacities[2];
-        }else{
-            Ship.drones.get(index).fuel = 0;
-        }
-
-        if(Ship.resources[3] > Ship.resourceCapacities[3]){
-            Ship.drones.get(index).medicalEquipment = Ship.resources[3] - Ship.resourceCapacities[3];
-            Ship.resources[3] = Ship.resourceCapacities[3];
-        }else{
-            Ship.drones.get(index).medicalEquipment = 0;
-        }
-
-        if(Ship.resources[4] > Ship.resourceCapacities[4]){
-            Ship.drones.get(index).scrap = Ship.resources[4] - Ship.resourceCapacities[4];
-            Ship.resources[4] = Ship.resourceCapacities[4];
-        }else{
-            Ship.drones.get(index).scrap = 0;
+        for(int i = 0; i < Ship.resources.length; i++){
+            if(Ship.resources[i] > Ship.resourceCapacities[i]){
+                Ship.drones.get(index).resources[i] = Ship.resources[i] - Ship.resourceCapacities[i];
+                Ship.resources[i] = Ship.resourceCapacities[i];
+            }else{
+                Ship.drones.get(index).resources[i] = 0;
+            }
         }
     }
 }

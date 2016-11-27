@@ -2,7 +2,7 @@ package world.map.entities;
 
 import data.DronePart;
 import data.drone_parts.DroneParts;
-import data.main_computer.Hardware;
+import data.Hardware;
 import data.main_computer.MainComputer;
 import data.main_computer.hardware.CPU;
 import tools.Tools;
@@ -54,8 +54,8 @@ public class Ship {
         Tools.out("|\n| Scrap: " + resources[4] + " / " + resourceCapacities[4]);
         for(int i = 0; i < 24 - (resources[4] + resourceCapacities[4] + "").length(); i++){Tools.out(" ");}
 
-        Tools.out("|\n| Money: " + money);
-        for(int i = 0; i < 30 - String.valueOf(money).length(); i++){Tools.out(" ");}
+        Tools.out("|\n| Money: " + money + "$");
+        for(int i = 0; i < 29 - String.valueOf(money).length(); i++){Tools.out(" ");}
 
         Tools.out("|\n|--------------------------------------/\n\n");
 

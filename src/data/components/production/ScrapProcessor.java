@@ -142,8 +142,8 @@ public class ScrapProcessor extends Component {
     }
     private void produceCPU() throws NumberFormatException {
         boolean open = true;
-        double frequency;
-        int cores;
+        double frequency = 0;
+        int cores = 0;
 
         Tools.out("\nWelcome to the S.P.'s v.13 Menus4U's trademarked menu's produce hardware submenu's CPU submenu. Enter x to return.\n\n");
 
@@ -158,7 +158,6 @@ public class ScrapProcessor extends Component {
             frequency = Double.parseDouble(input);
             if(frequency > level * 3){
                 Tools.out("\n\nWoa! Calm down! Too high frequency for this machine's level. Try upgrading it. (press enter)\n\n");
-                frequency = 0;
                 open = false;
                 scanner.nextLine();
             }else{
@@ -170,29 +169,34 @@ public class ScrapProcessor extends Component {
 
                 if(cores > 32){
                     Tools.out("\n\nWhy don't you obey the rules? (press enter)\n\n");
-                    cores = 0;
                     open = false;
                     scanner.nextLine();
                 }else{
-                    Tools.out("\nYou're about to spend " + Math.floor(frequency * cores * 30) + " iron, " + Math.floor(frequency * cores * 25) + " silicon, " + Math.floor(cores * 10) + " gold, " + Math.floor(cores * 35) + " copper and " + Math.floor(frequency * cores * 5) + " plastic.\nAre you sure you want to build this CPU? (y/anything else)\n\n");
+                    Tools.out("\n\nHow many do you wish to make?\n\n");
+
+                    input = scanner.nextLine();
+
+                    int amount = Integer.parseInt(input);
+
+                    Tools.out("\nYou're about to spend " + Math.floor(frequency * cores * 30) * amount + " iron, " + Math.floor(frequency * cores * 25) * amount + " silicon, " + Math.floor(cores * 10) * amount + " gold, " + Math.floor(cores * 35) * amount + " copper and " + Math.floor(frequency * cores * 5) * amount + " plastic.\nAre you sure you want to build this CPU? (y/anything else)\n\n");
 
                     input = scanner.nextLine();
 
                     if(input.toUpperCase().equals("Y")){
-                         if(enoughMaterials(Math.floor(frequency * cores * 30), Math.floor(frequency * cores * 25), cores * 10, cores * 35, Math.floor(frequency * cores * 5))){
-                            materials[0].amount -= Math.floor(frequency * cores * 30);
-                            materials[1].amount -= Math.floor(frequency * cores * 25);//fe, sl, au, cu, pl
-                            materials[2].amount -= cores * 10;
-                            materials[3].amount -= cores * 35;
-                            materials[4].amount -= Math.floor(frequency * cores * 5);
+                         if(enoughMaterials(Math.floor(frequency * cores * 30) * amount, Math.floor(frequency * cores * 25) * amount, cores * 10 * amount, cores * 35 * amount, Math.floor(frequency * cores * 5) * amount)){
+                             materials[0].amount -= Math.floor(frequency * cores * 30) * amount;
+                             materials[1].amount -= Math.floor(frequency * cores * 25) * amount;//fe, sl, au, cu, pl
+                             materials[2].amount -= cores * 10 * amount;
+                             materials[3].amount -= cores * 35 * amount;
+                             materials[4].amount -= Math.floor(frequency * cores * 5) * amount;
 
-                            Ship.hardwareStorage.add(new CPU(frequency, cores));
+                             for(int i = amount; i > 0; i--) Ship.hardwareStorage.add(new CPU(frequency, cores));
 
-                            Tools.out("\nCPU added to ship storage. (press enter)\n\n");
-                            scanner.nextLine();
+                             Tools.out("\nCPU(s) queue added. (press enter)\n\n");
+                             scanner.nextLine();
                         }else{
-                            Tools.out("\nNot enough materials. (press enter)\n\n");
-                            scanner.nextLine();
+                             Tools.out("\nNot enough materials. (press enter)\n\n");
+                             scanner.nextLine();
                         }
                         open = false;
                     }else{

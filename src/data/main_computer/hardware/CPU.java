@@ -1,6 +1,6 @@
 package data.main_computer.hardware;
 
-import data.main_computer.Hardware;
+import data.Hardware;
 import game.GameConstants;
 import tools.Tools;
 import world.map.entities.Ship;

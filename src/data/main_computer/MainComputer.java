@@ -1,6 +1,7 @@
 package data.main_computer;
 
 import data.Component;
+import data.Hardware;
 import data.main_computer.hardware.CPU;
 import data.main_computer.hardware.RAM;
 import data.main_computer.hardware.SSD;
@@ -49,43 +50,49 @@ public class MainComputer extends Component {
 
             String input = scanner.nextLine();
 
-            try{
-                int installedComponent = Integer.parseInt(input) - 1;
+            if(input.toUpperCase().equals("X")){
+                open = false;
+                Tools.out("\n\nCome back soon! (press enter)\n\n");
+                scanner.nextLine();
+            }else{
+                try{
+                    int installedComponent = Integer.parseInt(input) - 1;
 
-                Tools.out("\nCurrently installed component:");
+                    Tools.out("\nCurrently installed component:");
 
-                if(hardware[installedComponent] == null) Tools.out("\n\nNo component installed in this slot...\n\n");
-                else hardware[installedComponent].describe();
+                    if(hardware[installedComponent] == null) Tools.out("\n\nNo component installed in this slot...\n\n");
+                    else hardware[installedComponent].describe();
 
-                Tools.out("\n\nAvailable component(s):\n\n");
+                    Tools.out("\n\nAvailable component(s):\n\n");
 
-                int a = 0;
-                for(int i = 0; i < Ship.hardwareStorage.size(); i++){
-                    if(Ship.hardwareStorage.get(i).name.equals(names[installedComponent])){
-                        a++;
-                        Tools.out(a + ". " + Ship.hardwareStorage.get(i).tag + "\n");
+                    int a = 0;
+                    for(int i = 0; i < Ship.hardwareStorage.size(); i++){
+                        if(Ship.hardwareStorage.get(i).name.equals(names[installedComponent])){
+                            a++;
+                            Tools.out(a + ". " + Ship.hardwareStorage.get(i).tag + "\n");
 
-                        input = scanner.nextLine();
+                            input = scanner.nextLine();
 
-                        int cargoComponent = Integer.parseInt(input) - 1;
+                            int cargoComponent = Integer.parseInt(input) - 1;
 
-                        if(hardware[installedComponent] == null){
-                            hardware[installedComponent] = Ship.hardwareStorage.get(cargoComponent);
-                            Ship.hardwareStorage.remove(cargoComponent);
+                            if(hardware[installedComponent] == null){
+                                hardware[installedComponent] = Ship.hardwareStorage.get(cargoComponent);
+                                Ship.hardwareStorage.remove(cargoComponent);
+                            }
+                            else{
+                                Ship.hardwareStorage.add(hardware[installedComponent]);
+                                hardware[installedComponent] = Ship.hardwareStorage.get(cargoComponent);
+                                Ship.hardwareStorage.remove(cargoComponent);
+                            }
+
+                            Tools.out("\n\nReplacement successful. (press enter)\n\n");
+                            scanner.nextLine();
+                            open = false;
+                            break;
                         }
-                        else{
-                            Ship.hardwareStorage.add(hardware[installedComponent]);
-                            hardware[installedComponent] = Ship.hardwareStorage.get(cargoComponent);
-                            Ship.hardwareStorage.remove(cargoComponent);
-                        }
-
-                        Tools.out("\n\nReplacement successful. Press enter...\n\n");
-                        scanner.nextLine();
-                        open = false;
-                        break;
                     }
-                }
-            }catch(Exception e){Tools.out("\nFatal error. Returning...\n");}
+                }catch(Exception e){Tools.out("\nFatal error. Returning...\n");}
+            }
         }
     }
 }

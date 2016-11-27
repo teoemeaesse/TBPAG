@@ -15,7 +15,7 @@ public class Hydroponics extends Component {
         baseUpgradeCost = 12.5;
         consumption = 2;
         produce = 1;
-        timeTaken = 180;
+        timeTaken = 5;
         level = 1;
     }
 
@@ -26,6 +26,7 @@ public class Hydroponics extends Component {
             Tools.out("\nYour hydroponics ship component just produced " + produce * (level / 2 + 0.5) + " food, having consumed " + consumption * (level / 2 + 0.5) + " water.\n\n");
         }else{
             Tools.out("\nNot enough water in your mother-ship to safely continue plant growing.\n\n");
+            active = false;
         }
     }
 

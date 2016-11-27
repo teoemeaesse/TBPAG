@@ -1,8 +1,10 @@
 package game;
 
 import data.components.drone.DroneModifier;
-import threads.HydroponicsThread;
-import threads.MiningThread;
+import thread.GameThread;
+import thread.threads.HydroponicsThread;
+import thread.threads.JumpThread;
+import thread.threads.MiningThread;
 import tools.Tools;
 import data.Component;
 import world.map.Map;
@@ -51,12 +53,18 @@ public class Game {
 
     private static void init(){
         //IO.loadComponents();
-
         Map.generateSector(true, true, false);
 
         Ship.init();
-        MiningThread.start();
-        HydroponicsThread.start();
+
+
+        GameThread.gameThreads.add(new HydroponicsThread());
+        GameThread.gameThreads.add(new JumpThread());
+        GameThread.gameThreads.add(new MiningThread());
+
+        for(int i = 0; i < GameThread.gameThreads.size(); i++){
+            GameThread.gameThreads.get(i).start();
+        }
     }
 
     private static void commandsHelp(String input) throws Exception {
