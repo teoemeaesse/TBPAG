@@ -1,6 +1,6 @@
 package data.components.storage;
 
-import game.GameConstants;
+import game.Settings;
 import tools.Tools;
 import data.Component;
 import world.map.entities.Ship;
@@ -10,7 +10,7 @@ import world.map.entities.Ship;
  */
 public class MedicalStorage extends Component {
     public MedicalStorage(){
-        name = GameConstants.COMPONENT_MEDICALSTORAGE;
+        name = Settings.COMPONENT_MEDICALSTORAGE;
         buildCost = 20;
         baseUpgradeCost = 12.5;
         level = 1;

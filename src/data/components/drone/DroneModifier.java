@@ -1,7 +1,7 @@
 package data.components.drone;
 
 import data.Component;
-import game.GameConstants;
+import game.Settings;
 import tools.Tools;
 import world.map.entities.Ship;
 
@@ -14,7 +14,7 @@ public class DroneModifier extends Component {
     private Scanner scanner = new Scanner(System.in);
 
     public DroneModifier(){
-        name = GameConstants.COMPONENT_DRONEMODIFIER;
+        name = Settings.COMPONENT_DRONEMODIFIER;
         buildCost = 40;
         baseUpgradeCost = 25;
         timeTaken = 180;

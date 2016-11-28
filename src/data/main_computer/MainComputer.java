@@ -5,7 +5,7 @@ import data.Hardware;
 import data.main_computer.hardware.CPU;
 import data.main_computer.hardware.RAM;
 import data.main_computer.hardware.SSD;
-import game.GameConstants;
+import game.Settings;
 import tools.Tools;
 import world.map.entities.Ship;
 
@@ -19,7 +19,7 @@ public class MainComputer extends Component {
     public static Hardware[] hardware = new Hardware[3];
 
     public MainComputer(){
-        name = GameConstants.COMPONENT_MAINCOMPUTER;
+        name = Settings.COMPONENT_MAINCOMPUTER;
         level = 1;
 
         hardware[0] = new CPU(0.2, 1);

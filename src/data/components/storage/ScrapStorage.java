@@ -1,6 +1,6 @@
 package data.components.storage;
 
-import game.GameConstants;
+import game.Settings;
 import tools.Tools;
 import data.Component;
 import world.map.entities.Ship;
@@ -10,7 +10,7 @@ import world.map.entities.Ship;
  */
 public class ScrapStorage extends Component {
     public ScrapStorage(){
-        name = GameConstants.COMPONENT_SCRAPSTORAGE;
+        name = Settings.COMPONENT_SCRAPSTORAGE;
         buildCost = 16;
         baseUpgradeCost = 10;
         level = 1;

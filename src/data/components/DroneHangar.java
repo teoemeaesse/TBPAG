@@ -1,6 +1,6 @@
 package data.components;
 
-import game.GameConstants;
+import game.Settings;
 import tools.Tools;
 import data.Component;
 import world.map.entities.Ship;
@@ -10,7 +10,7 @@ import world.map.entities.Ship;
  */
 public class DroneHangar extends Component {
     public DroneHangar(){
-        name = GameConstants.COMPONENT_DRONEHANGAR;
+        name = Settings.COMPONENT_DRONEHANGAR;
         buildCost = 40;
         baseUpgradeCost = 25;
         level = 1;

@@ -2,7 +2,7 @@ package data.events.void_events;
 
 import data.Event;
 import data.main_computer.MainComputer;
-import game.GameConstants;
+import game.Settings;
 
 import java.util.Random;
 
@@ -23,7 +23,7 @@ public class BrokeDockEvent extends Event {
         Random r = new Random();
         int fine = r.nextInt(50 - 10) + 10;
 
-        if(r.nextInt((int) Math.round(MainComputer.hardware[0].value / GameConstants.BASE_VALUE_CPU + 10)) == 0){
+        if(r.nextInt((int) Math.round(MainComputer.hardware[0].value / Settings.BASE_VALUE_CPU + 10)) == 0){
             fireEvents(new DemandPayEvent(
                     fine,
                     "\nYou destroyed the docking hatch! The post demands that you pay " + fine + "$. Will you pay? (y/any other key)\n\n",

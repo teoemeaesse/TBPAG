@@ -1,7 +1,7 @@
 package data.main_computer.hardware;
 
 import data.Hardware;
-import game.GameConstants;
+import game.Settings;
 import tools.Tools;
 import world.map.entities.Ship;
 
@@ -14,7 +14,7 @@ public class RAM extends Hardware {
     public RAM(int memory){
         name = "RAM";
         tag = "CARGO_" + Ship.hardwareStorage.size();
-        value = memory * GameConstants.BASE_VALUE_RAM;
+        value = memory * Settings.BASE_VALUE_RAM;
         this.memory = memory;
     }
 

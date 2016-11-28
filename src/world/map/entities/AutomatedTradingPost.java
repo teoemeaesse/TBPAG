@@ -5,7 +5,7 @@ import data.commerce.Commerce;
 import data.events.returnable_events.EntranceDAEvent;
 import data.events.void_events.BrokeDockEvent;
 import data.events.void_events.MissedDockEvent;
-import game.GameConstants;
+import game.Settings;
 import tools.Tools;
 import world.map.Tile;
 
@@ -16,7 +16,7 @@ import java.util.Scanner;
  * Created by Tomás on 08/10/2016.
  */
 public class AutomatedTradingPost extends Tile {
-    public static String icon = GameConstants.MAP_AMTP, name = GameConstants.NAME_ATP;
+    public static String icon = Settings.MAP_AMTP, name = Settings.NAME_ATP;
     public int tax;
     public int[] resources = new int[5];
     private static Scanner scanner = new Scanner(System.in);
@@ -99,8 +99,8 @@ public class AutomatedTradingPost extends Tile {
 
     private void listResources(boolean purchasing){
         Tools.out("\nResources:\n\n");
-        if(purchasing) for(int i = 0; i < resources.length; i++) Tools.out((i + 1) + ". " + GameConstants.NAMES_RESOURCES[i] + " (" + Math.floor(GameConstants.BASE_VALUE_RESOURCES[i] * tax) + "$/each; " + resources[i] + " in stock)" + "\n");
-        else for(int i = 0; i < resources.length; i++) Tools.out((i + 1) + ". " + GameConstants.NAMES_RESOURCES[i] + " (" + Math.floor(GameConstants.BASE_VALUE_RESOURCES[i] * tax) + "$/each; " + Ship.resources[i] + " on-board)" + "\n");
+        if(purchasing) for(int i = 0; i < resources.length; i++) Tools.out((i + 1) + ". " + Settings.NAMES_RESOURCES[i] + " (" + Math.floor(Settings.BASE_VALUE_RESOURCES[i] * tax) + "$/each; " + resources[i] + " in stock)" + "\n");
+        else for(int i = 0; i < resources.length; i++) Tools.out((i + 1) + ". " + Settings.NAMES_RESOURCES[i] + " (" + Math.floor(Settings.BASE_VALUE_RESOURCES[i] * tax) + "$/each; " + Ship.resources[i] + " on-board)" + "\n");
         Tools.out("\n");
     }
     private void generateResources(){

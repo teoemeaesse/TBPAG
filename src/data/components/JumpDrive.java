@@ -1,8 +1,6 @@
 package data.components;
 
-import game.GameConstants;
-import thread.GameThread;
-import thread.threads.JumpThread;
+import game.Settings;
 import tools.Tools;
 import data.Component;
 import world.map.Map;
@@ -15,7 +13,7 @@ public class JumpDrive extends Component {
     public static boolean jumping = false;
 
     public JumpDrive(){
-        name = GameConstants.COMPONENT_JUMPDRIVE;
+        name = Settings.COMPONENT_JUMPDRIVE;
         buildCost = 40;
         baseUpgradeCost = 25;
         consumption = 10;

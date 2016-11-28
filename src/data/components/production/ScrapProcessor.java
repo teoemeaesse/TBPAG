@@ -7,7 +7,7 @@ import data.main_computer.hardware.CPU;
 import data.main_computer.hardware.RAM;
 import data.main_computer.hardware.SSD;
 import data.materials.Materials;
-import game.GameConstants;
+import game.Settings;
 import tools.Tools;
 import data.Component;
 import world.map.entities.Ship;
@@ -26,7 +26,7 @@ public class ScrapProcessor extends Component {
     private Scanner scanner = new Scanner(System.in);
 
     public ScrapProcessor(){
-        name = GameConstants.COMPONENT_SCRAPPROCESSOR;
+        name = Settings.COMPONENT_SCRAPPROCESSOR;
         buildCost = 40;
         baseUpgradeCost = 25;
         level = 1;

@@ -1,7 +1,7 @@
 package data.main_computer.hardware;
 
 import data.Hardware;
-import game.GameConstants;
+import game.Settings;
 import tools.Tools;
 import world.map.entities.Ship;
 
@@ -15,7 +15,7 @@ public class CPU extends Hardware {
     public CPU(double frequency, int cores){
         name = "CPU";
         tag = "CARGO_" + Ship.hardwareStorage.size();
-        value = frequency * cores * GameConstants.BASE_VALUE_CPU;
+        value = frequency * cores * Settings.BASE_VALUE_CPU;
         this.frequency = frequency;
         this.cores = cores;
     }

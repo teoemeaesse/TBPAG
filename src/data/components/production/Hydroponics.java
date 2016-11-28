@@ -1,6 +1,6 @@
 package data.components.production;
 
-import game.GameConstants;
+import game.Settings;
 import tools.Tools;
 import data.Component;
 import world.map.entities.Ship;
@@ -10,7 +10,7 @@ import world.map.entities.Ship;
  */
 public class Hydroponics extends Component {
     public Hydroponics(){
-        name = GameConstants.COMPONENT_HYDROPONICS;
+        name = Settings.COMPONENT_HYDROPONICS;
         buildCost = 20;
         baseUpgradeCost = 12.5;
         consumption = 2;

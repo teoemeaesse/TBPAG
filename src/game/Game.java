@@ -1,7 +1,9 @@
 package game;
 
 import data.components.drone.DroneModifier;
+import gfx.Frame;
 import thread.GameThread;
+import thread.threads.DisplayThread;
 import thread.threads.HydroponicsThread;
 import thread.threads.JumpThread;
 import thread.threads.MiningThread;
@@ -22,7 +24,7 @@ public class Game {
     public static boolean alive = true;
 
     public static void main(String[] args) throws Exception {
-        Tools.out("If you need help, type in '" + GameConstants.COMMAND_HELPCOMMANDS.toLowerCase() + "'.\n\n");
+        Tools.out("If you need help, type in '" + Settings.COMMAND_HELPCOMMANDS.toLowerCase() + "'.\n\n");
 
         init();
 
@@ -51,8 +53,19 @@ public class Game {
         }
     }
 
+
+    public static void tick(){
+
+    }
+
+    public static void render(){
+        Frame.panel.repaint();
+    }
+
+
     private static void init(){
         //IO.loadComponents();
+        new Frame(Settings.NAME, Settings.width, Settings.height);
         Map.generateSector(true, true, false);
 
         Ship.init();
@@ -61,41 +74,44 @@ public class Game {
         GameThread.gameThreads.add(new HydroponicsThread());
         GameThread.gameThreads.add(new JumpThread());
         GameThread.gameThreads.add(new MiningThread());
+        GameThread.gameThreads.add(new DisplayThread());
 
         for(int i = 0; i < GameThread.gameThreads.size(); i++){
             GameThread.gameThreads.get(i).start();
         }
     }
 
-    private static void commandsHelp(String input) throws Exception {
-        int initialLength = GameConstants.COMMAND_HELPCOMMANDS.length() - 1;
 
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_HELPCOMMANDS)){
+
+    private static void commandsHelp(String input) throws Exception {
+        int initialLength = Settings.COMMAND_HELPCOMMANDS.length() - 1;
+
+        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_HELPCOMMANDS)){
             Tools.cls();
             Tools.drawCommandsHelp();
         }
     }
     private static void componentsHelp(String input) throws Exception {
-        int initialLength = GameConstants.COMMAND_HELPCOMPONENTS.length() - 1;
+        int initialLength = Settings.COMMAND_HELPCOMPONENTS.length() - 1;
 
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_HELPCOMPONENTS)){
+        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_HELPCOMPONENTS)){
             Tools.cls();
             Tools.drawComponentsHelp();
         }
     }
     private static void shws(String input) throws Exception {
-        int initialLength = GameConstants.COMMAND_SHWS.length() - 1;
+        int initialLength = Settings.COMMAND_SHWS.length() - 1;
 
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_SHWS)){
+        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_SHWS)){
             Tools.cls();
             Map.displayMap();
             Ship.displayShipStatus();
         }
     }
     private static void shwd(String input) throws Exception {
-        int initialLength = GameConstants.COMMAND_SHWD.length() - 1;
+        int initialLength = Settings.COMMAND_SHWD.length() - 1;
 
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_SHWD)){
+        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_SHWD)){
             if(input.length() > initialLength + 1){
                 int drone;
                 if (Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) <= Ship.drones.size() && Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) > 0){
@@ -112,17 +128,17 @@ public class Game {
         }
     }
     private static void shwm(String input) throws Exception {
-        int initialLength = GameConstants.COMMAND_SHWM.length() - 1;
+        int initialLength = Settings.COMMAND_SHWM.length() - 1;
 
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_SHWM)) {
+        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_SHWM)) {
             Tools.cls();
             Map.displayMap();
         }
     }
     private static void navs(String input) throws Exception {
-        int initialLength = GameConstants.COMMAND_NAVS.length() - 1;
+        int initialLength = Settings.COMMAND_NAVS.length() - 1;
 
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_NAVS)){
+        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_NAVS)){
             if(Ship.extractionProgress == 0){
                 if(input.length() > initialLength + 1){
                     if(input.length() > initialLength + 3){
@@ -158,9 +174,9 @@ public class Game {
         }
     }
     private static void navd(String input) throws Exception {
-        int initialLength = GameConstants.COMMAND_NAVD.length() - 1;
+        int initialLength = Settings.COMMAND_NAVD.length() - 1;
 
-        if (input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_NAVD)) {
+        if (input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_NAVD)) {
             if (input.length() > initialLength + 1) {
                 int drone;
                 if (input.length() > initialLength + 2) {
@@ -205,9 +221,9 @@ public class Game {
         }
     }
     private static void mines(String input) throws Exception {
-        int initialLength = GameConstants.COMMAND_MINES.length() - 1;
+        int initialLength = Settings.COMMAND_MINES.length() - 1;
 
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_MINES)){
+        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_MINES)){
             Tools.cls();
             Map.displayMap();
             Tools.out("\nMining of" + Map.map[Ship.x][Ship.y].name + " commencing... It should be finished in " + Map.map[Ship.x][Ship.y].extractionTime + "s...\n\n");
@@ -215,9 +231,9 @@ public class Game {
         }
     }
     private static void mined(String input) throws Exception {
-        int initialLength = GameConstants.COMMAND_MINED.length() - 1;
+        int initialLength = Settings.COMMAND_MINED.length() - 1;
 
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_MINED)){
+        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_MINED)){
             if(input.length() > initialLength + 2){
                 int drone = Integer.parseInt(input.substring(initialLength + 2).trim()) - 1;
                 if(drone >= 0 && drone < Ship.drones.size()){
@@ -238,9 +254,9 @@ public class Game {
         }
     }
     private static void cold(String input) throws Exception {
-        int initialLength = GameConstants.COMMAND_COLD.length() - 1;
+        int initialLength = Settings.COMMAND_COLD.length() - 1;
 
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_COLD)){
+        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_COLD)){
             if(input.length() > initialLength + 1){
                 int drone;
                 if (Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) <= Ship.drones.size() && Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) > 0){
@@ -261,9 +277,9 @@ public class Game {
         }
     }
     private static void ac(String input) throws Exception {
-        int initialLength = GameConstants.COMMAND_AC.length() - 1;
+        int initialLength = Settings.COMMAND_AC.length() - 1;
 
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_AC)){
+        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_AC)){
             if(input.length() > initialLength + 1){
                 int component;
                 if (Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) <= Ship.components.length && Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) > 0){
@@ -283,9 +299,9 @@ public class Game {
         }
     }
     private static void dc(String input) throws Exception {
-        int initialLength = GameConstants.COMMAND_DC.length() - 1;
+        int initialLength = Settings.COMMAND_DC.length() - 1;
 
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_DC)){
+        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_DC)){
             if(input.length() > initialLength + 1){
                 int component;
                 if (Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) <= Ship.components.length && Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) > 0){
@@ -305,9 +321,9 @@ public class Game {
         }
     }
     private static void uc(String input) throws Exception {
-        int initialLength = GameConstants.COMMAND_UC.length() - 1;
+        int initialLength = Settings.COMMAND_UC.length() - 1;
 
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_UC)) {
+        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_UC)) {
             if (input.length() > initialLength + 1) {
                 int component;
                 if (Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) <= Ship.components.length && Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) > 0) {
@@ -358,9 +374,9 @@ public class Game {
         }
     }
     private static void bc(String input) throws Exception {
-        int initialLength = GameConstants.COMMAND_BC.length() - 1;
+        int initialLength = Settings.COMMAND_BC.length() - 1;
 
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_BC)){
+        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_BC)){
             if(input.length() > initialLength + 1){
                 for(int i = 0; i < Ship.components.length; i++){
                     if(Ship.components[i] == null){
@@ -387,9 +403,9 @@ public class Game {
         }
     }
     private static void sc(String input) throws Exception {
-        int initialLength = GameConstants.COMMAND_SC.length() - 1;
+        int initialLength = Settings.COMMAND_SC.length() - 1;
 
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_SC)){
+        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_SC)){
             if(input.length() > initialLength + 1){
                 int component;
                 if (Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) <= Ship.components.length && Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) > 0){
@@ -410,9 +426,9 @@ public class Game {
         }
     }
     private static void examh(String input) throws Exception {
-        int initialLength = GameConstants.COMMAND_EXAMH.length() - 1;
+        int initialLength = Settings.COMMAND_EXAMH.length() - 1;
 
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_EXAMH)){
+        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_EXAMH)){
             Tools.cls();
 
             boolean open = true;
@@ -432,9 +448,9 @@ public class Game {
         }
     }
     private static void intr(String input) throws Exception{
-        int initialLength = GameConstants.COMMAND_INTR.length() - 1;
+        int initialLength = Settings.COMMAND_INTR.length() - 1;
 
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(GameConstants.COMMAND_INTR)){
+        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_INTR)){
             Tools.cls();
 
             Map.map[Ship.x][Ship.y].interact();

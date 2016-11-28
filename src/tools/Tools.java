@@ -1,6 +1,6 @@
 package tools;
 
-import game.GameConstants;
+import game.Settings;
 
 /**
  * Created by Tomás on 29/03/2016.
@@ -26,8 +26,8 @@ public class Tools {
     public static void drawCommandsHelp(){
         out("\nList of all commands:\n\n");
 
-        for(int i = 0; i < GameConstants.commands.length; i++){
-            out(GameConstants.commands[i] + " - " + GameConstants.commandDescriptions[i] + "\n");
+        for(int i = 0; i < Settings.commands.length; i++){
+            out(Settings.commands[i] + " - " + Settings.commandDescriptions[i] + "\n");
         }
 
         out("\n\n");
@@ -35,8 +35,8 @@ public class Tools {
     public static void drawComponentsHelp(){
         out("\nList of all components:\n\n");
 
-        for(int i = 0; i < GameConstants.components.length; i++){
-            out(GameConstants.components[i] + " - " + GameConstants.componentDescriptions[i] + "\n");
+        for(int i = 0; i < Settings.components.length; i++){
+            out(Settings.components[i] + " - " + Settings.componentDescriptions[i] + "\n");
         }
 
         out("\n\n");
