@@ -57,8 +57,8 @@ public class Game {
 
 
     public static void tick(){
-        for(int i = 0; i < Frame.panel.panelObjects.size(); i++) Frame.panel.panelObjects.get(i).tick();
         Mouse.update();
+        for(int i = 0; i < Frame.panel.panelObjects.size(); i++) Frame.panel.panelObjects.get(i).tick();
     }
 
     public static void render(){

@@ -42,8 +42,10 @@ public class Window extends PanelObject {
 
     private void mouseDraggingDragBox(){
         if(Mouse.mouseOverBox(dragBox) && Mouse.down){
-            x = (Mouse.x - Mouse.lastX);
-            y = (Mouse.y - Mouse.lastY);
+            x += (Mouse.x - Mouse.lastX);
+            y += (Mouse.y - Mouse.lastY);
+            Mouse.lastX = Mouse.x;
+            Mouse.lastY = Mouse.y;
         }
     }
 }
