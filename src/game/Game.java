@@ -2,6 +2,7 @@ package game;
 
 import data.components.drone.DroneModifier;
 import gfx.Frame;
+import input.Mouse;
 import thread.GameThread;
 import thread.threads.DisplayThread;
 import thread.threads.HydroponicsThread;
@@ -55,7 +56,7 @@ public class Game {
 
 
     public static void tick(){
-
+        Mouse.update();
     }
 
     public static void render(){
