@@ -15,7 +15,7 @@ public class Hydroponics extends Component {
         baseUpgradeCost = 12.5;
         consumption = 2;
         produce = 1;
-        timeTaken = 5;
+        timeTaken = 1;
         level = 1;
     }
 

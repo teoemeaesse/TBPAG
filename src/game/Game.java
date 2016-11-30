@@ -3,6 +3,7 @@ package game;
 import data.components.drone.DroneModifier;
 import gfx.Frame;
 import input.Mouse;
+import input.MouseHandler;
 import thread.GameThread;
 import thread.threads.DisplayThread;
 import thread.threads.HydroponicsThread;
@@ -56,6 +57,7 @@ public class Game {
 
 
     public static void tick(){
+        for(int i = 0; i < Frame.panel.panelObjects.size(); i++) Frame.panel.panelObjects.get(i).tick();
         Mouse.update();
     }
 

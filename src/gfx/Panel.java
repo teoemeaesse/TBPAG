@@ -1,6 +1,7 @@
 package gfx;
 
 import game.Settings;
+import input.MouseHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +42,6 @@ public class Panel extends JPanel {
     private void renderPanelObjects(Graphics g){
         for(int i = 0; i < panelObjects.size(); i++) panelObjects.get(i).render(g);
     }
-
     private void renderBackground(Graphics g){
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, Settings.width, Settings.height);

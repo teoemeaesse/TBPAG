@@ -1,5 +1,7 @@
 package gfx;
 
+import input.MouseHandler;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,6 +10,7 @@ import java.awt.*;
  */
 public class Frame extends JFrame {
     public static Panel panel = new Panel();
+    public static MouseHandler mouseHandler = new MouseHandler();
 
     public Frame(String name, int width, int height){
         super(name);
@@ -16,7 +19,7 @@ public class Frame extends JFrame {
         setResizable(false);
         setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - width / 2, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - height / 2);
         panel.setIgnoreRepaint(false);
-        //add listeners
+        panel.addMouseListener(mouseHandler);
         add(panel);
         setVisible(true);
     }

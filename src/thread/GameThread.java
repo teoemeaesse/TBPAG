@@ -9,8 +9,8 @@ import java.util.ArrayList;
  */
 public class GameThread implements Runnable {
     public Thread thread;
-    public double fps = 1;
-    public double timePerTick = 1000000000 / fps;
+    public double fps;
+    public double timePerTick;
 
     public static ArrayList<GameThread> gameThreads = new ArrayList<>();
 

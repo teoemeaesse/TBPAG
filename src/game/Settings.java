@@ -6,7 +6,7 @@ package game;
 public class Settings {
     public static int width = 1280, height = 720;
     public static final String NAME = "PLACEHOLDER";
-    public static final int HEIGHT_DRAG_BOX = 30;
+    public static final int HEIGHT_DRAG_BOX = 20;
     public static final String MAP_LARGE_ASTEROID = "o", MAP_ASTEROID = ".", MAP_AMTP = "$";
     public static final String NAME_LARGE_ASTEROID = " large asteroid", NAME_ASTEROID = " asteroid", NAME_ATP = " automated trading post", NAME_MTP = " manned trading post";
     public static final int BASE_VALUE_CPU = 120, BASE_VALUE_RAM = 75, BASE_VALUE_SSD = 100;

@@ -1,7 +1,6 @@
 package gfx;
 
 import input.Mouse;
-import tools.Tools;
 
 import java.awt.*;
 
@@ -29,17 +28,10 @@ public class DragBox extends Rectangle {
 
     public void render(Graphics g){
         renderBase(g);
-        if(mouseOverBox()) highlight(g);
+        if(Mouse.mouseOverBox(this)) highlight(g);
     }
 
 
-    private boolean mouseOverBox(){
-        boolean mouseOver = false;
-
-        if(intersects(new Rectangle(Mouse.x, Mouse.y))) mouseOver = true;
-
-        return mouseOver;
-    }
     private void renderBase(Graphics g){
         g.setColor(color);
         g.fillRect(x, y, width, height);
@@ -48,7 +40,7 @@ public class DragBox extends Rectangle {
         g.drawRect(x + 1, y + 1, width - 2, height - 2);
     }
     private void highlight(Graphics g){
-        g.setColor(color.darker());
-        g.drawRect(x + 2, y + 2, width - 3, height - 3);
+        g.setColor(Color.black);
+        g.drawRect(x + 2, y + 2, width - 5, height - 5);
     }
 }

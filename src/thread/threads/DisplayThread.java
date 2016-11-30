@@ -10,6 +10,7 @@ import tools.Tools;
 public class DisplayThread extends GameThread {
     public DisplayThread(){
         fps = 60;
+        timePerTick = 1000000000 / fps;
     }
 
     @Override
