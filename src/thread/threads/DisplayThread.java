@@ -16,6 +16,5 @@ public class DisplayThread extends GameThread {
     public void action(){
         Game.tick();
         Game.render();
-        Tools.out("asd");
     }
 }

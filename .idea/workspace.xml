@@ -7,21 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9faed2a7-fd19-4997-830c-3f6209b9e60d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gfx/Button.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gfx/DragBox.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gfx/PanelObject.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gfx/TextField.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gfx/Window.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/input/Mouse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/hackinggame/game/Game.class" afterPath="$PROJECT_DIR$/out/production/hackinggame/game/Game.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/hackinggame/game/Settings.class" afterPath="$PROJECT_DIR$/out/production/hackinggame/game/Settings.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/hackinggame/gfx/Panel.class" afterPath="$PROJECT_DIR$/out/production/hackinggame/gfx/Panel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/hackinggame/thread/GameThread.class" afterPath="$PROJECT_DIR$/out/production/hackinggame/thread/GameThread.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/Game.java" afterPath="$PROJECT_DIR$/src/game/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/Settings.java" afterPath="$PROJECT_DIR$/src/game/Settings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gfx/Panel.java" afterPath="$PROJECT_DIR$/src/gfx/Panel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/thread/GameThread.java" afterPath="$PROJECT_DIR$/src/thread/GameThread.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/thread/threads/DisplayThread.java" afterPath="$PROJECT_DIR$/src/thread/threads/DisplayThread.java" />
     </list>
     <ignored path="hackinggame.iws" />
@@ -75,10 +60,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameThread.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GameThread.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/thread/GameThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
+            <state relative-caret-position="60">
               <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -109,11 +94,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DisplayThread.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DisplayThread.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/thread/threads/DisplayThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+            <state relative-caret-position="255">
+              <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
               <folding>
                 <element signature="e#207#208#0" expanded="true" />
                 <element signature="e#231#232#0" expanded="true" />
@@ -194,8 +179,8 @@
         <option value="$PROJECT_DIR$/src/input/MouseListener.java" />
         <option value="$PROJECT_DIR$/src/input/Mouse.java" />
         <option value="$PROJECT_DIR$/src/gfx/DragBox.java" />
-        <option value="$PROJECT_DIR$/src/thread/threads/DisplayThread.java" />
         <option value="$PROJECT_DIR$/src/thread/GameThread.java" />
+        <option value="$PROJECT_DIR$/src/thread/threads/DisplayThread.java" />
       </list>
     </option>
   </component>
@@ -1020,23 +1005,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/thread/threads/DisplayThread.java">
+    <entry file="file://$PROJECT_DIR$/src/thread/GameThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+        <state relative-caret-position="60">
+          <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
           <folding>
-            <element signature="e#207#208#0" expanded="true" />
-            <element signature="e#231#232#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/thread/GameThread.java">
+    <entry file="file://$PROJECT_DIR$/src/thread/threads/DisplayThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
+        <state relative-caret-position="255">
+          <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#207#208#0" expanded="true" />
+            <element signature="e#231#232#0" expanded="true" />
           </folding>
         </state>
       </provider>
