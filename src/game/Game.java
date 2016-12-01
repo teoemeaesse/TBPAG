@@ -3,12 +3,8 @@ package game;
 import data.components.drone.DroneModifier;
 import gfx.Frame;
 import input.Mouse;
-import input.MouseHandler;
 import thread.GameThread;
-import thread.threads.DisplayThread;
-import thread.threads.HydroponicsThread;
-import thread.threads.JumpThread;
-import thread.threads.MiningThread;
+import thread.threads.*;
 import tools.Tools;
 import data.Component;
 import world.map.Map;
@@ -77,7 +73,7 @@ public class Game {
         GameThread.gameThreads.add(new HydroponicsThread());
         GameThread.gameThreads.add(new JumpThread());
         GameThread.gameThreads.add(new MiningThread());
-        GameThread.gameThreads.add(new DisplayThread());
+        GameThread.gameThreads.add(new MainThread());
 
         for(int i = 0; i < GameThread.gameThreads.size(); i++){
             GameThread.gameThreads.get(i).start();

@@ -14,7 +14,7 @@ public class GameThread implements Runnable {
 
     public static ArrayList<GameThread> gameThreads = new ArrayList<>();
 
-    public void run(){
+    public synchronized void run(){
         double delta = 0;
         long now;
         long lastTime = System.nanoTime();
@@ -41,7 +41,7 @@ public class GameThread implements Runnable {
         stop();
     }
 
-    public synchronized void start(){
+    public void start(){
         if (thread != null) return;
         thread = new Thread(this);
         thread.start();

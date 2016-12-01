@@ -7,14 +7,14 @@ import tools.Tools;
 /**
  * Created by Tomás on 27/11/2016.
  */
-public class DisplayThread extends GameThread {
-    public DisplayThread(){
+public class MainThread extends GameThread {
+    public MainThread(){
         fps = 60;
         timePerTick = 1000000000 / fps;
     }
 
     @Override
-    public void action(){
+    public synchronized void action(){
         Game.tick();
         Game.render();
     }
