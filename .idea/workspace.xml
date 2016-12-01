@@ -6,15 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9faed2a7-fd19-4997-830c-3f6209b9e60d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/hackinggame/thread/threads/DisplayThread.class" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/thread/threads/DisplayThread.java" afterPath="$PROJECT_DIR$/src/thread/threads/MainThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/hackinggame/game/Game.class" afterPath="$PROJECT_DIR$/out/production/hackinggame/game/Game.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/hackinggame/thread/GameThread.class" afterPath="$PROJECT_DIR$/out/production/hackinggame/thread/GameThread.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/Game.java" afterPath="$PROJECT_DIR$/src/game/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/thread/GameThread.java" afterPath="$PROJECT_DIR$/src/thread/GameThread.java" />
-    </list>
+    <list default="true" id="9faed2a7-fd19-4997-830c-3f6209b9e60d" name="Default" comment="" />
     <ignored path="hackinggame.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -638,13 +630,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/data/events/void_events/MissedDockEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/data/events/returnable_events/EntranceDAEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -984,6 +969,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="16" column="38" selection-start-line="16" selection-start-column="38" selection-end-line="17" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
