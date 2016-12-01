@@ -1,7 +1,6 @@
 package gfx;
 
 import game.Settings;
-import input.MouseHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +17,7 @@ public class Panel extends JPanel {
 
 
         this.panelObjects.add(
-                new Window(
+                new gfx.panel_objects.Window(
                         30,
                         30,
                         800,

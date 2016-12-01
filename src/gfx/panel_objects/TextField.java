@@ -1,4 +1,6 @@
-package gfx;
+package gfx.panel_objects;
+
+import gfx.PanelObject;
 
 import java.awt.*;
 

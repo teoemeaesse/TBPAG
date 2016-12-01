@@ -1,8 +1,7 @@
-package gfx;
+package gfx.panel_objects;
 
-import game.Settings;
+import gfx.PanelObject;
 import input.Mouse;
-import tools.Tools;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
  * Created by Tomás on 28/11/2016.
  */
 public class Window extends PanelObject {
-    public DragBox dragBox;
+    public Rectangle dragBox;
 
     public Window(int x, int y, int width, int height, Color color, ArrayList<PanelObject> panelObjects) {
         this.x = x;
@@ -20,22 +19,20 @@ public class Window extends PanelObject {
         this.height = height;
         this.color = color;
         this.panelObjects = panelObjects;
-        dragBox = new DragBox(x, y, width, Settings.HEIGHT_DRAG_BOX, color.brighter().brighter());
+        dragBox = new Rectangle(x, y, width, height);
     }
 
 
     @Override
     public void render(Graphics g){
-        g.setColor(color);
-        g.fillRect(x, y, width, height);
-        dragBox.render(g);
+        renderWindow(g);
         for(int i = 0; i < panelObjects.size(); i++) panelObjects.get(i).render(g);
     }
 
     @Override
     public void tick(){
+        updateDragBox();
         mouseDraggingDragBox();
-        dragBox.update(x, y, width, Settings.HEIGHT_DRAG_BOX);
         for(int i = 0; i < panelObjects.size(); i++) panelObjects.get(i).tick();
     }
 
@@ -47,5 +44,16 @@ public class Window extends PanelObject {
             Mouse.lastX = Mouse.x;
             Mouse.lastY = Mouse.y;
         }
+    }
+    private void updateDragBox(){
+        dragBox.x = x;
+        dragBox.y = y;
+    }
+    private void renderWindow(Graphics g){
+        g.setColor(color);
+        g.fillRect(x, y, width, height);
+        g.setColor(color.darker().darker());
+        g.drawRect(x, y, width, height);
+        g.drawRect(x + 1, y + 1, width - 2, height - 2);
     }
 }

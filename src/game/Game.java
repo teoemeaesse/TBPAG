@@ -70,9 +70,9 @@ public class Game {
         Ship.init();
 
 
-        GameThread.gameThreads.add(new HydroponicsThread());
-        GameThread.gameThreads.add(new JumpThread());
-        GameThread.gameThreads.add(new MiningThread());
+        //GameThread.gameThreads.add(new HydroponicsThread());
+        //GameThread.gameThreads.add(new JumpThread());
+        //GameThread.gameThreads.add(new MiningThread());
         GameThread.gameThreads.add(new MainThread());
 
         for(int i = 0; i < GameThread.gameThreads.size(); i++){
