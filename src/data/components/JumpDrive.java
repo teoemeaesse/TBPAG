@@ -6,6 +6,8 @@ import data.Component;
 import world.map.Map;
 import world.map.entities.Ship;
 
+import java.util.Random;
+
 /**
  * Created by Tomás on 07/17/2016.
  */
@@ -21,13 +23,18 @@ public class JumpDrive extends Component {
         level = 1;
     }
 
-    public void jumpDrive(){
-        if(Ship.resources[2] - 5 >= consumption){
-            Tools.out("\nBeginning light-speed jump... Keep your eyes peeled for malfunctions.\n\n");
+    @Override
+    public void action(){
+        if(active){
+            progress++;
             Map.generateTravelGFX();
-            jumping = true;
-        }else{
-            Tools.out("\nNot enough fuel to safely make the jump to another sector. You need " + consumption + " fuel.\n\n");
+            if(progress == timeTaken){
+                Map.generateSector();
+                Tools.out("\nYou have arrived at a new sector!\n\n");
+                jumping = false;
+                active = false;
+                progress = 0;
+            }
         }
     }
 
@@ -44,6 +51,17 @@ public class JumpDrive extends Component {
 
     @Override
     public void activate(){
-        jumpDrive();
+        if(Ship.resources[2] - 5 >= consumption){
+            Tools.out("\nBeginning light-speed jump... Keep your eyes peeled for malfunctions.\n\n");
+            jumping = true;
+            active = true;
+        }else{
+            Tools.out("\nNot enough fuel to safely make the jump to another sector. You need " + consumption + " fuel.\n\n");
+        }
+    }
+
+    @Override
+    public void deactivate(){
+        active = false;
     }
 }

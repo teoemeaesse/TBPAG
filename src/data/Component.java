@@ -20,11 +20,14 @@ public class Component {
     public String name;
     public double buildCost = 0, baseUpgradeCost = 0, consumption = 0, produce = 0, timeTaken = 0, level;
     public boolean active = false;
+    public int progress = 0;
 
     public static final Component[] components = new Component[]{new Hydroponics(), new DroneHangar(), new JumpDrive(),
                                                                  new WaterStorage(), new FoodStorage(), new MedicalStorage(),
                                                                  new ScrapStorage(), new WaterStorage(), new ScrapProcessor(),
                                                                  new DroneModifier()};
+
+    public void action(){}
 
     public void activate() throws Exception {
         active = true;

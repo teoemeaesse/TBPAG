@@ -18,8 +18,9 @@ import java.util.List;
 public class Ship {
     public static int x, y;
     public static int hullPoints = 100, money = 9999999;
+    public static boolean mining = false;
+    public static int miningProgress = 0;
     public static double[] resourceCapacities = {30, 30, 30, 5, 20};
-    public static double extractionProgress = 0;
     public static double[] resources = {15, 5, 999, 1, 999};//water, food, fuel, medequip, scrap
     public static int droneCapacity = 1;
     public static Component components[] = new Component[10];
@@ -31,7 +32,6 @@ public class Ship {
         Ship.drones.add(new Drone());
         Ship.dronePartsStorage.add(DroneParts.SMALL_DRILL.getDronePart());
         Ship.dronePartsStorage.add(DroneParts.LARGE_DRILL.getDronePart());
-        Ship.hardwareStorage.add(new CPU(2, 8));
         components[0] = new MainComputer();
     }
 

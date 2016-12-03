@@ -24,7 +24,7 @@ public class MainComputer extends Component {
 
         hardware[0] = new CPU(0.2, 1);
         hardware[1] = new RAM(1);
-        hardware[2] = new SSD(1);
+        hardware[2] = new SSD(10);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class MainComputer extends Component {
         Tools.out("\nYou really shouldn't scrap this. It's just... no, just don't scrap it.\n\n");
     }
 
-    public void upgrade(int index){
+    public void upgrade(){
         Tools.out("\nYou can't upgrade this component\n\n");
     }
 

@@ -14,7 +14,7 @@ public class SSD extends Hardware {
     public SSD(int memory){
         name = "RAM";
         tag = "CARGO_" + Ship.hardwareStorage.size();
-        value = memory * Settings.BASE_VALUE_SSD;
+        value = memory / 10 * Settings.BASE_VALUE_SSD;
         this.memory = memory;
     }
 

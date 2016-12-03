@@ -11,11 +11,12 @@ import java.util.Random;
 public class Asteroid extends Tile {
     public Asteroid(){
         Random r = new Random();
-        this.icon = Settings.MAP_ASTEROID;
-        this.name = Settings.NAME_ASTEROID;
-        this.resources[0] = r.nextInt(5);
-        this.resources[2] = r.nextInt(8 - 3) + 3;
-        this.resources[4] = r.nextInt(4 - 1) + 1;
-        this.extractionTime = r.nextInt(40 - 5) + 5;
+        icon = Settings.MAP_ASTEROID;
+        name = Settings.NAME_ASTEROID;
+        resources[0] = r.nextInt(5);
+        resources[2] = r.nextInt(8 - 3) + 3;
+        resources[4] = r.nextInt(4 - 1) + 1;
+        miningTime = r.nextInt(40 - 5) + 5;
+        mineable = true;
     }
 }

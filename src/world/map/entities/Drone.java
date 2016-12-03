@@ -14,9 +14,10 @@ import java.util.List;
 public class Drone {
     //public static final int INACTIVE = 0, SCRAP_MINER = 1, GATHERER = 2, ASTEROID_MINER = 3;
     public int x, y;
+    public boolean mining = false;
     public static double[] resourceCapacities = {20, 20, 20, 4, 30};
     public double[] resources = new double[5];
-    public double extractionProgress = 0;
+    public double miningProgress = 0;
     //public int type = INACTIVE;
     public List<DronePart> parts = new ArrayList<>();
 
@@ -75,7 +76,6 @@ public class Drone {
 
         correctStorageFull(index);
     }
-
     private void correctStorageFull(int index){
         for(int i = 0; i < Ship.resources.length; i++){
             if(Ship.resources[i] > Ship.resourceCapacities[i]){
@@ -85,5 +85,10 @@ public class Drone {
                 Ship.drones.get(index).resources[i] = 0;
             }
         }
+    }
+
+    public void stopMining(){
+        mining = false;
+        miningProgress = 0;
     }
 }

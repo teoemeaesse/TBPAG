@@ -41,6 +41,9 @@ public class Tools {
 
         out("\n\n");
     }
+    public static String trimSpaces(String untrimmed){
+        return untrimmed.replace(" ", "");
+    }
     public static void cls(){
         try{new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();}catch(Exception e){}
     }

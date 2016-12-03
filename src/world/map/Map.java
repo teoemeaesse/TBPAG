@@ -37,7 +37,9 @@ public class Map {
         Tools.out("\n\n");
     }
 
-    public static void generateSector(boolean firstTime, boolean hasATP, boolean hasMTP){
+    public static void generateSector(/*boolean firstTime, USE ONCE THE SAVE FEATURE HAS BEEN IMPLEMENTED*/){
+        boolean hasATP = Tools.intToBool(r.nextInt(2));
+
         for(int x = 0; x < 20; x++){
             for(int y = 0; y < 20; y++){
                 Map.map[x][y] = new Space();
@@ -58,12 +60,6 @@ public class Map {
                 Map.map[x][y].x = x;
                 Map.map[x][y].y = y;
             }
-        }
-
-
-        if(firstTime){
-            Ship.x = r.nextInt(20);
-            Ship.y = r.nextInt(20);
         }
 
         if(hasATP) Map.map[r.nextInt(20)][r.nextInt(20)] = new AutomatedTradingPost();

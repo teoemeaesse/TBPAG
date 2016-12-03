@@ -142,8 +142,8 @@ public class ScrapProcessor extends Component {
     }
     private void produceCPU() throws NumberFormatException {
         boolean open = true;
-        double frequency = 0;
-        int cores = 0;
+        double frequency;
+        int cores;
 
         Tools.out("\nWelcome to the S.P.'s v.13 Menus4U's trademarked menu's produce hardware submenu's CPU submenu. Enter x to return.\n\n");
 
@@ -351,7 +351,6 @@ public class ScrapProcessor extends Component {
             }
         }
     }
-
 
     private boolean enoughMaterials(double fe, double sl, double au, double cu, double pl){
         if(materials[0].amount >= fe && materials[1].amount >= sl && materials[2].amount >= au && materials[3].amount > cu && materials[4].amount >= pl) {

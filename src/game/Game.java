@@ -1,10 +1,7 @@
 package game;
 
 import data.components.drone.DroneModifier;
-import gfx.Frame;
-import input.Mouse;
-import thread.GameThread;
-import thread.threads.*;
+import timer.GameTimer;
 import tools.Tools;
 import data.Component;
 import world.map.Map;
@@ -51,57 +48,30 @@ public class Game {
         }
     }
 
-
-    public static void tick(){
-        Mouse.update();
-        for(int i = 0; i < Frame.panel.panelObjects.size(); i++) Frame.panel.panelObjects.get(i).tick();
-    }
-
-    public static void render(){
-        Frame.panel.repaint();
-    }
-
-
     private static void init(){
         //IO.loadComponents();
-        new Frame(Settings.NAME, Settings.width, Settings.height);
-        Map.generateSector(true, true, false);
-
+        Map.generateSector();
         Ship.init();
 
-
-        //GameThread.gameThreads.add(new HydroponicsThread());
-        //GameThread.gameThreads.add(new JumpThread());
-        //GameThread.gameThreads.add(new MiningThread());
-        GameThread.gameThreads.add(new MainThread());
-
-        for(int i = 0; i < GameThread.gameThreads.size(); i++){
-            GameThread.gameThreads.get(i).start();
-        }
+        new GameTimer();
     }
 
 
 
     private static void commandsHelp(String input) throws Exception {
-        int initialLength = Settings.COMMAND_HELPCOMMANDS.length() - 1;
-
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_HELPCOMMANDS)){
+        if(Tools.trimSpaces(input).toUpperCase().equals(Tools.trimSpaces(Settings.COMMAND_HELPCOMMANDS))){
             Tools.cls();
             Tools.drawCommandsHelp();
         }
     }
     private static void componentsHelp(String input) throws Exception {
-        int initialLength = Settings.COMMAND_HELPCOMPONENTS.length() - 1;
-
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_HELPCOMPONENTS)){
+        if(Tools.trimSpaces(input).toUpperCase().equals(Tools.trimSpaces(Settings.COMMAND_HELPCOMPONENTS))){
             Tools.cls();
             Tools.drawComponentsHelp();
         }
     }
     private static void shws(String input) throws Exception {
-        int initialLength = Settings.COMMAND_SHWS.length() - 1;
-
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_SHWS)){
+        if(Tools.trimSpaces(input).toUpperCase().equals(Tools.trimSpaces(Settings.COMMAND_SHWS))){
             Tools.cls();
             Map.displayMap();
             Ship.displayShipStatus();
@@ -127,9 +97,7 @@ public class Game {
         }
     }
     private static void shwm(String input) throws Exception {
-        int initialLength = Settings.COMMAND_SHWM.length() - 1;
-
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_SHWM)) {
+        if(Tools.trimSpaces(input).toUpperCase().equals(Tools.trimSpaces(Settings.COMMAND_SHWM))) {
             Tools.cls();
             Map.displayMap();
         }
@@ -138,7 +106,7 @@ public class Game {
         int initialLength = Settings.COMMAND_NAVS.length() - 1;
 
         if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_NAVS)){
-            if(Ship.extractionProgress == 0){
+            if(!Ship.mining){
                 if(input.length() > initialLength + 1){
                     if(input.length() > initialLength + 3){
                         int xDestination = Integer.parseInt(input.substring(initialLength + 2, initialLength + 4));
@@ -188,7 +156,7 @@ public class Game {
                                     if (input.length() > initialLength + 8) {
                                         int yDestination = Integer.parseInt(input.substring(initialLength + 7, initialLength + 9));
                                         if (yDestination >= 0 && yDestination < 20) {
-                                            if(Ship.drones.get(drone - 1).extractionProgress == 0){
+                                            if(!Ship.drones.get(drone - 1).mining){
                                                 Ship.drones.get(drone - 1).navigateDrone(xDestination, yDestination, Ship.calcHypotenuse(Ship.calcXDifference(Ship.drones.get(drone - 1).x, xDestination), Ship.calcYDifference(Ship.drones.get(drone - 1).y, yDestination)));
                                             } else {
                                                 Tools.out("\nDrone is mining...\n\n");
@@ -220,13 +188,16 @@ public class Game {
         }
     }
     private static void mines(String input) throws Exception {
-        int initialLength = Settings.COMMAND_MINES.length() - 1;
-
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_MINES)){
-            Tools.cls();
-            Map.displayMap();
-            Tools.out("\nMining of" + Map.map[Ship.x][Ship.y].name + " commencing... It should be finished in " + Map.map[Ship.x][Ship.y].extractionTime + "s...\n\n");
-            MiningThread.shipMining = true;
+        if(Tools.trimSpaces(input).toUpperCase().equals(Tools.trimSpaces(Settings.COMMAND_MINES))){
+            if(Map.map[Ship.x][Ship.y].mineable){
+                Tools.cls();
+                Map.displayMap();
+                Tools.out("\nMining of" + Map.map[Ship.x][Ship.y].name + " commencing... It should be finished in " + Map.map[Ship.x][Ship.y].miningTime + "s...\n\n");
+                Ship.mining = true;
+            }else{
+                Tools.out("\nWhy are you trying to mine a" + Map.map[Ship.x][Ship.y].name + "? (press enter)");
+                in.nextLine();
+            }
         }
     }
     private static void mined(String input) throws Exception {
@@ -236,11 +207,17 @@ public class Game {
             if(input.length() > initialLength + 2){
                 int drone = Integer.parseInt(input.substring(initialLength + 2).trim()) - 1;
                 if(drone >= 0 && drone < Ship.drones.size()){
-                    if(Ship.drones.get(drone).extractionProgress == 0) {
-                        Tools.cls();
-                        Map.displayMap();
-                        Tools.out("\nMining of" + Map.map[Ship.drones.get(drone).x][Ship.drones.get(drone).y].name + " commencing... It should be finished in " + Map.map[Ship.drones.get(drone).x][Ship.drones.get(drone).y].extractionTime + "s...\n\n");
-                        MiningThread.insertDrone(drone);
+                    if(!Ship.drones.get(drone).mining){
+                        if(Map.map[Ship.drones.get(drone).x][Ship.drones.get(drone).y].mineable){
+                            Tools.cls();
+                            Map.displayMap();
+                            Tools.out("\nMining of" + Map.map[Ship.drones.get(drone).x][Ship.drones.get(drone).y].name + " commencing... It should be finished in " + Map.map[Ship.drones.get(drone).x][Ship.drones.get(drone).y].miningTime + "s...\n\n");
+                            Ship.drones.get(drone).mining = true;
+                            GameTimer.insertDrone(drone);
+                        }else{
+                            Tools.out("\nWhy are you trying to mine a" + Map.map[Ship.drones.get(drone).x][Ship.drones.get(drone).y].name + "? (press enter)");
+                            in.nextLine();
+                        }
                     }else{
                         Tools.out("\nDrone is mining...\n\n");
                     }
@@ -260,7 +237,7 @@ public class Game {
                 int drone;
                 if (Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) <= Ship.drones.size() && Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim()) > 0){
                     drone = Integer.parseInt(input.substring(initialLength + 1, initialLength + 3).trim());
-                    if(Ship.drones.get(drone - 1).extractionProgress == 0){
+                    if(Ship.drones.get(drone - 1).miningProgress == 0){
                         Tools.cls();
                         Ship.drones.get(drone - 1).collectDrone(drone - 1, Ship.calcHypotenuse(Ship.calcXDifference(Ship.drones.get(drone - 1).x, Ship.x), Ship.calcYDifference(Ship.drones.get(drone - 1).y, Ship.y)));
                     }
@@ -391,7 +368,6 @@ public class Game {
                                 i = Ship.components.length;
                             }
                         }
-
                     } else if (i == Ship.components.length - 1) {
                         Tools.out("\nNot enough component space\n\n");
                     }
@@ -425,9 +401,7 @@ public class Game {
         }
     }
     private static void examh(String input) throws Exception {
-        int initialLength = Settings.COMMAND_EXAMH.length() - 1;
-
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_EXAMH)){
+        if(Tools.trimSpaces(input).toUpperCase().equals(Tools.trimSpaces(Settings.COMMAND_EXAMH))){
             Tools.cls();
 
             boolean open = true;
@@ -447,9 +421,7 @@ public class Game {
         }
     }
     private static void intr(String input) throws Exception{
-        int initialLength = Settings.COMMAND_INTR.length() - 1;
-
-        if(input.length() > initialLength && input.toUpperCase().substring(0, initialLength + 1).equals(Settings.COMMAND_INTR)){
+        if(Tools.trimSpaces(input).toUpperCase().equals(Tools.trimSpaces(Settings.COMMAND_INTR))){
             Tools.cls();
 
             Map.map[Ship.x][Ship.y].interact();
